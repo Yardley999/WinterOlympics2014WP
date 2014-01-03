@@ -1,0 +1,63 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib" 
+    xmlns:converters="clr-namespace:WinterOlympics2014WP.Converters"
+    
+    >
+
+    <!--colors-->
+    <SolidColorBrush x:Key="App_Highlight_Color" Color="#ff27bfc6"/>
+
+    <!--converters-->
+    
+    <!--base Styles-->
+    <Style x:Key="TextBlockStyleBase" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+    </Style>
+
+    <Style x:Key="TextBoxStyleBase" TargetType="TextBox">
+        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+    </Style>
+
+    <Style x:Key="ButtonStyleBase" TargetType="Button">
+        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+    </Style>
+
+    <!--common-->
+    <Style x:Key="HeaderBar_Style" TargetType="Grid">
+        <Setter Property="Background" Value="#fff0f0f0"/>
+    </Style>
+
+    <Style x:Key="QuickSelector_Item_Text_Style" TargetType="TextBlock">
+        <Setter Property="Height" Value="26"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Foreground" Value="#ffffffff"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="QuickSelector_Preview_Text_Style" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="Foreground" Value="#ffffffff"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="QuickSelector_Text_Disabled_Style" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="#ff808080"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!--home page-->
+    <Style x:Key="HomePage_PivotHeader_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="Foreground" Value="#ff000000"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    
+
+</ResourceDictionary>

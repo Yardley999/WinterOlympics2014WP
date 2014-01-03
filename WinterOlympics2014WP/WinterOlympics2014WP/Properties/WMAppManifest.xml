@@ -11,7 +11,7 @@
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
     </Capabilities>
     <Tasks>
-      <DefaultTask Name="_default" NavigationPage="Pages/SplashPage.xaml" />
+      <DefaultTask Name="_default" NavigationPage="Pages/HomePage.xaml" />
     </Tasks>
     <Tokens>
       <PrimaryToken TokenID="WinterOlympics2014WPToken" TaskName="_default">
