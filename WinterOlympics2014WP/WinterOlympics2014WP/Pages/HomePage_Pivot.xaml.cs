@@ -18,7 +18,61 @@ namespace WinterOlympics2014WP.Pages
             InitQuickSelector();
         }
 
-        
+        #region Pivot Selection
+
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (this.pivot.SelectedIndex)
+            {
+                case 0:
+                    SelectToday();
+                    break;
+                case 1:
+                    SelectTomorrow();
+                    break;
+                case 2:
+                    SelectYesterday();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void PivotHeader_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            string tag = (sender as FrameworkElement).Tag.ToString();
+            switch (tag)
+            {
+                case "yesterday":
+                    pivot.SelectedIndex = 2;
+                    break;
+                case "today":
+                    pivot.SelectedIndex = 0;
+                    break;
+                case "tomorrow":
+                    pivot.SelectedIndex = 1;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void SelectYesterday()
+        {
+            VisualStateManager.GoToState(this, "YesterdayActive", true);
+        }
+
+        private void SelectToday()
+        {
+            VisualStateManager.GoToState(this, "TodayActive", true);
+        }
+
+        private void SelectTomorrow()
+        {
+            VisualStateManager.GoToState(this, "TomorrowActive", true);
+        }
+
+        #endregion
 
         #region Quick Selector
 
