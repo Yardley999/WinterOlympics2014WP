@@ -16,6 +16,7 @@ namespace WinterOlympics2014WP.Pages
         {
             InitializeComponent();
             InitQuickSelector();
+            BuildApplicationBar();
         }
 
         #region Pivot Selection
@@ -116,5 +117,31 @@ namespace WinterOlympics2014WP.Pages
 
         #endregion
 
+        #region App Bar
+
+        ApplicationBarIconButton appBarRefreshButton;
+        ApplicationBarIconButton appBarReNewsButton;
+
+        private void BuildApplicationBar()
+        {
+            ApplicationBar = new ApplicationBar();
+            ApplicationBar.Opacity = 0.7;
+            //ApplicationBar.Mode = ApplicationBarMode.Minimized;
+
+            // refresh
+            appBarRefreshButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/refresh.png", UriKind.Relative));
+            appBarRefreshButton.Text = "刷新";
+            ApplicationBar.Buttons.Add(appBarRefreshButton);
+
+            // news
+            appBarReNewsButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/news.png", UriKind.Relative));
+            appBarReNewsButton.Text = "快讯";
+            ApplicationBar.Buttons.Add(appBarReNewsButton);
+
+            ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem("More");
+            ApplicationBar.MenuItems.Add(appBarMenuItem);
+        }
+
+        #endregion
     }
 }

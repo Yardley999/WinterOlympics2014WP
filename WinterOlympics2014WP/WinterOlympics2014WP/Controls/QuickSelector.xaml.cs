@@ -98,6 +98,11 @@ namespace WinterOlympics2014WP.Controls
             }
         }
 
+        private void Dismiss()
+        {
+            VisualStateManager.GoToState(this, "SelectionPreviewHidden", false);
+        }
+
         #region Selection Changed Event
 
         public event SelectionChangedEventHandler SelectionChanged;
@@ -118,7 +123,8 @@ namespace WinterOlympics2014WP.Controls
 
         private void LayoutRoot_MouseLeave(object sender, MouseEventArgs e)
         {
-            RaiseSelectionChanged();
+            //RaiseSelectionChanged();
+            Dismiss();
         }
 
         private void LayoutRoot_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

@@ -8,18 +8,18 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="480" Width="55">
+    d:DesignHeight="480" Width="48">
     
     <UserControl.Resources>
         <converters:QuickSelectorItemOpacityConverter x:Key="QuickSelectorItemOpacityConverter"/>
     </UserControl.Resources>
 
-    <Grid x:Name="LayoutRoot" Background="#ff4d4d4d" MouseLeftButtonDown="LayoutRoot_MouseLeftButtonDown"  MouseMove="LayoutRoot_MouseMove" MouseLeave="LayoutRoot_MouseLeave" MouseLeftButtonUp="LayoutRoot_MouseLeftButtonUp">
+    <Grid x:Name="LayoutRoot" Background="#00000000" MouseLeftButtonDown="LayoutRoot_MouseLeftButtonDown"  MouseMove="LayoutRoot_MouseMove" MouseLeave="LayoutRoot_MouseLeave" MouseLeftButtonUp="LayoutRoot_MouseLeftButtonUp">
     	<VisualStateManager.VisualStateGroups>
     		<VisualStateGroup x:Name="VisualStateGroup">
     			<VisualStateGroup.Transitions>
     				<VisualTransition GeneratedDuration="0"/>
-    				<VisualTransition From="SelectionPreviewShown" GeneratedDuration="0:0:0.9" To="SelectionPreviewHidden"/>
+    				<VisualTransition From="SelectionPreviewShown" GeneratedDuration="0:0:0.5" To="SelectionPreviewHidden"/>
     			</VisualStateGroup.Transitions>
     			<VisualState x:Name="SelectionPreviewShown"/>
     			<VisualState x:Name="SelectionPreviewHidden">
@@ -29,7 +29,8 @@
     			</VisualState>
     		</VisualStateGroup>
     	</VisualStateManager.VisualStateGroups>
-        <Rectangle IsHitTestVisible="False" Height="20" x:Name="selectionHint" Fill="#ff2d2d2d" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+        <Rectangle IsHitTestVisible="False" Height="20" x:Name="selectionHint" Fill="#ff2d2d2d" VerticalAlignment="Center" 
+                   RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <CompositeTransform x:Name="selectionHintTransform" TranslateY="0"/>
             </Rectangle.RenderTransform>
@@ -37,7 +38,8 @@
         <ItemsControl x:Name="itemsControl" IsHitTestVisible="False" VerticalAlignment="Center">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Opacity="{Binding Value, Converter={StaticResource QuickSelectorItemOpacityConverter}}" Text="{Binding Key}" Style="{StaticResource QuickSelector_Item_Text_Style}"/>
+                    <TextBlock Opacity="{Binding Value, Converter={StaticResource QuickSelectorItemOpacityConverter}}" Text="{Binding Key}" Style="{StaticResource QuickSelector_Item_Text_Style}"
+                               Height="26"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
@@ -46,7 +48,8 @@
                 <CompositeTransform x:Name="selectionPreviewTransform" TranslateY="0"/>
             </Grid.RenderTransform>
             <Image Source="/Assets/Images/QuickSelectorPreview.png" Stretch="None" />
-            <TextBlock x:Name="selectionPreviewText" Style="{StaticResource QuickSelector_Preview_Text_Style}"/>
+            <TextBlock x:Name="selectionPreviewText" Style="{StaticResource QuickSelector_Preview_Text_Style}"
+                       Margin="-10,0,0,0"/>
         </Grid>
     </Grid>
 </UserControl>
