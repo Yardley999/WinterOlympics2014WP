@@ -8,11 +8,14 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Media.Imaging;
+using System.Collections.ObjectModel;
 
 namespace WinterOlympics2014WP.Pages
 {
     public partial class HomePage : PhoneApplicationPage
     {
+        #region Lifecycle
+
         public HomePage()
         {
             InitializeComponent();
@@ -20,6 +23,14 @@ namespace WinterOlympics2014WP.Pages
             SetSplashImage();
             InitQuickSelector();
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            PopulateToday();
+        }
+
+        #endregion
 
         #region Set Splash Image
 
@@ -75,6 +86,7 @@ namespace WinterOlympics2014WP.Pages
         private void QuickSelector_SelectionChanged(object sender, int selectedIndex)
         {
             //MessageBox.Show(hoursList[selectedIndex]);
+            todayItemsControl.ScrollIntoView(6);
         }
 
         private void ShowQuickSelector()
@@ -185,6 +197,28 @@ namespace WinterOlympics2014WP.Pages
                 default:
                     break;
             }
+        }
+
+        #endregion
+
+        #region Today
+
+        ObservableCollection<int> todayList = new ObservableCollection<int>();
+
+        private void PopulateToday()
+        {
+            todayList.Clear();
+            todayList.Add(0);
+            todayList.Add(1);
+            todayList.Add(2);
+            todayList.Add(3);
+            todayList.Add(4);
+            todayList.Add(5);
+            todayList.Add(6);
+            todayList.Add(7);
+            todayList.Add(8);
+            todayList.Add(9);
+            todayItemsControl.ItemsSource = todayList;
         }
 
         #endregion

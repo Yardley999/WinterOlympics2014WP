@@ -19,7 +19,7 @@
     		<VisualStateGroup x:Name="VisualStateGroup">
     			<VisualStateGroup.Transitions>
     				<VisualTransition GeneratedDuration="0"/>
-    				<VisualTransition From="SelectionPreviewShown" GeneratedDuration="0:0:0.5" To="SelectionPreviewHidden"/>
+    				<VisualTransition From="SelectionPreviewShown" GeneratedDuration="0:0:0.9" To="SelectionPreviewHidden"/>
     			</VisualStateGroup.Transitions>
     			<VisualState x:Name="SelectionPreviewShown"/>
     			<VisualState x:Name="SelectionPreviewHidden">

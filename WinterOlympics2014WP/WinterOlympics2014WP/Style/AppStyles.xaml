@@ -7,7 +7,8 @@
     >
 
     <!--colors-->
-    <SolidColorBrush x:Key="App_Highlight_Color" Color="#ff27bfc6"/>
+    <SolidColorBrush x:Key="App_Theme_Color" Color="#ff0056a6"/>
+    <SolidColorBrush x:Key="QuickSelector_Base_Color" Color="#ff4d4d4d"/>
 
     <!--converters-->
     
@@ -96,7 +97,34 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-    
+
+    <Style x:Key="PlayButton_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="#ff3e4656"/>
+        <Setter Property="Margin" Value="4,0,0,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="Timeline_Tag_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="#ffffffff"/>
+        <Setter Property="Margin" Value="16,0,0,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="Timeline_GameName_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="Foreground" Value="#ffffffff"/>
+        <Setter Property="Margin" Value="0,0,0,0"/>
+    </Style>
+
+    <Style x:Key="Timeline_GameSubName_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="Foreground" Value="#ffffffff"/>
+        <Setter Property="Margin" Value="0,0,0,0"/>
+    </Style>
+
     <!--more page-->
     <Style x:Key="Tile_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
         <Setter Property="FontSize" Value="18"/>

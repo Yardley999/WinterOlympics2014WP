@@ -50,7 +50,7 @@
         </VisualStateManager.CustomVisualStateManager>
 
         <!--top bar-->
-        <Grid Background="{StaticResource App_Highlight_Color}">
+        <Grid Background="{StaticResource App_Theme_Color}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -83,7 +83,55 @@
 
                 <!--today-->
                 <phone:PanoramaItem Header="今天">
-                    <Grid Background="LightGray"/>
+                    <Grid >
+                        <Rectangle Width="2" Fill="#ff4d4d4d" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+
+                        <ListBox x:Name="todayItemsControl">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="12"/>
+                                            <ColumnDefinition Width="400"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="180"/>
+                                        </Grid.RowDefinitions>
+                                        <!--<Rectangle Grid.RowSpan="2" Width="2" Fill="#ff4d4d4d" HorizontalAlignment="Center"/>-->
+                                        <Ellipse Width="12" Height="12" Fill="#ff4d4d4d" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                                        <Grid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
+                                            <Image Source="/Assets/Images/TimelineTag.png" Stretch="None"/>
+                                            <TextBlock Text="02:30" Style="{StaticResource Timeline_Tag_Text_Style}"/>
+                                        </Grid>
+                                        <Button Grid.Row="0" Grid.Column="1"
+                                                HorizontalAlignment="Left" Margin="100,0,0,0" 
+                                                Style="{StaticResource ContentButtonStyle}" >
+                                            <StackPanel Orientation="Horizontal" Background="#00000000">
+                                                <Image Source="/Assets/Images/PlayButton.png" Stretch="None"/>
+                                                <TextBlock Text="点播" Style="{StaticResource PlayButton_Text_Style}"/>
+                                            </StackPanel>
+                                        </Button>
+                                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <Image Source="/Assets/Images/CCTV1.png" Stretch="None"/>
+                                            <Image Source="/Assets/Images/CCTV5.png" Stretch="None" Margin="4,0,0,0"/>
+                                        </StackPanel>
+
+                                        <Button Grid.Row="1" Grid.Column="1" Margin="7,5,0,20" 
+                                                Style="{StaticResource ContentButtonStyle}" >
+                                            <Grid>
+                                                <Image Source="/Assets/Images/SportSample.jpg" Stretch="UniformToFill"/>
+                                                <StackPanel VerticalAlignment="Center" Margin="24,0,0,0">
+                                                    <TextBlock Text="短道速滑" Style="{StaticResource Timeline_GameName_Text_Style}"/>
+                                                    <TextBlock Text="女子500米" Style="{StaticResource Timeline_GameSubName_Text_Style}"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ListBox>
+                    </Grid>
                 </phone:PanoramaItem>
 
                 <!--news-->
@@ -135,7 +183,7 @@
 
             <!--quick selector-->
             <Grid x:Name="quickSelectorPanel" Grid.Row="1" HorizontalAlignment="Right" 
-                  Background="#ff4d4d4d"
+                  Background="{StaticResource QuickSelector_Base_Color}"
                   RenderTransformOrigin="0.5,0.5">
                 <Grid.RenderTransform>
                     <CompositeTransform TranslateX="48"/>

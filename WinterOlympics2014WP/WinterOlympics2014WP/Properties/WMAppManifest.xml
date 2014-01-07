@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{110ebd28-cdd9-4de9-b23a-9907f5f11aca}" Title="WinterOlympics2014WP" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="WinterOlympics2014WP author" Description="Sample description" Publisher="WinterOlympics2014WP" PublisherID="{05b9fed1-d9fc-4b37-b608-d6b253ce2ccb}">
-    <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
+  <App xmlns="" ProductID="{110ebd28-cdd9-4de9-b23a-9907f5f11aca}" Title="CCTV索契冬奥会" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="WinterOlympics2014WP author" Description="CCTV索契冬奥会" Publisher="WinterOlympics2014WP" PublisherID="{05b9fed1-d9fc-4b37-b608-d6b253ce2ccb}">
+    <IconPath IsRelative="true" IsResource="false">Assets\Tiles\icon100x100.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
       <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
@@ -16,10 +16,10 @@
     <Tokens>
       <PrimaryToken TokenID="WinterOlympics2014WPToken" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\icon159x159.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>WinterOlympics2014WP</Title>
+          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\icon336x336.png</BackgroundImageURI>
+          <Title>CCTV索契冬奥会</Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>
