@@ -28,6 +28,7 @@ namespace WinterOlympics2014WP.Pages
         {
             base.OnNavigatedTo(e);
             PopulateToday();
+            LoadNews();
         }
 
         #endregion
@@ -208,6 +209,7 @@ namespace WinterOlympics2014WP.Pages
         private void PopulateToday()
         {
             todayList.Clear();
+
             todayList.Add(0);
             todayList.Add(1);
             todayList.Add(2);
@@ -219,6 +221,40 @@ namespace WinterOlympics2014WP.Pages
             todayList.Add(8);
             todayList.Add(9);
             todayItemsControl.ItemsSource = todayList;
+        }
+
+        #endregion
+
+        #region News
+
+        ObservableCollection<int> newsList = new ObservableCollection<int>();
+
+        private void LoadNews()
+        {
+            newsList.Clear();
+
+            newsList.Add(0);
+            newsList.Add(1);
+            newsList.Add(2);
+            newsList.Add(3);
+            newsList.Add(4);
+            newsList.Add(5);
+            newsList.Add(6);
+            newsList.Add(7);
+            newsList.Add(8);
+            newsList.Add(9);
+
+            newsListBox.ItemsSource = newsList;
+        }
+
+        #endregion
+
+
+        #region More Section
+
+        private void awardsButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/NewsListPage.xaml", UriKind.Relative));
         }
 
         #endregion

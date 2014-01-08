@@ -51,12 +51,7 @@
 
         <!--top bar-->
         <Grid Background="{StaticResource App_Theme_Color}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Image Source="/Assets/Images/TopBarIcon.png" Stretch="None" Margin="24,12,0,12"/>
+            <Image Source="/Assets/Images/TopBarIcon.png" Stretch="None" Margin="24,12,0,12" HorizontalAlignment="Left"/>
         </Grid>
 
         <!--content panel-->
@@ -98,20 +93,16 @@
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="180"/>
                                         </Grid.RowDefinitions>
-                                        <!--<Rectangle Grid.RowSpan="2" Width="2" Fill="#ff4d4d4d" HorizontalAlignment="Center"/>-->
                                         <Ellipse Width="12" Height="12" Fill="#ff4d4d4d" VerticalAlignment="Top" Margin="0,10,0,0"/>
                                         <Grid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
                                             <Image Source="/Assets/Images/TimelineTag.png" Stretch="None"/>
                                             <TextBlock Text="02:30" Style="{StaticResource Timeline_Tag_Text_Style}"/>
                                         </Grid>
-                                        <Button Grid.Row="0" Grid.Column="1"
-                                                HorizontalAlignment="Left" Margin="100,0,0,0" 
-                                                Style="{StaticResource ContentButtonStyle}" >
-                                            <StackPanel Orientation="Horizontal" Background="#00000000">
-                                                <Image Source="/Assets/Images/PlayButton.png" Stretch="None"/>
-                                                <TextBlock Text="点播" Style="{StaticResource PlayButton_Text_Style}"/>
-                                            </StackPanel>
-                                        </Button>
+                                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Background="#00000000" 
+                                                    HorizontalAlignment="Left" Margin="100,0,0,0" >
+                                            <Image Source="/Assets/Images/PlayButton.png" Stretch="None"/>
+                                            <TextBlock Text="点播" Style="{StaticResource PlayButton_Text_Style}"/>
+                                        </StackPanel>
                                         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                                             <Image Source="/Assets/Images/CCTV1.png" Stretch="None"/>
                                             <Image Source="/Assets/Images/CCTV5.png" Stretch="None" Margin="4,0,0,0"/>
@@ -136,7 +127,35 @@
 
                 <!--news-->
                 <phone:PanoramaItem Header="快讯">
-                    <Grid Background="LightGray"/>
+                    <ScrollViewer>
+                        <ItemsControl x:Name="newsListBox">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Rectangle Height="1" Fill="{StaticResource App_Theme_Color}" VerticalAlignment="Top"/>
+                                        <Button Style="{StaticResource ContentButtonStyle}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="150"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Width="150" Height="120" Margin="0,10,0,10" Source="/Assets/Images/SportSample.jpg" Stretch="UniformToFill"/>
+                                                <StackPanel Grid.Column="1" Margin="12,10,12,10">
+                                                    <TextBlock Text="高山滑雪男子超级大逆转：斯文达尔夺冠" Style="{StaticResource NewsList_ItemTitle_Text_Style}"/>
+                                                    <TextBlock Text="2014-02-07 02:35" Style="{StaticResource NewsList_ItemTime_Text_Style}"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
                 </phone:PanoramaItem>
 
                 <!--more-->
@@ -152,7 +171,8 @@
                             <ColumnDefinition Width="180"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Row="0" Grid.Column="0" x:Name="awardsButton"  Margin="0,0,8,8" Style="{StaticResource ContentButtonStyle}" >
+                        <Button Grid.Row="0" Grid.Column="0" x:Name="awardsButton"  Margin="0,0,8,8" Style="{StaticResource ContentButtonStyle}" 
+                                Click="awardsButton_Click">
                             <Grid Background="LightSkyBlue">
                                 <Image Source="/Assets/AppBar/award.png" />
                                 <TextBlock Text="奖牌榜" Style="{StaticResource Tile_Text_Style}"/>
