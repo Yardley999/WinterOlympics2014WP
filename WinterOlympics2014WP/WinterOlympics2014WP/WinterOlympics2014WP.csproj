@@ -102,6 +102,9 @@
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\NewsDetailPage.xaml.cs">
+      <DependentUpon>NewsDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\NewsListPage.xaml.cs">
       <DependentUpon>NewsListPage.xaml</DependentUpon>
     </Compile>
@@ -125,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\NewsDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,8 +166,9 @@
     <Content Include="Assets\Images\CCTV1.png" />
     <Content Include="Assets\Images\CCTV5.png" />
     <Content Include="Assets\Images\PlayButton.png" />
-    <Content Include="Assets\Images\SportSample.jpg" />
+    <Content Include="Assets\Sample\SportSample.jpg" />
     <Content Include="Assets\Images\TimelineTag.png" />
+    <Content Include="Assets\Sample\NewsDetailSample.jpg" />
     <Content Include="Assets\Tiles\icon100x100.png" />
     <Content Include="Assets\Images\QuickSelectorPreview.png" />
     <Content Include="Assets\Images\SplashScreenDefault.PNG" />

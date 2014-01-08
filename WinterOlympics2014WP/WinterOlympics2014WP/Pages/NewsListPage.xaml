@@ -13,7 +13,6 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -49,7 +48,7 @@
                                             <ColumnDefinition Width="150"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Image Width="150" Height="120" Margin="12,10,0,10" Source="/Assets/Images/SportSample.jpg" Stretch="UniformToFill"/>
+                                        <Image Width="150" Height="120" Margin="12,10,0,10" Source="/Assets/Sample/SportSample.jpg" Stretch="UniformToFill"/>
                                         <StackPanel Grid.Column="1" Margin="12,10,12,10">
                                             <TextBlock Text="高山滑雪男子超级大逆转：斯文达尔夺冠" Style="{StaticResource NewsList_ItemTitle_Text_Style}"/>
                                             <TextBlock Text="2014-02-07 02:35" Style="{StaticResource NewsList_ItemTime_Text_Style}"/>

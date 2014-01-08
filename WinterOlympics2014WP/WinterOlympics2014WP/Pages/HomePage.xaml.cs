@@ -249,7 +249,6 @@ namespace WinterOlympics2014WP.Pages
 
         #endregion
 
-
         #region More Section
 
         private void awardsButton_Click(object sender, RoutedEventArgs e)
@@ -258,6 +257,11 @@ namespace WinterOlympics2014WP.Pages
         }
 
         #endregion
+
+        private void NewsItem_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/NewsDetailPage.xaml", UriKind.Relative));
+        }
 
     }
 }
