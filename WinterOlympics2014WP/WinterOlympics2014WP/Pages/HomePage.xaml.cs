@@ -96,6 +96,7 @@ namespace WinterOlympics2014WP.Pages
             {
                 quickSelectorShown = true;
                 VisualStateManager.GoToState(this, "QuickSelectorShown", true);
+                newsListScrollViewer.IsHitTestVisible = false;
             }
         }
 
@@ -105,6 +106,7 @@ namespace WinterOlympics2014WP.Pages
             {
                 quickSelectorShown = false;
                 VisualStateManager.GoToState(this, "QuickSelectorHidden", true);
+                newsListScrollViewer.IsHitTestVisible = true;
             }
         }
 
@@ -223,6 +225,11 @@ namespace WinterOlympics2014WP.Pages
             todayItemsControl.ItemsSource = todayList;
         }
 
+        private void EpgItem_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/LivePage.xaml", UriKind.Relative));
+        }
+
         #endregion
 
         #region News
@@ -262,8 +269,6 @@ namespace WinterOlympics2014WP.Pages
         }
 
         #endregion
-
-
 
     }
 }
