@@ -14,7 +14,7 @@
     
     <!--base Styles-->
     <Style x:Key="TextBlockStyleBase" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+        <!--<Setter Property="FontFamily" Value="Microsoft YaHei"/>-->
     </Style>
 
     <Style x:Key="TextBoxStyleBase" TargetType="TextBox">
@@ -197,4 +197,27 @@
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="Foreground" Value="#ff808080"/>
     </Style>
+    
+    <!--medal tally page-->
+    <Style x:Key="MedalTallyPage_Title_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="Foreground" Value="#ffffffff"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="MedalTallyPage_ColumnHeader_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="#ff000000"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="MedalTallyPage_Table_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="#ff000000"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
 </ResourceDictionary>

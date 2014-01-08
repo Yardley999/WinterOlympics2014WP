@@ -247,21 +247,23 @@ namespace WinterOlympics2014WP.Pages
             newsListBox.ItemsSource = newsList;
         }
 
-        #endregion
-
-        #region More Section
-
-        private void awardsButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Pages/NewsListPage.xaml", UriKind.Relative));
-        }
-
-        #endregion
-
         private void NewsItem_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Pages/NewsDetailPage.xaml", UriKind.Relative));
         }
+
+        #endregion
+
+        #region More Section
+
+        private void medalTallyButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/MedalTallyPage.xaml", UriKind.Relative));
+        }
+
+        #endregion
+
+
 
     }
 }

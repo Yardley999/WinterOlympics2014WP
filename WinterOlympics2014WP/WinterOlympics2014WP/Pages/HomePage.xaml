@@ -176,8 +176,8 @@
                             <ColumnDefinition Width="180"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Row="0" Grid.Column="0" x:Name="awardsButton"  Margin="0,0,8,8" Style="{StaticResource ContentButtonStyle}" 
-                                Click="awardsButton_Click">
+                        <Button Grid.Row="0" Grid.Column="0" x:Name="medalTallyButton"  Margin="0,0,8,8" Style="{StaticResource ContentButtonStyle}" 
+                                Click="medalTallyButton_Click">
                             <Grid Background="LightSkyBlue">
                                 <Image Source="/Assets/AppBar/award.png" />
                                 <TextBlock Text="奖牌榜" Style="{StaticResource Tile_Text_Style}"/>

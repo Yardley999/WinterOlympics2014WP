@@ -102,11 +102,11 @@
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MedalTallyPage.xaml.cs">
+      <DependentUpon>MedalTallyPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\NewsDetailPage.xaml.cs">
       <DependentUpon>NewsDetailPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\NewsListPage.xaml.cs">
-      <DependentUpon>NewsListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SplashPage.xaml.cs">
       <DependentUpon>SplashPage.xaml</DependentUpon>
@@ -131,11 +131,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\NewsDetailPage.xaml">
+    <Page Include="Pages\MedalTallyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\NewsListPage.xaml">
+    <Page Include="Pages\NewsDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,6 +165,10 @@
     <Content Include="Assets\AppBar\transport.rew.png" />
     <Content Include="Assets\Images\CCTV1.png" />
     <Content Include="Assets\Images\CCTV5.png" />
+    <Content Include="Assets\Images\Medal1.png" />
+    <Content Include="Assets\Images\Medal2.png" />
+    <Content Include="Assets\Images\Medal3.png" />
+    <Content Include="Assets\Images\MedalTallyPageBackground.jpg" />
     <Content Include="Assets\Images\PlayButton.png" />
     <Content Include="Assets\Sample\SportSample.jpg" />
     <Content Include="Assets\Images\TimelineTag.png" />

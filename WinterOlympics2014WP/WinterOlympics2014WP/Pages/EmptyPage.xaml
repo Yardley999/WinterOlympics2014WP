@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="WinterOlympics2014WP.Pages.NewsDetailPage"
+    x:Class="WinterOlympics2014WP.Pages.MedalTallyPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -26,8 +26,9 @@
 
         <!--content-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Background="Gray">
-            <Image Margin="12,10,12,10" Source="/Assets/Sample/NewsDetailSample.jpg" Stretch="None"/>
+            
         </Grid>
     </Grid>
+
 
 </phone:PhoneApplicationPage>
