@@ -24,6 +24,8 @@ namespace WinterOlympics2014WP.Pages
         {
             base.OnNavigatedTo(e);
             PopulateEPGList();
+
+            bool xx = App.Current.Host.Content.ScaleFactor == 100;
         }
 
         #endregion

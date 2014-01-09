@@ -29,6 +29,7 @@
             <!--quick selector-->
             <controls:QuickSelector x:Name="quickSelector" />
         </Grid>
+        
     </Grid>
 
 </phone:PhoneApplicationPage>
