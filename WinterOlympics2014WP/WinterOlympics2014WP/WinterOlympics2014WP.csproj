@@ -94,11 +94,20 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EPGList.xaml.cs">
+      <DependentUpon>EPGList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\QuickSelector.xaml.cs">
       <DependentUpon>QuickSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\QuickSelectorItemOpacityConverter.cs" />
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="Pages\CalendarPage.xaml.cs">
+      <DependentUpon>CalendarPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EPGListPage.xaml.cs">
+      <DependentUpon>EPGListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -126,7 +135,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Controls\EPGList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\QuickSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CalendarPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EPGListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -177,6 +198,8 @@
     <Content Include="Assets\Images\Medal3.png" />
     <Content Include="Assets\Images\MedalTallyPageBackground.jpg" />
     <Content Include="Assets\Images\PlayButton.png" />
+    <Content Include="Assets\Sample\Country1.PNG" />
+    <Content Include="Assets\Sample\Country2.PNG" />
     <Content Include="Assets\Sample\SportSample.jpg" />
     <Content Include="Assets\Images\TimelineTag.png" />
     <Content Include="Assets\Sample\NewsDetailSample.jpg" />

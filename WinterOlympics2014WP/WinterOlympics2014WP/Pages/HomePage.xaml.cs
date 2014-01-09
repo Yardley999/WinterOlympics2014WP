@@ -21,7 +21,7 @@ namespace WinterOlympics2014WP.Pages
             InitializeComponent();
             BuildApplicationBar();
             SetSplashImage();
-            InitQuickSelector();
+            InitEpgList();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -50,54 +50,15 @@ namespace WinterOlympics2014WP.Pages
         #region Quick Selector
 
         bool quickSelectorShown = false;
-        Dictionary<string, bool> hoursOfDay = new Dictionary<string, bool>();
-        List<string> hoursList = new List<string>();
-
-        private void InitQuickSelector()
-        {
-            hoursOfDay.Add("00:00", true);
-            hoursOfDay.Add("01:00", false);
-            hoursOfDay.Add("02:00", true);
-            hoursOfDay.Add("03:00", true);
-            hoursOfDay.Add("04:00", false);
-            hoursOfDay.Add("05:00", false);
-            hoursOfDay.Add("06:00", false);
-            hoursOfDay.Add("07:00", false);
-            hoursOfDay.Add("08:00", false);
-            hoursOfDay.Add("09:00", false);
-            hoursOfDay.Add("10:00", false);
-            hoursOfDay.Add("11:00", false);
-            hoursOfDay.Add("12:00", false);
-            hoursOfDay.Add("13:00", false);
-            hoursOfDay.Add("14:00", false);
-            hoursOfDay.Add("15:00", false);
-            hoursOfDay.Add("16:00", false);
-            hoursOfDay.Add("17:00", false);
-            hoursOfDay.Add("18:00", false);
-            hoursOfDay.Add("19:00", true);
-            hoursOfDay.Add("20:00", true);
-            hoursOfDay.Add("21:00", true);
-            hoursOfDay.Add("22:00", true);
-            hoursOfDay.Add("23:00", true);
-            quickSelector.SetItems(hoursOfDay);
-
-            hoursList = hoursOfDay.Keys.ToList();
-        }
-
-        private void QuickSelector_SelectionChanged(object sender, int selectedIndex)
-        {
-            //MessageBox.Show(hoursList[selectedIndex]);
-            todayItemsControl.ScrollIntoView(6);
-        }
-
+        
         private void ShowQuickSelector()
         {
             if (!quickSelectorShown)
             {
                 quickSelectorShown = true;
                 VisualStateManager.GoToState(this, "QuickSelectorShown", true);
-                newsListScrollViewer.IsHitTestVisible = false;
             }
+            newsListScrollViewer.IsHitTestVisible = false;
         }
 
         private void HideQuickSelector()
@@ -106,8 +67,8 @@ namespace WinterOlympics2014WP.Pages
             {
                 quickSelectorShown = false;
                 VisualStateManager.GoToState(this, "QuickSelectorHidden", true);
-                newsListScrollViewer.IsHitTestVisible = true;
             }
+            newsListScrollViewer.IsHitTestVisible = true;
         }
 
         #endregion
@@ -206,28 +167,15 @@ namespace WinterOlympics2014WP.Pages
 
         #region Today
 
-        ObservableCollection<int> todayList = new ObservableCollection<int>();
+        private void InitEpgList()
+        {
+            epgList.HostingPage = this;
+            epgList.QuickSelector = this.quickSelector;
+        }
 
         private void PopulateToday()
         {
-            todayList.Clear();
-
-            todayList.Add(0);
-            todayList.Add(1);
-            todayList.Add(2);
-            todayList.Add(3);
-            todayList.Add(4);
-            todayList.Add(5);
-            todayList.Add(6);
-            todayList.Add(7);
-            todayList.Add(8);
-            todayList.Add(9);
-            todayItemsControl.ItemsSource = todayList;
-        }
-
-        private void EpgItem_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Pages/LivePage.xaml", UriKind.Relative));
+            epgList.PopulateData(DateTime.Today);
         }
 
         #endregion
@@ -254,7 +202,7 @@ namespace WinterOlympics2014WP.Pages
             newsListBox.ItemsSource = newsList;
         }
 
-        private void NewsItem_Click(object sender, RoutedEventArgs e)
+        private void NewsItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Pages/NewsDetailPage.xaml", UriKind.Relative));
         }
@@ -263,9 +211,24 @@ namespace WinterOlympics2014WP.Pages
 
         #region More Section
 
-        private void medalTallyButton_Click(object sender, RoutedEventArgs e)
+        private void medalTallyButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Pages/MedalTallyPage.xaml", UriKind.Relative));
+        }
+
+        private void calendarButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/CalendarPage.xaml", UriKind.Relative));
+        }
+
+        private void gamesButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/CalendarPage.xaml", UriKind.Relative));
+        }
+
+        private void stadiumButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/CalendarPage.xaml", UriKind.Relative));
         }
 
         #endregion

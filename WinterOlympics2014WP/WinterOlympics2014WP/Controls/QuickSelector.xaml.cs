@@ -45,7 +45,7 @@ namespace WinterOlympics2014WP.Controls
         {
             InitializeComponent();
             selectionHint.Height = UNIT_HEIGHT;
-            VisualStateManager.GoToState(this, "SelectionPreviewHidden", false);
+            //VisualStateManager.GoToState(this, "SelectionPreviewHidden", false);
         }
 
         public void SetItems(Dictionary<string, bool> items)
@@ -59,7 +59,7 @@ namespace WinterOlympics2014WP.Controls
         {
             eventRaised = false;
             VisualStateManager.GoToState(this, "SelectionPreviewShown", true);
-            Point p = e.GetPosition(LayoutRoot);
+            Point p = e.GetPosition(InterActionArea);
 
             double y = p.Y - p.Y % UNIT_HEIGHT;
             int tempIndex = (int)(y / UNIT_HEIGHT);
@@ -111,23 +111,23 @@ namespace WinterOlympics2014WP.Controls
 
         #region Touch Event
 
-        private void LayoutRoot_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void InterActionArea_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             SetSelectionPosition(e);
         }
 
-        private void LayoutRoot_MouseMove(object sender, MouseEventArgs e)
+        private void InterActionArea_MouseMove(object sender, MouseEventArgs e)
         {
             SetSelectionPosition(e);
         }
 
-        private void LayoutRoot_MouseLeave(object sender, MouseEventArgs e)
+        private void InterActionArea_MouseLeave(object sender, MouseEventArgs e)
         {
             //RaiseSelectionChanged();
             Dismiss();
         }
 
-        private void LayoutRoot_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void InterActionArea_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             RaiseSelectionChanged();
         }

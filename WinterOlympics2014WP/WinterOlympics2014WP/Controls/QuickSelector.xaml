@@ -8,48 +8,58 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="480" Width="48">
-    
+    d:DesignHeight="480" Width="48"
+    HorizontalAlignment="Right">
+
     <UserControl.Resources>
         <converters:QuickSelectorItemOpacityConverter x:Key="QuickSelectorItemOpacityConverter"/>
     </UserControl.Resources>
 
-    <Grid x:Name="LayoutRoot" Background="#00000000" MouseLeftButtonDown="LayoutRoot_MouseLeftButtonDown"  MouseMove="LayoutRoot_MouseMove" MouseLeave="LayoutRoot_MouseLeave" MouseLeftButtonUp="LayoutRoot_MouseLeftButtonUp">
-    	<VisualStateManager.VisualStateGroups>
-    		<VisualStateGroup x:Name="VisualStateGroup">
-    			<VisualStateGroup.Transitions>
-    				<VisualTransition GeneratedDuration="0"/>
-    				<VisualTransition From="SelectionPreviewShown" GeneratedDuration="0:0:0.9" To="SelectionPreviewHidden"/>
-    			</VisualStateGroup.Transitions>
-    			<VisualState x:Name="SelectionPreviewShown"/>
-    			<VisualState x:Name="SelectionPreviewHidden">
-    				<Storyboard>
-    					<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="selectionPreview" d:IsOptimized="True"/>
-    				</Storyboard>
-    			</VisualState>
-    		</VisualStateGroup>
-    	</VisualStateManager.VisualStateGroups>
-        <Rectangle IsHitTestVisible="False" Height="20" x:Name="selectionHint" Fill="#ff2d2d2d" VerticalAlignment="Center" 
+    <Grid Background="{StaticResource QuickSelector_Base_Color}" >
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualStateGroup.Transitions>
+                    <VisualTransition GeneratedDuration="0"/>
+                    <VisualTransition From="SelectionPreviewShown" GeneratedDuration="0:0:0.9" To="SelectionPreviewHidden"/>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="SelectionPreviewShown">
+                    <Storyboard>
+                        <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="selectionPreview" d:IsOptimized="True"/>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="SelectionPreviewHidden"/>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid x:Name="InterActionArea" Background="#00000000"
+              VerticalAlignment="Top" Margin="0,12,0,0"
+              MouseLeftButtonDown="InterActionArea_MouseLeftButtonDown" 
+              MouseMove="InterActionArea_MouseMove" MouseLeave="InterActionArea_MouseLeave" 
+              MouseLeftButtonUp="InterActionArea_MouseLeftButtonUp">
+            <Rectangle IsHitTestVisible="False" Height="20" x:Name="selectionHint" Fill="#ff2d2d2d" VerticalAlignment="Center" 
                    RenderTransformOrigin="0.5,0.5">
-            <Rectangle.RenderTransform>
-                <CompositeTransform x:Name="selectionHintTransform" TranslateY="0"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <ItemsControl x:Name="itemsControl" IsHitTestVisible="False" VerticalAlignment="Center">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Opacity="{Binding Value, Converter={StaticResource QuickSelectorItemOpacityConverter}}" Text="{Binding Key}" Style="{StaticResource QuickSelector_Item_Text_Style}"
+                <Rectangle.RenderTransform>
+                    <CompositeTransform x:Name="selectionHintTransform" TranslateY="0"/>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <ItemsControl x:Name="itemsControl" IsHitTestVisible="False" VerticalAlignment="Center">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Opacity="{Binding Value, Converter={StaticResource QuickSelectorItemOpacityConverter}}" Text="{Binding Key}" Style="{StaticResource QuickSelector_Item_Text_Style}"
                                Height="26"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <Grid x:Name="selectionPreview" Margin="-170,0,0,0" IsHitTestVisible="False">
-            <Grid.RenderTransform>
-                <CompositeTransform x:Name="selectionPreviewTransform" TranslateY="0"/>
-            </Grid.RenderTransform>
-            <Image Source="/Assets/Images/QuickSelectorPreview.png" Stretch="None" />
-            <TextBlock x:Name="selectionPreviewText" Style="{StaticResource QuickSelector_Preview_Text_Style}"
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <Grid x:Name="selectionPreview" Margin="-170,0,0,0" IsHitTestVisible="False" Opacity="0">
+                <Grid.RenderTransform>
+                    <CompositeTransform x:Name="selectionPreviewTransform" TranslateY="0"/>
+                </Grid.RenderTransform>
+                <Image Source="/Assets/Images/QuickSelectorPreview.png" Stretch="None" />
+                <TextBlock x:Name="selectionPreviewText" Style="{StaticResource QuickSelector_Preview_Text_Style}"
                        Margin="-10,0,0,0"/>
+            </Grid>
         </Grid>
+
     </Grid>
+
 </UserControl>
