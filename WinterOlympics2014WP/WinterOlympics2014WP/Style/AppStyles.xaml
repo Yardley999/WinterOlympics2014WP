@@ -332,5 +332,22 @@
         <Setter Property="Margin" Value="24,0,0,24"/>
     </Style>
 
+    <!--album page-->
+    <Style x:Key="AlbumPage_Description_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="Foreground" Value="#ff000000"/>
+        <Setter Property="Margin" Value="24,8,100,8"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
+    <Style x:Key="AlbumPage_Index_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="40"/>
+        <Setter Property="Foreground" Value="#ff000000"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0,0,24,0"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
 
 </ResourceDictionary>

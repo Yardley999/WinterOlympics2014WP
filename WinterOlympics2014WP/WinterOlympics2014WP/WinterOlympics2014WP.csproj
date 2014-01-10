@@ -101,7 +101,9 @@
       <DependentUpon>QuickSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\QuickSelectorItemOpacityConverter.cs" />
+    <Compile Include="Utility\JsonSerializer.cs" />
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="Models\News.cs" />
     <Compile Include="Pages\AlbumPage.xaml.cs">
       <DependentUpon>AlbumPage.xaml</DependentUpon>
     </Compile>
@@ -242,6 +244,7 @@
     <Content Include="Assets\AppBar\transport.ff.png" />
     <Content Include="Assets\AppBar\transport.rew.png" />
     <Content Include="Assets\Images\ArrowDown.png" />
+    <Content Include="Assets\Images\ArrowLeft.png" />
     <Content Include="Assets\Images\ArrowRight.png" />
     <Content Include="Assets\Images\ArrowUp.png" />
     <Content Include="Assets\Images\Categories\category1.png" />

@@ -9,6 +9,9 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Media.Imaging;
 using System.Collections.ObjectModel;
+using System.IO;
+using WinterOlympics2014WP.Models;
+using WinterOlympics2014WP.Utility;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -190,7 +193,7 @@ namespace WinterOlympics2014WP.Pages
 
         ObservableCollection<int> newsList = new ObservableCollection<int>();
 
-        private void LoadNews()
+        private void LoadNews_old()
         {
             newsList.Clear();
 
@@ -206,6 +209,43 @@ namespace WinterOlympics2014WP.Pages
             newsList.Add(9);
 
             newsListBox.ItemsSource = newsList;
+        }
+
+        private void LoadNews()
+        {
+            try
+            {
+                String url = "http://115.28.21.97/api/server?cmd=getnewslist";
+                HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
+                request.Method = "GET";
+                request.BeginGetResponse(GetNewsList_Callback, request);
+            }
+            catch (WebException e)
+            {
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+        private void GetNewsList_Callback(IAsyncResult result)
+        {
+            HttpWebRequest request = (HttpWebRequest)result.AsyncState;//获取异步操作返回的的信息
+            WebResponse response = request.EndGetResponse(result);//结束对 Internet 资源的异步请求
+
+            using (Stream stream = response.GetResponseStream())
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string json = reader.ReadToEnd();
+                List<News> newsList = JsonSerializer.Deserialize<List<News>>(json);
+               
+                //通过呼叫UI Thread来改变页面的显示
+                Dispatcher.BeginInvoke(() => 
+                { 
+                    //httpWebRequestTextBlock.Text = contents.ToString().Substring(begin + 7, end - begin - 7); textBox2.Text = note; 
+                });
+
+            }
         }
 
         private void NewsItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -243,6 +283,7 @@ namespace WinterOlympics2014WP.Pages
         }
 
         #endregion
+
 
     }
 }

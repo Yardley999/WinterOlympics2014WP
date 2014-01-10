@@ -29,24 +29,63 @@
 	</phone:PhoneApplicationPage.Resources>
 
     <Grid x:Name="LayoutRoot" Background="White">
-        <phone:Panorama ItemContainerStyle="{StaticResource PanoramaItemStyle1}" 
-                        Margin="60,36,0,0" RenderTransformOrigin="0.5,0.5" >
+    	<VisualStateManager.VisualStateGroups>
+    		<VisualStateGroup x:Name="VisualStateGroup">
+    			<VisualStateGroup.Transitions>
+    				<VisualTransition GeneratedDuration="0:0:0.2">
+    					<VisualTransition.GeneratedEasingFunction>
+    						<PowerEase EasingMode="EaseInOut"/>
+    					</VisualTransition.GeneratedEasingFunction>
+    				</VisualTransition>
+    			</VisualStateGroup.Transitions>
+    			<VisualState x:Name="BottomPanelShown"/>
+    			<VisualState x:Name="BottomPanelHidden">
+    				<Storyboard>
+    					<DoubleAnimation Duration="0" To="80" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="descriptionPanel" d:IsOptimized="True"/>
+    				</Storyboard>
+    			</VisualState>
+    		</VisualStateGroup>
+    	</VisualStateManager.VisualStateGroups>
+        
+        <phone:Panorama x:Name="panorama" ItemContainerStyle="{StaticResource PanoramaItemStyle1}" 
+                        Margin="58,35,0,0" RenderTransformOrigin="0.5,0.5" 
+                        SelectionChanged="Panorama_SelectionChanged"
+                        Tap="Panorama_Tap">
         	<phone:Panorama.RenderTransform>
-        		<CompositeTransform ScaleX="1.17" ScaleY="1.17"/>
+        		<CompositeTransform ScaleX="1.16" ScaleY="1.16"/>
         	</phone:Panorama.RenderTransform>
             <phone:PanoramaItem>
-                <Grid Background="LightBlue">
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="695" Height="415">
+                    <Image Source="/Assets/Sample/SportSample.jpg" Stretch="UniformToFill"/>
                 </Grid>
             </phone:PanoramaItem>
             <phone:PanoramaItem>
-                <Grid Background="LightGreen">
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="695" Height="415">
+                    <Image Source="/Assets/Sample/StadiumSample.jpg" Stretch="UniformToFill"/>
                 </Grid>
             </phone:PanoramaItem>
             <phone:PanoramaItem>
-                <Grid Background="LightSalmon">
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="695" Height="415">
+                    <Image Source="/Assets/Sample/NewsDetailSample.jpg" Stretch="UniformToFill"/>
                 </Grid>
             </phone:PanoramaItem>
+            
         </phone:Panorama>
+        
+        <Grid Background="#a0ffffff" Width="24" Height="100" HorizontalAlignment="Left" IsHitTestVisible="False">
+            <Image Source="/Assets/Images/ArrowLeft.png" Stretch="None"/>
+        </Grid>
+        <Grid Background="#a0ffffff" Width="24" Height="100" HorizontalAlignment="Right" IsHitTestVisible="False">
+            <Image Source="/Assets/Images/ArrowRight.png" Stretch="None"/>
+        </Grid>
+        <Grid x:Name="descriptionPanel" Background="#a0ffffff" Height="80" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+        	<Grid.RenderTransform>
+        		<CompositeTransform/>
+        	</Grid.RenderTransform>
+            <TextBlock Text="2014索契冬奥会吉祥物原来是这样子的！" 
+                       Style="{StaticResource AlbumPage_Description_Text_Style}"/>
+            <TextBlock x:Name="indexTextBlock" Text="" Style="{StaticResource AlbumPage_Index_Text_Style}"/>
+        </Grid>
     </Grid>
 
 </phone:PhoneApplicationPage>
