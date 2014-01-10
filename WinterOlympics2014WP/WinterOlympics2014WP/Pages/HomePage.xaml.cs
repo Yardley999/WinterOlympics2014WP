@@ -17,6 +17,12 @@ namespace WinterOlympics2014WP.Pages
 {
     public partial class HomePage : PhoneApplicationPage
     {
+        #region Property
+
+        private bool busy = false;
+
+        #endregion
+
         #region Lifecycle
 
         public HomePage()
@@ -25,6 +31,8 @@ namespace WinterOlympics2014WP.Pages
             BuildApplicationBar();
             SetSplashImage();
             InitEpgList();
+
+            newsListBox.ItemsSource = newsList;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -53,7 +61,7 @@ namespace WinterOlympics2014WP.Pages
         #region Quick Selector
 
         bool quickSelectorShown = false;
-        
+
         private void ShowQuickSelector()
         {
             if (!quickSelectorShown)
@@ -191,28 +199,21 @@ namespace WinterOlympics2014WP.Pages
 
         #region News
 
-        ObservableCollection<int> newsList = new ObservableCollection<int>();
-
-        private void LoadNews_old()
-        {
-            newsList.Clear();
-
-            newsList.Add(0);
-            newsList.Add(1);
-            newsList.Add(2);
-            newsList.Add(3);
-            newsList.Add(4);
-            newsList.Add(5);
-            newsList.Add(6);
-            newsList.Add(7);
-            newsList.Add(8);
-            newsList.Add(9);
-
-            newsListBox.ItemsSource = newsList;
-        }
+        bool newsLoaded = false;
+        ObservableCollection<News> newsList = new ObservableCollection<News>();
 
         private void LoadNews()
         {
+            if (busy)
+            {
+                return;
+            }
+
+            if (newsLoaded)
+            {
+                return;
+            }
+
             try
             {
                 String url = "http://115.28.21.97/api/server?cmd=getnewslist";
@@ -230,6 +231,7 @@ namespace WinterOlympics2014WP.Pages
 
         private void GetNewsList_Callback(IAsyncResult result)
         {
+            newsLoaded = true;
             HttpWebRequest request = (HttpWebRequest)result.AsyncState;//获取异步操作返回的的信息
             WebResponse response = request.EndGetResponse(result);//结束对 Internet 资源的异步请求
 
@@ -237,12 +239,13 @@ namespace WinterOlympics2014WP.Pages
             using (StreamReader reader = new StreamReader(stream))
             {
                 string json = reader.ReadToEnd();
-                List<News> newsList = JsonSerializer.Deserialize<List<News>>(json);
-               
-                //通过呼叫UI Thread来改变页面的显示
+                var list = JsonSerializer.Deserialize<NewsList>(json);
                 Dispatcher.BeginInvoke(() => 
-                { 
-                    //httpWebRequestTextBlock.Text = contents.ToString().Substring(begin + 7, end - begin - 7); textBox2.Text = note; 
+                {
+                    for (int i = 0; i < list.data.Length; i++)
+                    {
+                        newsList.Add(list.data[i]);
+                    }
                 });
 
             }
