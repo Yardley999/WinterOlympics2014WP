@@ -228,7 +228,7 @@ namespace WinterOlympics2014WP.Pages
 
         private void stadiumButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/CalendarPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Pages/StadiumListPage.xaml", UriKind.Relative));
         }
 
         #endregion

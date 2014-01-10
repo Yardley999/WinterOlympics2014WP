@@ -9,7 +9,6 @@
     <!--colors-->
     <SolidColorBrush x:Key="App_Theme_Color" Color="#ff0056a6"/>
     <SolidColorBrush x:Key="QuickSelector_Base_Color" Color="#ff4d4d4d"/>
-
     <!--converters-->
     
     <!--base Styles-->
@@ -116,6 +115,13 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="ListBoxItem_SplitBar_Style" TargetType="Rectangle">
+        <Setter Property="Height" Value="1"/>
+        <Setter Property="Fill" Value="#ff808080"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
 
     <!--quick selector-->
     <Style x:Key="QuickSelector_Item_Text_Style" TargetType="TextBlock">
@@ -293,19 +299,36 @@
     <Style x:Key="CategoryPage_Date_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Foreground" Value="#ff000000"/>
-        <Setter Property="Margin" Value="12,12,24,12"/>
+        <Setter Property="Margin" Value="0,0,0,4"/>
     </Style>
 
     <Style x:Key="CategoryPage_Schedule_Title_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="Foreground" Value="#ff000000"/>
-        <Setter Property="Margin" Value="12,12,24,12"/>
+        <Setter Property="Margin" Value="0,0,0,4"/>
     </Style>
 
     <Style x:Key="CategoryPage_Schedule_SubTitle_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Foreground" Value="#ff000000"/>
-        <Setter Property="Margin" Value="12,12,24,12"/>
+        <Setter Property="Margin" Value="0,0,0,4"/>
     </Style>
+    
+    <Style x:Key="CategoryPage_PivotHeader_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="Foreground" Value="#ff000000"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    
+    <!--stadium list page-->
+    <Style x:Key="StadiumListPage_Title_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="28"/>
+        <Setter Property="Foreground" Value="#ffffffff"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Margin" Value="24,0,0,24"/>
+    </Style>
+
 
 </ResourceDictionary>

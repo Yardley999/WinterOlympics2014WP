@@ -102,11 +102,17 @@
     </Compile>
     <Compile Include="Converters\QuickSelectorItemOpacityConverter.cs" />
     <Compile Include="LocalizedStrings.cs" />
-    <Compile Include="Pages\CalendarPage.xaml.cs">
-      <DependentUpon>CalendarPage.xaml</DependentUpon>
+    <Compile Include="Pages\StadiumDetailPage.xaml.cs">
+      <DependentUpon>StadiumDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\StadiumListPage.xaml.cs">
+      <DependentUpon>StadiumListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\CategoryPage.xaml.cs">
       <DependentUpon>CategoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CalendarPage.xaml.cs">
+      <DependentUpon>CalendarPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\EPGListPage.xaml.cs">
       <DependentUpon>EPGListPage.xaml</DependentUpon>
@@ -146,13 +152,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\CalendarPage.xaml">
+    <Page Include="Pages\StadiumDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\StadiumListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CategoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CalendarPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\EPGListPage.xaml">
       <SubType>Designer</SubType>
@@ -215,6 +229,8 @@
     <Content Include="Assets\Sample\SportSample.jpg" />
     <Content Include="Assets\Images\TimelineTag.png" />
     <Content Include="Assets\Sample\NewsDetailSample.jpg" />
+    <Content Include="Assets\Sample\StadiumDetailSample.jpg" />
+    <Content Include="Assets\Sample\StadiumSample.jpg" />
     <Content Include="Assets\Tiles\icon100x100.png" />
     <Content Include="Assets\Images\QuickSelectorPreview.png" />
     <Content Include="Assets\Images\SplashScreenDefault.PNG" />
