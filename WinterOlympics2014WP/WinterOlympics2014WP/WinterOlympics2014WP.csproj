@@ -105,6 +105,9 @@
     <Compile Include="Pages\CalendarPage.xaml.cs">
       <DependentUpon>CalendarPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CategoryPage.xaml.cs">
+      <DependentUpon>CategoryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EPGListPage.xaml.cs">
       <DependentUpon>EPGListPage.xaml</DependentUpon>
     </Compile>
@@ -144,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CalendarPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CategoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -191,6 +198,9 @@
     <Content Include="Assets\AppBar\refresh.png" />
     <Content Include="Assets\AppBar\transport.ff.png" />
     <Content Include="Assets\AppBar\transport.rew.png" />
+    <Content Include="Assets\Images\ArrowDown.png" />
+    <Content Include="Assets\Images\ArrowUp.png" />
+    <Content Include="Assets\Images\Categories\Curling.png" />
     <Content Include="Assets\Images\CCTV1.png" />
     <Content Include="Assets\Images\CCTV5.png" />
     <Content Include="Assets\Images\Medal1.png" />
@@ -198,6 +208,8 @@
     <Content Include="Assets\Images\Medal3.png" />
     <Content Include="Assets\Images\MedalTallyPageBackground.jpg" />
     <Content Include="Assets\Images\PlayButton.png" />
+    <Content Include="Assets\Images\Subscribe.png" />
+    <Content Include="Assets\Images\UnSubscribe.png" />
     <Content Include="Assets\Sample\Country1.PNG" />
     <Content Include="Assets\Sample\Country2.PNG" />
     <Content Include="Assets\Sample\SportSample.jpg" />
