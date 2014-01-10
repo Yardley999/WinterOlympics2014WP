@@ -94,8 +94,14 @@ namespace WinterOlympics2014WP.Pages
             appBarRefreshNews.Text = "刷新";
 
             appBarSetting = new ApplicationBarMenuItem("设置");
+            appBarSetting.Click += appBarSetting_Click;
 
             SetAppBarForSplash();
+        }
+
+        void appBarSetting_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/SettingsPage.xaml", UriKind.Relative));
         }
 
         private void ClearAppBar()

@@ -1,0 +1,52 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="WinterOlympics2014WP.Pages.AlbumPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Landscape" Orientation="Landscape"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+	<phone:PhoneApplicationPage.Resources>
+		<Style x:Key="PanoramaItemStyle1" TargetType="phone:PanoramaItem">
+			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+			<Setter Property="VerticalContentAlignment" Value="Stretch"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="phone:PanoramaItem">
+						<Grid Background="{TemplateBinding Background}" Margin="0,0,0,0">
+							<ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Grid.Row="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</phone:PhoneApplicationPage.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="White">
+        <phone:Panorama ItemContainerStyle="{StaticResource PanoramaItemStyle1}" 
+                        Margin="60,36,0,0" RenderTransformOrigin="0.5,0.5" >
+        	<phone:Panorama.RenderTransform>
+        		<CompositeTransform ScaleX="1.17" ScaleY="1.17"/>
+        	</phone:Panorama.RenderTransform>
+            <phone:PanoramaItem>
+                <Grid Background="LightBlue">
+                </Grid>
+            </phone:PanoramaItem>
+            <phone:PanoramaItem>
+                <Grid Background="LightGreen">
+                </Grid>
+            </phone:PanoramaItem>
+            <phone:PanoramaItem>
+                <Grid Background="LightSalmon">
+                </Grid>
+            </phone:PanoramaItem>
+        </phone:Panorama>
+    </Grid>
+
+</phone:PhoneApplicationPage>

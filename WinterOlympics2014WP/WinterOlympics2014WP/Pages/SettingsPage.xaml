@@ -25,10 +25,27 @@
         </Grid>
 
         <!--content-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Background="Gray">
+        <Grid x:Name="ContentPanel" Grid.Row="1">
+            <phone:Pivot>
+                <phone:Pivot.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid Height="48" Margin="0,0,0,-24">
+                            <TextBlock Text="{Binding}" Style="{StaticResource CategoryPage_PivotHeader_Text_Style}"/>
+                        </Grid>
+                    </DataTemplate>
+                </phone:Pivot.HeaderTemplate>
+                <phone:PivotItem Header="设置">
+                    <Grid>
+                    </Grid>
+                </phone:PivotItem>
+                <phone:PivotItem Header="关于">
+                    <Grid>
+                        
+                    </Grid>
+                </phone:PivotItem>
+            </phone:Pivot>
 
         </Grid>
     </Grid>
-
 
 </phone:PhoneApplicationPage>

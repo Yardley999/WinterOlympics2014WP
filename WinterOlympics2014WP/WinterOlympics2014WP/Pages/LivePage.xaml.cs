@@ -34,9 +34,9 @@ namespace WinterOlympics2014WP.Pages
 
         }
 
-        private void Gallery_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void Albumn_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Pages/AlbumPage.xaml", UriKind.Relative));
         }
 
         #region Description
