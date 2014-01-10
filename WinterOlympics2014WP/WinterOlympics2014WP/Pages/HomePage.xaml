@@ -110,6 +110,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="180"/>
                             <RowDefinition Height="180"/>
+                            <RowDefinition Height="180"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
@@ -119,33 +120,39 @@
                         </Grid.ColumnDefinitions>
                         <Button Grid.Row="0" Grid.Column="0" x:Name="medalTallyButton"  Margin="0,0,8,8" Style="{StaticResource ContentButtonStyle}" 
                                 Tap="medalTallyButton_Tap">
-                            <Grid Background="LightSkyBlue">
+                            <Grid Background="#FF1BA1E2">
                                 <Image Source="/Assets/AppBar/award.png" />
                                 <TextBlock Text="奖牌榜" Style="{StaticResource Tile_Text_Style}"/>
                             </Grid>
                         </Button>
                         <Button Grid.Row="0" Grid.Column="1" x:Name="calendarButton"  Margin="0,0,8,8" Style="{StaticResource ContentButtonStyle}" 
                                 Tap="calendarButton_Tap">
-                            <Grid Background="LightGreen">
+                            <Grid Background="#FFA4C400">
                                 <Image Source="/Assets/AppBar/calendar.png"/>
                                 <TextBlock Text="赛事日历" Style="{StaticResource Tile_Text_Style}"/>
                             </Grid>
                         </Button>
-                        <Button Grid.Row="1" Grid.Column="0" x:Name="gamesButton"  Margin="0,0,8,8" Style="{StaticResource ContentButtonStyle}" 
-                                Tap="gamesButton_Tap">
-                            <Grid Background="LightSalmon">
+                        <Button Grid.Row="1" Grid.Column="0" x:Name="categoryButton"  Margin="0,0,8,8" Style="{StaticResource ContentButtonStyle}" 
+                                Tap="categoryButton_Tap">
+                            <Grid Background="#FFA20025">
                                 <Image Source="/Assets/AppBar/search.png"/>
                                 <TextBlock Text="比赛项目" Style="{StaticResource Tile_Text_Style}"/>
                             </Grid>
                         </Button>
                         <Button Grid.Row="1" Grid.Column="1" x:Name="stadiumButton"  Margin="0,0,8,8" Style="{StaticResource ContentButtonStyle}" 
                                 Tap="stadiumButton_Tap">
-                            <Grid Background="#FFFFE800">
+                            <Grid Background="#FFF0A30A">
                                 <Image Source="/Assets/AppBar/camera.png"/>
                                 <TextBlock Text="场馆介绍" Style="{StaticResource Tile_Text_Style}"/>
                             </Grid>
                         </Button>
-
+                        <Button Grid.Row="2" Grid.Column="0" x:Name="subscribeButton"  Margin="0,0,8,8" Style="{StaticResource ContentButtonStyle}" 
+                                Tap="subscribeButton_Tap">
+                            <Grid Background="#FF76608A">
+                                <Image Source="/Assets/AppBar/alarm.png"/>
+                                <TextBlock Text="我的预约" Style="{StaticResource Tile_Text_Style}"/>
+                            </Grid>
+                        </Button>
                     </Grid>
                 </phone:PanoramaItem>
             </phone:Panorama>

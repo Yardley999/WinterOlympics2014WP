@@ -102,6 +102,15 @@
     </Compile>
     <Compile Include="Converters\QuickSelectorItemOpacityConverter.cs" />
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="Pages\CategoryListPage.xaml.cs">
+      <DependentUpon>CategoryListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MySubscriptionPage.xaml.cs">
+      <DependentUpon>MySubscriptionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\StadiumDetailPage.xaml.cs">
       <DependentUpon>StadiumDetailPage.xaml</DependentUpon>
     </Compile>
@@ -149,6 +158,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\QuickSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CategoryListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MySubscriptionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -204,6 +225,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\AppBar\alarm.png" />
     <Content Include="Assets\AppBar\calendar.png" />
     <Content Include="Assets\AppBar\award.png" />
     <Content Include="Assets\AppBar\camera.png" />
@@ -213,7 +235,30 @@
     <Content Include="Assets\AppBar\transport.ff.png" />
     <Content Include="Assets\AppBar\transport.rew.png" />
     <Content Include="Assets\Images\ArrowDown.png" />
+    <Content Include="Assets\Images\ArrowRight.png" />
     <Content Include="Assets\Images\ArrowUp.png" />
+    <Content Include="Assets\Images\Categories\category1.png" />
+    <Content Include="Assets\Images\Categories\category10.png" />
+    <Content Include="Assets\Images\Categories\category11.png" />
+    <Content Include="Assets\Images\Categories\category12.png" />
+    <Content Include="Assets\Images\Categories\category13.png" />
+    <Content Include="Assets\Images\Categories\category14.png" />
+    <Content Include="Assets\Images\Categories\category15.png" />
+    <Content Include="Assets\Images\Categories\category16.png" />
+    <Content Include="Assets\Images\Categories\category17.png" />
+    <Content Include="Assets\Images\Categories\category18.png" />
+    <Content Include="Assets\Images\Categories\category19.png" />
+    <Content Include="Assets\Images\Categories\category2.png" />
+    <Content Include="Assets\Images\Categories\category20.png" />
+    <Content Include="Assets\Images\Categories\category21.png" />
+    <Content Include="Assets\Images\Categories\category22.png" />
+    <Content Include="Assets\Images\Categories\category3.png" />
+    <Content Include="Assets\Images\Categories\category4.png" />
+    <Content Include="Assets\Images\Categories\category5.png" />
+    <Content Include="Assets\Images\Categories\category6.png" />
+    <Content Include="Assets\Images\Categories\category7.png" />
+    <Content Include="Assets\Images\Categories\category8.png" />
+    <Content Include="Assets\Images\Categories\category9.png" />
     <Content Include="Assets\Images\Categories\Curling.png" />
     <Content Include="Assets\Images\CCTV1.png" />
     <Content Include="Assets\Images\CCTV5.png" />

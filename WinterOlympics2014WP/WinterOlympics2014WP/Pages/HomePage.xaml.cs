@@ -221,14 +221,19 @@ namespace WinterOlympics2014WP.Pages
             NavigationService.Navigate(new Uri("/Pages/CalendarPage.xaml", UriKind.Relative));
         }
 
-        private void gamesButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void categoryButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/CategoryPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Pages/CategoryListPage.xaml", UriKind.Relative));
         }
 
         private void stadiumButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Pages/StadiumListPage.xaml", UriKind.Relative));
+        }
+
+        private void subscribeButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/MySubscriptionPage.xaml", UriKind.Relative));
         }
 
         #endregion

@@ -11,11 +11,11 @@ using System.Collections.ObjectModel;
 
 namespace WinterOlympics2014WP.Pages
 {
-    public partial class CategoryPage : PhoneApplicationPage
+    public partial class MySubscriptionPage : PhoneApplicationPage
     {
         #region Lifecycle
 
-        public CategoryPage()
+        public MySubscriptionPage()
         {
             InitializeComponent();
             scheduleListBox.ItemsSource = scheduleList;
@@ -29,7 +29,7 @@ namespace WinterOlympics2014WP.Pages
 
         #endregion
 
-        #region Schedule List
+        #region Subscription List
 
         ObservableCollection<int> scheduleList = new ObservableCollection<int>();
 
@@ -51,7 +51,7 @@ namespace WinterOlympics2014WP.Pages
 
         #endregion
 
-        private void Subscribe_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void UnSubscribe_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
 
         }
@@ -60,5 +60,6 @@ namespace WinterOlympics2014WP.Pages
         {
 
         }
+
     }
 }

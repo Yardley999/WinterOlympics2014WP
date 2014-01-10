@@ -14,7 +14,6 @@
     shell:SystemTray.IsVisible="True">
 
     <phone:PhoneApplicationPage.Resources>
-        <SolidColorBrush x:Key="CategoryPage_ExpandButton_Color" Color="#ff0a7cc2"/>
     </phone:PhoneApplicationPage.Resources>
 
     <Grid x:Name="LayoutRoot" Background="White">
@@ -72,7 +71,7 @@
                                                     <Grid Background="#00000000">
                                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                                             <TextBlock Text="赛果" Style="{StaticResource CategoryPage_Schedule_Title_Text_Style}"
-                                                                       Foreground="{StaticResource CategoryPage_ExpandButton_Color}" />
+                                                                       Foreground="{StaticResource ArrowButton_Color}" />
                                                             <Image Margin="8,0,0,0" Source="/Assets/Images/ArrowDown.png" Stretch="None"/>
                                                         </StackPanel>
                                                     </Grid>

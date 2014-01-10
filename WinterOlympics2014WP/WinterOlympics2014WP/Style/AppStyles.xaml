@@ -9,6 +9,8 @@
     <!--colors-->
     <SolidColorBrush x:Key="App_Theme_Color" Color="#ff0056a6"/>
     <SolidColorBrush x:Key="QuickSelector_Base_Color" Color="#ff4d4d4d"/>
+    <SolidColorBrush x:Key="ArrowButton_Color" Color="#ff0a7cc2"/>
+
     <!--converters-->
     
     <!--base Styles-->
