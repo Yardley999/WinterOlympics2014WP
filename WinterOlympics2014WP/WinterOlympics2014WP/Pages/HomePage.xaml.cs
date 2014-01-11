@@ -248,7 +248,13 @@ namespace WinterOlympics2014WP.Pages
                     }
                 });
 
+                SaveNews(json);
             }
+        }
+
+        private async void SaveNews(string content)
+        {
+            await IsolatedStorageHelper.WriteToFile("news", "latest_news.txt", content);
         }
 
         private void NewsItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)

@@ -101,6 +101,7 @@
       <DependentUpon>QuickSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\QuickSelectorItemOpacityConverter.cs" />
+    <Compile Include="Utility\IsolatedStorageHelper.cs" />
     <Compile Include="Utility\JsonSerializer.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Models\News.cs" />
