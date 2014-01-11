@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using WinterOlympics2014WP.Models;
 using WinterOlympics2014WP.Utility;
+using Microsoft.Phone.Net.NetworkInformation;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -210,6 +211,11 @@ namespace WinterOlympics2014WP.Pages
             }
 
             if (newsLoaded)
+            {
+                return;
+            }
+
+            if (!DeviceNetworkInformation.IsNetworkAvailable)
             {
                 return;
             }

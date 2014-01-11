@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
+using WinterOlympics2014WP.Utility;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -35,6 +36,8 @@ namespace WinterOlympics2014WP.Pages
 
         private void LoadScheduleList()
         {
+            var xxx = ReminderHelper.GetReminders();
+
             scheduleList.Clear();
 
             scheduleList.Add(0);

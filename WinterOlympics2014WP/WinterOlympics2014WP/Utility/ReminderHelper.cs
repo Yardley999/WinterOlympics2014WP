@@ -17,7 +17,7 @@ namespace WinterOlympics2014WP.Utility
             reminder.BeginTime = beginTime;
             //reminder.ExpirationTime = expirationTime;
             reminder.RecurrenceType = RecurrenceInterval.None;
-            reminder.NavigationUri = new Uri(navUri); ;
+            reminder.NavigationUri = new Uri(navUri, UriKind.Relative); ;
 
             // Register the reminder with the system.
             ScheduledActionService.Add(reminder);
@@ -36,6 +36,12 @@ namespace WinterOlympics2014WP.Utility
         {
             var notifications = ScheduledActionService.GetActions<ScheduledNotification>();
             return notifications.FirstOrDefault(x => x.Name == name);
+        }
+
+        public static IEnumerable<ScheduledNotification> GetReminders()
+        {
+            var notifications = ScheduledActionService.GetActions<ScheduledNotification>();
+            return notifications;
         }
     }
 }

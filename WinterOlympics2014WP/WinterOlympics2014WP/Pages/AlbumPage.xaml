@@ -6,12 +6,10 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Landscape" Orientation="Landscape"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="False">
+    shell:SystemTray.IsVisible="False"
+    OrientationChanged="PhoneApplicationPage_OrientationChanged">
 	<phone:PhoneApplicationPage.Resources>
 		<Style x:Key="PanoramaItemStyle1" TargetType="phone:PanoramaItem">
 			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -28,7 +26,7 @@
 		</Style>
 	</phone:PhoneApplicationPage.Resources>
 
-    <Grid x:Name="LayoutRoot" Background="White">
+    <Grid x:Name="LayoutRoot" Background="Black">
     	<VisualStateManager.VisualStateGroups>
     		<VisualStateGroup x:Name="VisualStateGroup">
     			<VisualStateGroup.Transitions>
@@ -41,49 +39,59 @@
     			<VisualState x:Name="BottomPanelShown"/>
     			<VisualState x:Name="BottomPanelHidden">
     				<Storyboard>
-    					<DoubleAnimation Duration="0" To="80" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="descriptionPanel" d:IsOptimized="True"/>
+    					<DoubleAnimation Duration="0" To="100" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="descriptionPanel" d:IsOptimized="True"/>
+    					<DoubleAnimation Duration="0" To="24" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="flipHintRight" d:IsOptimized="True"/>
+    					<DoubleAnimation Duration="0" To="-24" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="flipHintLeft" d:IsOptimized="True"/>
     				</Storyboard>
     			</VisualState>
     		</VisualStateGroup>
     	</VisualStateManager.VisualStateGroups>
         
         <phone:Panorama x:Name="panorama" ItemContainerStyle="{StaticResource PanoramaItemStyle1}" 
-                        Margin="58,35,0,0" RenderTransformOrigin="0.5,0.5" 
+                        Margin="61,0,0,0" RenderTransformOrigin="0.5,0.5" 
                         SelectionChanged="Panorama_SelectionChanged"
                         Tap="Panorama_Tap">
         	<phone:Panorama.RenderTransform>
-        		<CompositeTransform ScaleX="1.16" ScaleY="1.16"/>
+        		<CompositeTransform x:Name="panoramaTransform" ScaleX="1.29" ScaleY="1.29"/>
         	</phone:Panorama.RenderTransform>
             <phone:PanoramaItem>
-                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="695" Height="415">
-                    <Image Source="/Assets/Sample/SportSample.jpg" Stretch="UniformToFill"/>
+                <Grid x:Name="grid1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="372" Height="620">
+                    <Image x:Name="image1" Stretch="Uniform" Margin="2"/>
                 </Grid>
             </phone:PanoramaItem>
             <phone:PanoramaItem>
-                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="695" Height="415">
-                    <Image Source="/Assets/Sample/StadiumSample.jpg" Stretch="UniformToFill"/>
+                <Grid x:Name="grid2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="372" Height="620">
+                    <Image x:Name="image2" Stretch="Uniform" Margin="2"/>
                 </Grid>
             </phone:PanoramaItem>
             <phone:PanoramaItem>
-                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="695" Height="415">
-                    <Image Source="/Assets/Sample/NewsDetailSample.jpg" Stretch="UniformToFill"/>
+                <Grid x:Name="grid3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="372" Height="620">
+                    <Image x:Name="image3" Stretch="Uniform" Margin="2"/>
                 </Grid>
             </phone:PanoramaItem>
             
         </phone:Panorama>
         
-        <Grid Background="#a0ffffff" Width="24" Height="100" HorizontalAlignment="Left" IsHitTestVisible="False">
-            <Image Source="/Assets/Images/ArrowLeft.png" Stretch="None"/>
-        </Grid>
-        <Grid Background="#a0ffffff" Width="24" Height="100" HorizontalAlignment="Right" IsHitTestVisible="False">
-            <Image Source="/Assets/Images/ArrowRight.png" Stretch="None"/>
-        </Grid>
-        <Grid x:Name="descriptionPanel" Background="#a0ffffff" Height="80" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+        <Grid x:Name="flipHintLeft" Background="#a0ffffff" Width="24" Height="100" HorizontalAlignment="Left" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5">
         	<Grid.RenderTransform>
         		<CompositeTransform/>
         	</Grid.RenderTransform>
-            <TextBlock Text="2014索契冬奥会吉祥物原来是这样子的！" 
-                       Style="{StaticResource AlbumPage_Description_Text_Style}"/>
+            <Image Source="/Assets/Images/ArrowLeft.png" Stretch="None"/>
+        </Grid>
+        <Grid x:Name="flipHintRight" Background="#a0ffffff" Width="24" Height="100" HorizontalAlignment="Right" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5">
+        	<Grid.RenderTransform>
+        		<CompositeTransform/>
+        	</Grid.RenderTransform>
+            <Image Source="/Assets/Images/ArrowRight.png" Stretch="None"/>
+        </Grid>
+        <Grid x:Name="descriptionPanel" Background="#a0ffffff" Height="100" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+        	<Grid.RenderTransform>
+        		<CompositeTransform/>
+        	</Grid.RenderTransform>
+            <ScrollViewer Margin="12,8,100,8">
+                <TextBlock x:Name="descriptionTextBlock" Text="" Style="{StaticResource AlbumPage_Description_Text_Style}"/>
+            </ScrollViewer>
+            
             <TextBlock x:Name="indexTextBlock" Text="" Style="{StaticResource AlbumPage_Index_Text_Style}"/>
         </Grid>
     </Grid>

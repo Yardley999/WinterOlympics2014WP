@@ -52,20 +52,22 @@
                                             <Rectangle Style="{StaticResource ListBoxItem_SplitBar_Style}"/>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="132"/>
+                                                    <ColumnDefinition Width="140"/>
                                                     <ColumnDefinition Width="Auto"/>
                                                     <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="90"/>
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,12,12,0">
-                                                    <TextBlock Text="02/10" Style="{StaticResource CategoryPage_Date_Text_Style}"/>
-                                                    <TextBlock Text="13:00" Style="{StaticResource CategoryPage_Date_Text_Style}"/>
+                                                    <TextBlock Text="{Binding StartTime,Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='MM/dd'}" 
+                                                               Style="{StaticResource CategoryPage_Date_Text_Style}"/>
+                                                    <TextBlock Text="{Binding StartTime,Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='hh:mm'}" 
+                                                               Style="{StaticResource CategoryPage_Date_Text_Style}"/>
                                                 </StackPanel>
                                                 <Image Grid.Column="1" Width="48" Height="48" Stretch="Uniform" VerticalAlignment="Center" 
                                                        Source="/Assets/Images/Categories/Curling.png"/>
                                                 <StackPanel Grid.Column="2" Margin="12,10,12,0">
                                                     <TextBlock Text="男子" Style="{StaticResource CategoryPage_Schedule_Title_Text_Style}"/>
-                                                    <TextBlock Text="循环赛 第1轮 A赛道" Style="{StaticResource CategoryPage_Schedule_SubTitle_Text_Style}"/>
+                                                    <TextBlock Text="{Binding Match}" Style="{StaticResource CategoryPage_Schedule_SubTitle_Text_Style}"/>
                                                 </StackPanel>
                                                 <Button Grid.Column="3" HorizontalAlignment="Center" Style="{StaticResource ContentButtonStyle}" Tap="ExpandSchedule_Tap">
                                                     <Grid Background="#00000000">

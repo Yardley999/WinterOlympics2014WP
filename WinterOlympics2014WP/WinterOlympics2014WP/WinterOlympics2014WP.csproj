@@ -100,7 +100,11 @@
     <Compile Include="Controls\QuickSelector.xaml.cs">
       <DependentUpon>QuickSelector.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\QuickSelectorItemOpacityConverter.cs" />
+    <Compile Include="Models\AlbumItem.cs" />
+    <Compile Include="Models\GameSchedule.cs" />
+    <Compile Include="Utility\DataContextGetter.cs" />
     <Compile Include="Utility\IsolatedStorageHelper.cs" />
     <Compile Include="Utility\JsonSerializer.cs" />
     <Compile Include="LocalizedStrings.cs" />
