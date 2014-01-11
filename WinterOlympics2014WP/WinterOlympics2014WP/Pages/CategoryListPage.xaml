@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:WinterOlympics2014WP.Controls"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
@@ -50,93 +51,93 @@
                     <Rectangle Grid.Row="6" Grid.ColumnSpan="3" Style="{StaticResource ListBoxItem_SplitBar_Style}"/>
                     <Rectangle Grid.Row="7" Grid.ColumnSpan="3" Style="{StaticResource ListBoxItem_SplitBar_Style}"/>-->
 
-                    <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource ContentButtonStyle}" Tag="1" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="0" Grid.Column="0" Tag="1" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category1.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource ContentButtonStyle}" Tag="2" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="0" Grid.Column="1" Tag="2" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category2.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource ContentButtonStyle}" Tag="3" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="0" Grid.Column="2" Tag="3" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category3.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource ContentButtonStyle}" Tag="4" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="1" Grid.Column="0" Tag="4" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category4.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource ContentButtonStyle}" Tag="5" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="1" Grid.Column="1" Tag="5" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category5.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource ContentButtonStyle}" Tag="6" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="1" Grid.Column="2" Tag="6" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category6.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource ContentButtonStyle}" Tag="7" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="2" Grid.Column="0" Tag="7" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category7.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource ContentButtonStyle}" Tag="8" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="2" Grid.Column="1" Tag="8" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category8.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource ContentButtonStyle}" Tag="9" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="2" Grid.Column="2" Tag="9" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category9.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource ContentButtonStyle}" Tag="10" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="3" Grid.Column="0" Tag="10" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category10.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource ContentButtonStyle}" Tag="11" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="3" Grid.Column="1" Tag="11" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category11.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="3" Grid.Column="2" Style="{StaticResource ContentButtonStyle}" Tag="12" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="3" Grid.Column="2" Tag="12" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category12.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="4" Grid.Column="0" Style="{StaticResource ContentButtonStyle}" Tag="13" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="4" Grid.Column="0" Tag="13" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category13.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="4" Grid.Column="1" Style="{StaticResource ContentButtonStyle}" Tag="14" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="4" Grid.Column="1" Tag="14" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category14.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="4" Grid.Column="2" Style="{StaticResource ContentButtonStyle}" Tag="15" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="4" Grid.Column="2" Tag="15" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category15.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="5" Grid.Column="0" Style="{StaticResource ContentButtonStyle}" Tag="16" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="5" Grid.Column="0" Tag="16" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category16.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="5" Grid.Column="1" Style="{StaticResource ContentButtonStyle}" Tag="17" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="5" Grid.Column="1" Tag="17" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category17.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="5" Grid.Column="2" Style="{StaticResource ContentButtonStyle}" Tag="18" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="5" Grid.Column="2" Tag="18" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category18.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="6" Grid.Column="0" Style="{StaticResource ContentButtonStyle}" Tag="19" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="6" Grid.Column="0" Tag="19" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category19.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="6" Grid.Column="1" Style="{StaticResource ContentButtonStyle}" Tag="20" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="6" Grid.Column="1" Tag="20" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category20.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="6" Grid.Column="2" Style="{StaticResource ContentButtonStyle}" Tag="21" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="6" Grid.Column="2" Tag="21" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category21.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
-                    <Button Grid.Row="7" Grid.Column="0" Style="{StaticResource ContentButtonStyle}" Tag="22" Tap="Item_Tap">
+                    <controls:ContentButton Grid.Row="7" Grid.Column="0" Tag="22" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category22.png" Stretch="Uniform"/>
-                    </Button>
+                    </controls:ContentButton>
 
                 </Grid>
             </ScrollViewer>

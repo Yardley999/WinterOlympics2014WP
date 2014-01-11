@@ -6,9 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
+    xmlns:controls="clr-namespace:WinterOlympics2014WP.Controls"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
@@ -40,7 +38,7 @@
                                     <RectangleGeometry Rect="0,0,480,180"/>
                                 </Grid.Clip>
 
-                                <Button Style="{StaticResource ContentButtonStyle}" Tap="Stadium_Tap">
+                                <controls:ContentButton Tap="Stadium_Tap">
                                     <Grid>
                                         <Image Source="/Assets/Sample/StadiumSample.jpg" Stretch="UniformToFill" Margin="-13,-5"/>
                                         <Rectangle Width="240" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="-13,-5">
@@ -53,7 +51,7 @@
                                         </Rectangle>
                                         <TextBlock Text="索契奥林匹克体育场" Style="{StaticResource StadiumListPage_Title_Text_Style}"/>
                                     </Grid>
-                                </Button>
+                                </controls:ContentButton>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

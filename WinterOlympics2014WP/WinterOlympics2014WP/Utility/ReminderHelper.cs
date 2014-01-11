@@ -19,8 +19,21 @@ namespace WinterOlympics2014WP.Utility
             reminder.RecurrenceType = RecurrenceInterval.None;
             reminder.NavigationUri = new Uri(navUri, UriKind.Relative); ;
 
+            try
+            {
+                var existingReminder = ScheduledActionService.Find(name);
+                if (existingReminder != null)
+                {
+                    ScheduledActionService.Remove(name);
+                }
+                ScheduledActionService.Add(reminder);
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
             // Register the reminder with the system.
-            ScheduledActionService.Add(reminder);
         }
 
         public static void RemoveReminder(string name)

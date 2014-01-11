@@ -94,6 +94,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ContentButton.cs" />
     <Compile Include="Controls\EPGList.xaml.cs">
       <DependentUpon>EPGList.xaml</DependentUpon>
     </Compile>

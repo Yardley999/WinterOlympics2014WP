@@ -6,9 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
+    xmlns:controls="clr-namespace:WinterOlympics2014WP.Controls"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
@@ -54,8 +52,8 @@
                                         <TextBlock Text="男子" Style="{StaticResource CategoryPage_Schedule_Title_Text_Style}"/>
                                         <TextBlock Text="循环赛 第1轮 A赛道" Style="{StaticResource CategoryPage_Schedule_SubTitle_Text_Style}"/>
                                     </StackPanel>
-                                    <Button Grid.Column="3" HorizontalAlignment="Center" Style="{StaticResource ContentButtonStyle}" 
-                                            Tap="ExpandSchedule_Tap">
+                                    <controls:ContentButton Grid.Column="3" HorizontalAlignment="Center"
+                                                            Tap="ExpandSchedule_Tap">
                                         <Grid Background="#00000000">
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                                 <TextBlock Text="已结束" Style="{StaticResource CategoryPage_Schedule_Title_Text_Style}"
@@ -63,13 +61,12 @@
                                                 <Image Margin="4,0,0,0" Source="/Assets/Images/ArrowRight.png" Stretch="None"/>
                                             </StackPanel>
                                         </Grid>
-                                    </Button>
+                                    </controls:ContentButton>
                                 </Grid>
-                                <Button Style="{StaticResource ContentButtonStyle}" 
-                                                VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0"
+                                <controls:ContentButton VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0"
                                                 Tap="UnSubscribe_Tap">
                                     <Image Margin="12,0,12,12" Source="/Assets/Images/UnSubscribe.png" Stretch="None"/>
-                                </Button>
+                                </controls:ContentButton>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
