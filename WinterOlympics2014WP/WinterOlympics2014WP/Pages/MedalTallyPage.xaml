@@ -32,39 +32,39 @@
         <Grid x:Name="ContentPanel" Grid.Row="1">
             <Image Source="/Assets/Images/MedalTallyPageBackground.jpg" Stretch="UniformToFill"/>
             <Border BorderBrush="{StaticResource MedalTallyPage_Chrome_Color}" BorderThickness="1,0,1,0" Background="White"
-                    Margin="12,135,12,0">
+                    Margin="12,100,12,0">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="60"/>
-                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Grid Height="60">
+                    <Grid>
                         <Rectangle Fill="{StaticResource MedalTallyPage_Chrome_Color}"/>
                         <TextBlock Text="第22届 索契冬季奥运奖牌榜" Style="{StaticResource MedalTallyPage_Title_Text_Style}"/>
                     </Grid>
 
                     <!--column headers-->
-                    <Grid Grid.Row="1" Height="60">
+                    <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="70"/>
-                            <ColumnDefinition Width="130"/>
+                            <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="50"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="排名" Style="{StaticResource MedalTallyPage_ColumnHeader_Text_Style}"/>
                         <TextBlock Grid.Column="1" Text="国家" Style="{StaticResource MedalTallyPage_ColumnHeader_Text_Style}"/>
-                        <TextBlock Grid.Column="5" Text="总数" Style="{StaticResource MedalTallyPage_ColumnHeader_Text_Style}"/>
-                        <Image Grid.Column="2" Source="/Assets/Images/Medal1.png" Stretch="None"/>
-                        <Image Grid.Column="3" Source="/Assets/Images/Medal2.png" Stretch="None"/>
-                        <Image Grid.Column="4" Source="/Assets/Images/Medal3.png" Stretch="None"/>
+                        <TextBlock Grid.Column="5" Text="总数" Style="{StaticResource MedalTallyPage_ColumnHeader_Text_Style}" HorizontalAlignment="Left" Margin="-8,0,0,0"/>
+                        <Image Grid.Column="2" Source="/Assets/Images/Medal1.png" Width="24" Height="24" Stretch="Uniform" HorizontalAlignment="Left" Margin="-4,0,0,0"/>
+                        <Image Grid.Column="3" Source="/Assets/Images/Medal2.png" Width="24" Height="24" Stretch="Uniform" HorizontalAlignment="Left" Margin="-4,0,0,0"/>
+                        <Image Grid.Column="4" Source="/Assets/Images/Medal3.png" Width="24" Height="24" Stretch="Uniform" HorizontalAlignment="Left" Margin="-4,0,0,0"/>
                     </Grid>
                     
                     <!--split bar-->
                     <Rectangle Grid.Row="1" Height="1" Fill="{StaticResource MedalTallyPage_Chrome_Color}"
-                               Margin="4,0,4,0" VerticalAlignment="Bottom"/>
+                               Margin="0,0,0,0" VerticalAlignment="Bottom"/>
                     
                     <!--list-->
                     <ScrollViewer Grid.Row="2">
@@ -76,21 +76,24 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Margin="0,4,0,4" Height="48">
+                                    <Grid Margin="0,4,0,4" Height="40">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="70"/>
-                                            <ColumnDefinition Width="130"/>
+                                            <ColumnDefinition Width="50"/>
                                             <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="50"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="99" Style="{StaticResource MedalTallyPage_Table_Text_Style}"/>
-                                        <TextBlock Grid.Column="1" Text="加拿大" Style="{StaticResource MedalTallyPage_Table_Text_Style}"/>
-                                        <TextBlock Grid.Column="2" Text="14" Style="{StaticResource MedalTallyPage_Table_Text_Style}"/>
-                                        <TextBlock Grid.Column="3" Text="7" Style="{StaticResource MedalTallyPage_Table_Text_Style}"/>
-                                        <TextBlock Grid.Column="4" Text="5" Style="{StaticResource MedalTallyPage_Table_Text_Style}"/>
-                                        <TextBlock Grid.Column="5" Text="26" Style="{StaticResource MedalTallyPage_Table_Text_Style}"/>
+                                        <TextBlock Grid.Column="0" Text="{Binding Rank}" Style="{StaticResource MedalTallyPage_Table_Text_Style}" HorizontalAlignment="Right" Margin="0,0,20,0"/>
+                                        <Image Grid.Column="1" Source="/Assets/Sample/Country2.png" Width="32" Height="32" Stretch="Uniform" HorizontalAlignment="Left"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding Country}" Style="{StaticResource MedalTallyPage_Table_Text_Style}" Margin="36,0,0,0"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding Gold}" Style="{StaticResource MedalTallyPage_Table_Text_Style}"/>
+                                        <TextBlock Grid.Column="3" Text="{Binding Silver}" Style="{StaticResource MedalTallyPage_Table_Text_Style}"/>
+                                        <TextBlock Grid.Column="4" Text="{Binding Bronze}" Style="{StaticResource MedalTallyPage_Table_Text_Style}"/>
+                                        <TextBlock Grid.Column="5" Text="{Binding Total}" Style="{StaticResource MedalTallyPage_Table_Text_Style}"/>
+
+                                        <Rectangle Grid.ColumnSpan="6" Style="{StaticResource ListBoxItem_SplitBar_Style}" Margin="0,0,0,-3"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>

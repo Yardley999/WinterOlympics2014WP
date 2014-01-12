@@ -36,6 +36,7 @@ namespace WinterOlympics2014WP.Pages
         {
             base.OnNavigatedTo(e);
             LoadSchedules();
+            this.topBar.SecondaryHeader = "短道速滑";
         }
 
         #endregion

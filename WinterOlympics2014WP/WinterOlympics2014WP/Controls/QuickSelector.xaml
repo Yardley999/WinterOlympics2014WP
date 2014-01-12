@@ -34,7 +34,7 @@
               MouseMove="InterActionArea_MouseMove" MouseLeave="InterActionArea_MouseLeave" 
               MouseLeftButtonUp="InterActionArea_MouseLeftButtonUp">
             <Rectangle IsHitTestVisible="False" Height="20" x:Name="selectionHint" Fill="#ff2d2d2d" VerticalAlignment="Center" 
-                   RenderTransformOrigin="0.5,0.5">
+                   RenderTransformOrigin="0.5,0.5" Visibility="Collapsed">
                 <Rectangle.RenderTransform>
                     <CompositeTransform x:Name="selectionHintTransform" TranslateY="0"/>
                 </Rectangle.RenderTransform>

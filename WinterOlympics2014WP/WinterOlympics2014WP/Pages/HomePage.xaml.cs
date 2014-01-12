@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -45,7 +43,7 @@ namespace WinterOlympics2014WP.Pages
 
         #endregion
 
-        #region Set Splash Image
+        #region Splash Image
 
         private void SetSplashImage()
         {
@@ -55,6 +53,11 @@ namespace WinterOlympics2014WP.Pages
         private void SetDefualtSplashImage()
         {
             this.splashImage.Source = new BitmapImage(new Uri("/Assets/Images/SplashScreenDefault.PNG", UriKind.Relative));
+        }
+
+        private void splashImage_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            snow.IsBusy = !snow.IsBusy;
         }
 
         #endregion
@@ -226,6 +229,7 @@ namespace WinterOlympics2014WP.Pages
                 HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
                 request.Method = "GET";
                 request.BeginGetResponse(GetNewsList_Callback, request);
+                busy = true;
             }
             catch (WebException e)
             {
@@ -235,26 +239,37 @@ namespace WinterOlympics2014WP.Pages
             }
         }
 
-        private void GetNewsList_Callback(IAsyncResult result)
+        private async void GetNewsList_Callback(IAsyncResult result)
         {
-            newsLoaded = true;
-            HttpWebRequest request = (HttpWebRequest)result.AsyncState;//获取异步操作返回的的信息
-            WebResponse response = request.EndGetResponse(result);//结束对 Internet 资源的异步请求
-
-            using (Stream stream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(stream))
+            try
             {
-                string json = reader.ReadToEnd();
-                var list = JsonSerializer.Deserialize<NewsList>(json);
-                Dispatcher.BeginInvoke(() => 
-                {
-                    for (int i = 0; i < list.data.Length; i++)
-                    {
-                        newsList.Add(list.data[i]);
-                    }
-                });
+                HttpWebRequest request = (HttpWebRequest)result.AsyncState;
+                WebResponse response = request.EndGetResponse(result);
 
-                SaveNews(json);
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string json = reader.ReadToEnd();
+                    var list = JsonSerializer.Deserialize<NewsList>(json);
+                    Dispatcher.BeginInvoke(() =>
+                    {
+                        for (int i = 0; i < list.data.Length; i++)
+                        {
+                            newsList.Add(list.data[i]);
+                        }
+                    });
+
+                    SaveNews(json);
+                    await IsolatedStorageHelper.WriteToFile(Constants.NEWS_MODULE, Constants.NEWS_FILE_NAME, json);
+                }
+                newsLoaded = true;
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                busy = false;
             }
         }
 
@@ -298,6 +313,7 @@ namespace WinterOlympics2014WP.Pages
         }
 
         #endregion
+
 
     }
 }

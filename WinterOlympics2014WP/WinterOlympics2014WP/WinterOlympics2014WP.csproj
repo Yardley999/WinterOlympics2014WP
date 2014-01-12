@@ -91,6 +91,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Animations\AnimationBase.cs" />
+    <Compile Include="Animations\FadeAnimation.cs" />
+    <Compile Include="Animations\MoveAnimation.cs" />
+    <Compile Include="Animations\RotateAnimation.cs" />
+    <Compile Include="Animations\ScaleAnimation.cs" />
+    <Compile Include="Animations\VibrateAnimation.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -101,9 +107,18 @@
     <Compile Include="Controls\QuickSelector.xaml.cs">
       <DependentUpon>QuickSelector.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Snow.xaml.cs">
+      <DependentUpon>Snow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TopBar.xaml.cs">
+      <DependentUpon>TopBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\QuickSelectorItemOpacityConverter.cs" />
+    <Compile Include="Global\ApplicationExtension.cs" />
+    <Compile Include="Global\Constants.cs" />
     <Compile Include="Models\AlbumItem.cs" />
+    <Compile Include="Models\MedalScore.cs" />
     <Compile Include="Models\GameSchedule.cs" />
     <Compile Include="Utility\DataContextGetter.cs" />
     <Compile Include="Utility\IsolatedStorageHelper.cs" />
@@ -170,6 +185,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\QuickSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Snow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TopBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -285,6 +308,11 @@
     <Content Include="Assets\Images\Medal3.png" />
     <Content Include="Assets\Images\MedalTallyPageBackground.jpg" />
     <Content Include="Assets\Images\PlayButton.png" />
+    <Content Include="Assets\Images\Snow\Snow1.png" />
+    <Content Include="Assets\Images\Snow\Snow2.png" />
+    <Content Include="Assets\Images\Snow\Snow3.png" />
+    <Content Include="Assets\Images\Snow\Snow4.png" />
+    <Content Include="Assets\Images\Snow\SnowSky.png" />
     <Content Include="Assets\Images\Subscribe.png" />
     <Content Include="Assets\Images\UnSubscribe.png" />
     <Content Include="Assets\Sample\Country1.PNG" />

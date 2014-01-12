@@ -8,7 +8,8 @@
 
     <!--colors-->
     <SolidColorBrush x:Key="App_Theme_Color" Color="#ff0056a6"/>
-    <SolidColorBrush x:Key="QuickSelector_Base_Color" Color="#ff4d4d4d"/>
+    <SolidColorBrush x:Key="App_Theme_Color_Secondary" Color="#ff3c97ce"/>
+    <SolidColorBrush x:Key="QuickSelector_Base_Color" Color="#ff2a2a2a"/>
     <SolidColorBrush x:Key="ArrowButton_Color" Color="#ff0a7cc2"/>
 
     <!--converters-->
@@ -32,49 +33,12 @@
         <Setter Property="Background" Value="#fff0f0f0"/>
     </Style>
 
-    <Style x:Key="ContentButtonStyle" TargetType="ButtonBase">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ButtonBase">
-                    <Grid Background="Transparent" x:Name="rootGrid" RenderTransformOrigin="0.5,0.5">
-                        <Grid.RenderTransform>
-                            <CompositeTransform/>
-                        </Grid.RenderTransform>
-                        <ContentPresenter Content="{TemplateBinding Content}" />
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal"/>
-                                <VisualState x:Name="PointerOver"/>
-                                <VisualState x:Name="Pressed">
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0" To="0.95" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="rootGrid" />
-                                        <DoubleAnimation Duration="0" To="0.95" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="rootGrid" />
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Disabled"/>
-                            </VisualStateGroup>
-                            <VisualStateGroup x:Name="FocusStates">
-                                <VisualState x:Name="Focused"/>
-                                <VisualState x:Name="Unfocused"/>
-                            </VisualStateGroup>
-                            <VisualStateGroup x:Name="CheckStates">
-                                <VisualState x:Name="Checked"/>
-                                <VisualState x:Name="Unchecked"/>
-                                <VisualState x:Name="Indeterminate"/>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="Page_Header_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
-        <Setter Property="FontSize" Value="24"/>
-        <Setter Property="Foreground" Value="#ff000000"/>
+    <Style x:Key="TopBar_Secondary_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="#ffffffff"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="12,10,0,10"/>
+        <Setter Property="Margin" Value="24,4,0,4"/>
     </Style>
 
     <Style x:Key="ListBoxItemStyle1" TargetType="ListBoxItem">
@@ -121,8 +85,8 @@
 
     <Style x:Key="ListBoxItem_SplitBar_Style" TargetType="Rectangle">
         <Setter Property="Height" Value="1"/>
-        <Setter Property="Fill" Value="#ff808080"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Fill" Value="#ffa0a0a0"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
     </Style>
     
     <Style TargetType="controls:ContentButton">
@@ -140,7 +104,7 @@
                                     <Storyboard>
                                         <DoubleAnimation Duration="0" To="0.95" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="content" />
                                         <DoubleAnimation Duration="0" To="0.95" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="content" />
-                                        <DoubleAnimation Duration="0" To="0.7" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="content"/>
+                                        <DoubleAnimation Duration="0" To="0.8" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="content"/>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -255,9 +219,9 @@
     </Style>
 
     <Style x:Key="MedalTallyPage_Table_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="18"/>
         <Setter Property="Foreground" Value="#ff000000"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 

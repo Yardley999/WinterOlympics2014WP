@@ -62,7 +62,8 @@
                 <!--splash image-->
                 <phone:PanoramaItem>
                     <Grid Background="LightGray" Margin="-12,-48,0,0">
-                        <Image x:Name="splashImage" Stretch="UniformToFill"/>
+                        <Image x:Name="splashImage" Stretch="UniformToFill" Tap="splashImage_Tap"/>
+                        <controls:Snow x:Name="snow"/>
                     </Grid>
                 </phone:PanoramaItem>
 
