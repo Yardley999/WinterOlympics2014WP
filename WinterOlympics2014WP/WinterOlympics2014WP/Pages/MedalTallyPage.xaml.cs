@@ -76,8 +76,8 @@ namespace WinterOlympics2014WP.Pages
         {
             try
             {
-                HttpWebRequest request = (HttpWebRequest)result.AsyncState;//获取异步操作返回的的信息
-                WebResponse response = request.EndGetResponse(result);//结束对 Internet 资源的异步请求
+                HttpWebRequest request = (HttpWebRequest)result.AsyncState;
+                WebResponse response = request.EndGetResponse(result);
 
                 using (Stream stream = response.GetResponseStream())
                 using (StreamReader reader = new StreamReader(stream))

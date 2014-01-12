@@ -10,6 +10,10 @@ namespace WinterOlympics2014WP
     {
         public const string DOMAIN = "http://115.28.21.97";
 
+        //splash
+        public const string SPLASH_MODULE = "splash";
+        public const string SPLASH_FILE_NAME = "splash.jpg";
+
         //news 
         public const string NEWS_MODULE = "news";
         public const string NEWS_FILE_NAME = "news.txt";
@@ -17,5 +21,6 @@ namespace WinterOlympics2014WP
         //medal tally
         public const string MEDAL_TALLY_MODULE = "medaltally";
         public const string MEDAL_TALLY_FILE_NAME = "medaltally.txt";
+
     }
 }

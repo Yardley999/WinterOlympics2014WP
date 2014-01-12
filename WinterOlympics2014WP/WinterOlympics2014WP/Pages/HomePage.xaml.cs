@@ -11,6 +11,8 @@ using System.IO;
 using WinterOlympics2014WP.Models;
 using WinterOlympics2014WP.Utility;
 using Microsoft.Phone.Net.NetworkInformation;
+using System.Collections.Generic;
+using System.IO.IsolatedStorage;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -28,36 +30,64 @@ namespace WinterOlympics2014WP.Pages
         {
             InitializeComponent();
             BuildApplicationBar();
-            SetSplashImage();
             InitEpgList();
-
-            newsListBox.ItemsSource = newsList;
+            //newsListBox.ItemsSource = newsList;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            LoadSplashImage();
             PopulateToday();
             LoadNews();
         }
 
         #endregion
 
-        #region Splash Image
+        #region Splash
 
-        private void SetSplashImage()
+        DataLoader<Splash> splashLoader = new DataLoader<Splash>();
+        ImageHelper imageHelper = new ImageHelper();
+
+        private void LoadSplashImage()
         {
-            SetDefualtSplashImage();
+            if (splashLoader.Loaded || splashLoader.Busy)
+            {
+                return;
+            }
+
+            bigSnow.IsBusy = true;
+
+            splashLoader.Load("getsplash",
+                splash =>
+                {
+                    if (splash != null)
+                    {
+                        //this.splashImage.Source = new BitmapImage(new Uri(splash.Image, UriKind.RelativeOrAbsolute));
+                        imageHelper.Download(splash.Image, Constants.SPLASH_MODULE, Constants.SPLASH_FILE_NAME, OpenIamgeSafely);
+                    }
+                });
         }
 
-        private void SetDefualtSplashImage()
+        private void OpenIamgeSafely()
         {
-            this.splashImage.Source = new BitmapImage(new Uri("/Assets/Images/SplashScreenDefault.PNG", UriKind.Relative));
+            Dispatcher.BeginInvoke(() =>
+            {
+                OpenIamge();
+            });
+        }
+
+        private async void OpenIamge()
+        {
+            BitmapImage source = await imageHelper.ReadImage(Constants.SPLASH_MODULE, Constants.SPLASH_FILE_NAME);
+            this.splashImage.Source = source;
+            bigSnow.IsBusy = false;
         }
 
         private void splashImage_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            snow.IsBusy = !snow.IsBusy;
+            bigSnow.IsBusy = !bigSnow.IsBusy;
+            //snow.IsBusy = !snow.IsBusy;
         }
 
         #endregion
@@ -203,80 +233,93 @@ namespace WinterOlympics2014WP.Pages
 
         #region News
 
-        bool newsLoaded = false;
-        ObservableCollection<News> newsList = new ObservableCollection<News>();
+        ListDataLoader<News> newsLoader = new ListDataLoader<News>();
 
         private void LoadNews()
         {
-            if (busy)
+            if (newsLoader.Loaded || newsLoader.Busy)
             {
                 return;
             }
 
-            if (newsLoaded)
-            {
-                return;
-            }
-
-            if (!DeviceNetworkInformation.IsNetworkAvailable)
-            {
-                return;
-            }
-
-            try
-            {
-                String url = "http://115.28.21.97/api/server?cmd=getnewslist";
-                HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
-                request.Method = "GET";
-                request.BeginGetResponse(GetNewsList_Callback, request);
-                busy = true;
-            }
-            catch (WebException e)
-            {
-            }
-            catch (Exception e)
-            {
-            }
-        }
-
-        private async void GetNewsList_Callback(IAsyncResult result)
-        {
-            try
-            {
-                HttpWebRequest request = (HttpWebRequest)result.AsyncState;
-                WebResponse response = request.EndGetResponse(result);
-
-                using (Stream stream = response.GetResponseStream())
-                using (StreamReader reader = new StreamReader(stream))
+            newsLoader.Load("getnewslist",
+                list =>
                 {
-                    string json = reader.ReadToEnd();
-                    var list = JsonSerializer.Deserialize<NewsList>(json);
-                    Dispatcher.BeginInvoke(() =>
+                    if (list != null)
                     {
-                        for (int i = 0; i < list.data.Length; i++)
-                        {
-                            newsList.Add(list.data[i]);
-                        }
-                    });
-
-                    SaveNews(json);
-                    await IsolatedStorageHelper.WriteToFile(Constants.NEWS_MODULE, Constants.NEWS_FILE_NAME, json);
-                }
-                newsLoaded = true;
-            }
-            catch (Exception)
-            {
-            }
-            finally
-            {
-                busy = false;
-            }
+                        newsListBox.ItemsSource = list;
+                    }
+                }, Constants.NEWS_MODULE, Constants.NEWS_FILE_NAME);
         }
 
-        private async void SaveNews(string content)
-        {
-            await IsolatedStorageHelper.WriteToFile("news", "latest_news.txt", content);
-        }
+        //bool newsLoaded = false;
+        //ObservableCollection<News> newsList = new ObservableCollection<News>();
+
+        //private void LoadNews_old()
+        //{
+        //    if (busy)
+        //    {
+        //        return;
+        //    }
+
+        //    if (newsLoaded)
+        //    {
+        //        return;
+        //    }
+
+        //    if (!DeviceNetworkInformation.IsNetworkAvailable)
+        //    {
+        //        return;
+        //    }
+
+        //    try
+        //    {
+        //        String url = "http://115.28.21.97/api/server?cmd=getnewslist";
+        //        HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
+        //        request.Method = "GET";
+        //        request.BeginGetResponse(GetNewsList_Callback, request);
+        //        busy = true;
+        //    }
+        //    catch (WebException e)
+        //    {
+        //    }
+        //    catch (Exception e)
+        //    {
+        //    }
+        //}
+
+        //private async void GetNewsList_Callback(IAsyncResult result)
+        //{
+        //    try
+        //    {
+        //        HttpWebRequest request = (HttpWebRequest)result.AsyncState;
+        //        WebResponse response = request.EndGetResponse(result);
+
+        //        using (Stream stream = response.GetResponseStream())
+        //        using (StreamReader reader = new StreamReader(stream))
+        //        {
+        //            string json = reader.ReadToEnd();
+        //            var list = JsonSerializer.Deserialize<NewsList>(json);
+        //            Dispatcher.BeginInvoke(() =>
+        //            {
+        //                for (int i = 0; i < list.data.Length; i++)
+        //                {
+        //                    newsList.Add(list.data[i]);
+        //                }
+        //            });
+
+        //            await IsolatedStorageHelper.WriteToFile(Constants.NEWS_MODULE, Constants.NEWS_FILE_NAME, json);
+        //        }
+        //        newsLoaded = true;
+        //    }
+        //    catch (Exception)
+        //    {
+        //    }
+        //    finally
+        //    {
+        //        busy = false;
+        //    }
+        //}
 
         private void NewsItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
@@ -313,6 +356,8 @@ namespace WinterOlympics2014WP.Pages
         }
 
         #endregion
+
+
 
 
     }

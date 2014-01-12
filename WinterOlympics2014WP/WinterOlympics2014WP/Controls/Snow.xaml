@@ -4,19 +4,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Height="240" d:DesignWidth="480"
+    d:DesignHeight="80" d:DesignWidth="80"
              IsHitTestVisible="False"
              Opacity="0">
     
-    <Grid>
-    	<!--<Grid.OpacityMask>
-    		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-    			<GradientStop Color="Transparent" Offset="0"/>
-    			<GradientStop Color="Transparent" Offset="1"/>
-    			<GradientStop Color="White" Offset="0.5"/>
-    		</LinearGradientBrush>
-    	</Grid.OpacityMask>-->
-        <Image Source="/Assets/Images/Snow/SnowSky.png" Stretch="Fill"/>
-        <Grid x:Name="snowPanel"/>
+	<UserControl.Resources>
+		<Storyboard x:Name="Storyboard1" RepeatBehavior="forever">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="bigSnow">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:3" Value="360"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+	</UserControl.Resources>
+    
+    <Grid x:Name="rootGrid">
+        <Image x:Name="bigSnow" Source="/Assets/Images/Snow/BigSnow.png" Stretch="Uniform" RenderTransformOrigin="0.5,0.5">
+        	<Image.RenderTransform>
+        		<CompositeTransform/>
+        	</Image.RenderTransform>
+        </Image>
     </Grid>
 </UserControl>

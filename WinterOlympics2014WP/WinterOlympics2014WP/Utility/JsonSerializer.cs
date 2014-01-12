@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -7,12 +9,6 @@ namespace WinterOlympics2014WP.Utility
 {
     public static class JsonSerializer
     {
-        /// <summary>
-        /// Serialize the value to string.
-        /// </summary>
-        /// <typeparam name="T">Type of the value.</typeparam>
-        /// <param name="value">Object to be serialized.</param>
-        /// <returns>Json string.</returns>
         public static string Serialize<T>(T value) where T : class
         {
             try
@@ -54,12 +50,6 @@ namespace WinterOlympics2014WP.Utility
             }
         }
 
-        /// <summary>
-        /// DeSerialize the string to T type object.
-        /// </summary>
-        /// <typeparam name="T">Target Type.</typeparam>
-        /// <param name="json">The string to be deserilized.</param>
-        /// <returns>The T type object.</returns>
         public static T Deserialize<T>(string json) where T : class
         {
             try
@@ -78,5 +68,6 @@ namespace WinterOlympics2014WP.Utility
                 return null;
             }
         }
+
     }
 }

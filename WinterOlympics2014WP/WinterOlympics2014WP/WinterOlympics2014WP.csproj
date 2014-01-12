@@ -107,6 +107,9 @@
     <Compile Include="Controls\QuickSelector.xaml.cs">
       <DependentUpon>QuickSelector.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BigSnow.xaml.cs">
+      <DependentUpon>BigSnow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Snow.xaml.cs">
       <DependentUpon>Snow.xaml</DependentUpon>
     </Compile>
@@ -118,9 +121,15 @@
     <Compile Include="Global\ApplicationExtension.cs" />
     <Compile Include="Global\Constants.cs" />
     <Compile Include="Models\AlbumItem.cs" />
+    <Compile Include="Models\IEnumberable.cs" />
+    <Compile Include="Models\Splash.cs" />
     <Compile Include="Models\MedalScore.cs" />
     <Compile Include="Models\GameSchedule.cs" />
     <Compile Include="Utility\DataContextGetter.cs" />
+    <Compile Include="Utility\DataLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utility\ImageHelper.cs" />
     <Compile Include="Utility\IsolatedStorageHelper.cs" />
     <Compile Include="Utility\JsonSerializer.cs" />
     <Compile Include="LocalizedStrings.cs" />
@@ -185,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\QuickSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BigSnow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -258,7 +271,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
@@ -308,6 +320,7 @@
     <Content Include="Assets\Images\Medal3.png" />
     <Content Include="Assets\Images\MedalTallyPageBackground.jpg" />
     <Content Include="Assets\Images\PlayButton.png" />
+    <Content Include="Assets\Images\Snow\BigSnow.png" />
     <Content Include="Assets\Images\Snow\Snow1.png" />
     <Content Include="Assets\Images\Snow\Snow2.png" />
     <Content Include="Assets\Images\Snow\Snow3.png" />
