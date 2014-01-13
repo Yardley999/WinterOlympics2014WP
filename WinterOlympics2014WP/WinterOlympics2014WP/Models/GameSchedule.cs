@@ -24,14 +24,10 @@ namespace WinterOlympics2014WP.Models
         [DataMember(Name = "match")]
         public string Match { get; set; }
 
+        [DataMember(Name = "channel")]
+        public string Channel { get; set; }
+
         [DataMember(Name = "end")]
         public DateTime EndTime { get; set; }
-    }
-
-    [DataContract]
-    public class GameScheduleList
-    {
-        [DataMember]
-        public GameSchedule[] data { get; set; }
     }
 }

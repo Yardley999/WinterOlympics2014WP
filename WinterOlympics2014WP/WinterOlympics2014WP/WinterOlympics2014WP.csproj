@@ -106,6 +106,9 @@
     <Compile Include="Controls\EPGList.xaml.cs">
       <DependentUpon>EPGList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GameResultPanel.xaml.cs">
+      <DependentUpon>GameResultPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ImageToggleButton.cs" />
     <Compile Include="Controls\QuickSelector.xaml.cs">
       <DependentUpon>QuickSelector.xaml</DependentUpon>
@@ -124,6 +127,8 @@
     <Compile Include="Global\ApplicationExtension.cs" />
     <Compile Include="Global\Constants.cs" />
     <Compile Include="Models\AlbumItem.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\GameResult.cs" />
     <Compile Include="Models\IEnumberable.cs" />
     <Compile Include="Models\Splash.cs" />
     <Compile Include="Models\MedalScore.cs" />
@@ -193,6 +198,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="Controls\EPGList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GameResultPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

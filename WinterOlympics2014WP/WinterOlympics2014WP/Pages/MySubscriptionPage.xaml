@@ -34,7 +34,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Height="120">
-                                <Rectangle Style="{StaticResource ListBoxItem_SplitBar_Style}"/>
+                                <Rectangle Style="{StaticResource Item_SplitBar_Bottom_Style}"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="132"/>
@@ -67,7 +67,7 @@
                                                 Tap="UnSubscribe_Tap">
                                     <Image Margin="12,0,12,12" Source="/Assets/Images/UnSubscribe.png" Stretch="None"/>
                                 </controls:ContentButton>-->
-                                <controls:ImageToggleButton VerticalAlignment="Top" HorizontalAlignment="Left" Margin="12,0,12,0"
+                                <controls:ImageToggleButton VerticalAlignment="Top" HorizontalAlignment="Left" Padding="12,0,12,12"
                                                             CheckedBackground="/Assets/Images/Subscribe.png" 
                                                             UnCheckedBackground="/Assets/Images/UnSubscribe.png" />
                                 
@@ -76,7 +76,6 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
-            <Rectangle Style="{StaticResource ListBoxItem_SplitBar_Style}"/>
         </Grid>
     </Grid>
 

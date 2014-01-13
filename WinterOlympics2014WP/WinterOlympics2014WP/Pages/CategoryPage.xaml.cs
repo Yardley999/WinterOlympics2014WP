@@ -12,6 +12,8 @@ using Microsoft.Phone.Net.NetworkInformation;
 using System.IO;
 using WinterOlympics2014WP.Utility;
 using WinterOlympics2014WP.Models;
+using System.Windows.Input;
+using WinterOlympics2014WP.Controls;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -19,8 +21,7 @@ namespace WinterOlympics2014WP.Pages
     {
         #region Property
 
-        private bool busy;
-        private bool dataLoaded;
+        private string categoryID = string.Empty;
 
         #endregion
 
@@ -29,83 +30,130 @@ namespace WinterOlympics2014WP.Pages
         public CategoryPage()
         {
             InitializeComponent();
-            scheduleListBox.ItemsSource = scheduleList;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            categoryID = NavigationContext.QueryString[NaviParam.CATEGORY_ID];
+            SetTitle(categoryID);
             LoadSchedules();
+        }
+
+        #endregion
+
+        #region Sub Title
+
+        private void SetTitle(string cateId)
+        {
             this.topBar.SecondaryHeader = "短道速滑";
+        }
+
+        #endregion
+
+        #region VirtualizingStackPanel
+
+        StackPanel scheduleItemsPanel = null;
+        private void scheduleListBoxItemsPanel_Loaded(object sender, RoutedEventArgs e)
+        {
+            scheduleItemsPanel = sender as StackPanel;
         }
 
         #endregion
 
         #region Schedule List
 
-        ObservableCollection<GameSchedule> scheduleList = new ObservableCollection<GameSchedule>();
+        ListDataLoader<GameSchedule> scheduleloader = new ListDataLoader<GameSchedule>();
+        List<GameSchedule> scheduleList = new List<GameSchedule>();
 
         private void LoadSchedules()
         {
-            if (busy)
+            if (scheduleloader.Loaded || scheduleloader.Busy)
             {
                 return;
             }
 
-            if (dataLoaded)
-            {
-                return;
-            }
+            snow1.IsBusy = true;
 
-            if (!DeviceNetworkInformation.IsNetworkAvailable)
-            {
-                return;
-            }
-
-            try
-            {
-                String url = "http://115.28.21.97/api/server?cmd=getschedule&id=20256";
-                HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
-                request.Method = "GET";
-                request.BeginGetResponse(GetNewsList_Callback, request);
-            }
-            catch (WebException e)
-            {
-            }
-            catch (Exception e)
-            {
-            }
-        }
-
-        private void GetNewsList_Callback(IAsyncResult result)
-        {
-            dataLoaded = true;
-            HttpWebRequest request = (HttpWebRequest)result.AsyncState;
-            WebResponse response = request.EndGetResponse(result);
-
-            using (Stream stream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                string json = reader.ReadToEnd();
-                var list = JsonSerializer.Deserialize<GameScheduleList>(json);
-                Dispatcher.BeginInvoke(() =>
+            scheduleloader.Load("getschedule", "&id=" + categoryID,
+                list =>
                 {
-                    for (int i = 0; i < list.data.Length; i++)
-                    {
-                        scheduleList.Add(list.data[i]);
-                    }
-                });
-
-                SaveNews(json);
-            }
-        }
-
-        private async void SaveNews(string content)
-        {
-            await IsolatedStorageHelper.WriteToFile("news", "latest_news.txt", content);
+                    this.scheduleListBox.ItemsSource = scheduleList = list;
+                    snow1.IsBusy = false;
+                }, true, Constants.SCHEDULE_MODULE, string.Format(Constants.SCHEDULE_FILE_NAME_FORMAT, categoryID));
         }
 
         #endregion
+
+        #region Result
+
+        DataLoader<GameResult> resultLoader = new DataLoader<GameResult>();
+        GameResultPanel gameResultPanel = null;
+        GameSchedule expandedSchedule = null;
+
+        private void LoadGameResult(GameSchedule schedule)
+        {
+            if (resultLoader.Busy)
+            {
+                return;
+            }
+
+            snow1.IsBusy = true;
+
+            resultLoader.Load("getresult", "&id=" + schedule.ID,
+                list =>
+                {
+                    ShowResultPanel(schedule, list);
+                    snow1.IsBusy = false;
+                }, true, Constants.SCHEDULE_MODULE, string.Format(Constants.RESULT_FILE_NAME_FORMAT, schedule.ID));
+        }
+
+        private void Result_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var schedule = sender.GetDataContext<GameSchedule>();
+            if (schedule == expandedSchedule)
+            {
+                HideResultPanel();
+            }
+            else
+            {
+                if (expandedSchedule!=null)
+                {
+                    HideResultPanel();
+                }
+                LoadGameResult(schedule);
+            }
+        }
+
+        private void ShowResultPanel(GameSchedule schedule, GameResult result)
+        {
+            if (gameResultPanel == null)
+            {
+                gameResultPanel = new GameResultPanel();
+            }
+            if (scheduleItemsPanel.Children.Contains(gameResultPanel))
+            {
+                scheduleItemsPanel.Children.Remove(gameResultPanel);
+            }
+
+            scheduleItemsPanel.DataContext = result;
+
+            int index = scheduleList.IndexOf(schedule);
+            scheduleItemsPanel.Children.Insert(index + 1, gameResultPanel);
+            gameResultPanel.Show();
+            expandedSchedule = schedule;
+        }
+
+        private void HideResultPanel()
+        {
+            gameResultPanel.Hide(scheduleItemsPanel);
+            expandedSchedule = null;
+        }
+
+        #endregion
+
+        #region Subscribe
 
         private void Subscribe_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
@@ -114,9 +162,7 @@ namespace WinterOlympics2014WP.Pages
             ReminderHelper.AddReminder(schedule.ID, schedule.Category, schedule.Match, schedule.StartTime, "/Pages/LivePage.xaml");
         }
 
-        private void ExpandSchedule_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
+        #endregion
 
-        }
     }
 }

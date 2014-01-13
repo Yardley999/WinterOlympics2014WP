@@ -83,12 +83,18 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ListBoxItem_SplitBar_Style" TargetType="Rectangle">
+    <Style x:Key="Item_SplitBar_Bottom_Style" TargetType="Rectangle">
         <Setter Property="Height" Value="1"/>
         <Setter Property="Fill" Value="#ffa0a0a0"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
     </Style>
-    
+
+    <Style x:Key="Item_SplitBar_Top_Style" TargetType="Rectangle">
+        <Setter Property="Height" Value="1"/>
+        <Setter Property="Fill" Value="#ffa0a0a0"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
     <Style TargetType="controls:ContentButton">
         <Setter Property="Template">
             <Setter.Value>
@@ -155,12 +161,12 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
 
-                        <Grid x:Name="content" RenderTransformOrigin="0.5,0.5">
+                        <Grid x:Name="content" Background="#00000000" RenderTransformOrigin="0.5,0.5" >
                             <Grid.RenderTransform>
                                 <CompositeTransform/>
                             </Grid.RenderTransform>
-                            <Image x:Name="checkedBackground" Source="{TemplateBinding CheckedBackground}" Stretch="None" Opacity="0"/>
-                            <Image x:Name="unCheckedBackground" Source="{TemplateBinding UnCheckedBackground}" Stretch="None"/>
+                            <Image x:Name="checkedBackground" Source="{TemplateBinding CheckedBackground}" Stretch="None" Margin="{TemplateBinding Padding}" Opacity="0"/>
+                            <Image x:Name="unCheckedBackground" Source="{TemplateBinding UnCheckedBackground}" Stretch="None" Margin="{TemplateBinding Padding}"/>
                         </Grid>
 
                     </Grid>
@@ -358,7 +364,7 @@
     <Style x:Key="CategoryPage_Schedule_SubTitle_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Foreground" Value="#ff000000"/>
-        <Setter Property="Margin" Value="0,0,0,4"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
     
     <Style x:Key="CategoryPage_PivotHeader_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
@@ -392,6 +398,12 @@
         <Setter Property="Margin" Value="0,0,12,0"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
-
     
+    <!--game result panel-->
+    <Style x:Key="GameResultPanel_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource CategoryPage_Schedule_SubTitle_Text_Style}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="4,4,4,4"/>
+    </Style>
+
+
 </ResourceDictionary>

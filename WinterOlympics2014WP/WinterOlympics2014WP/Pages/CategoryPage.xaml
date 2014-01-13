@@ -20,11 +20,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--top bar-->
-        <!--<Grid Background="{StaticResource App_Theme_Color}">
-            <Image Source="/Assets/Images/TopBarIcon.png" Stretch="None" Margin="24,12,0,12" HorizontalAlignment="Left"/>
-        </Grid>-->
-        
         <controls:TopBar x:Name="topBar"/>
 
         <!--content-->
@@ -37,70 +32,81 @@
                         </Grid>
                     </DataTemplate>
                 </phone:Pivot.HeaderTemplate>
-                <phone:PivotItem Header="赛程赛果">
+
+                <phone:PivotItem Header="赛程赛果" >
                     <Grid>
                         <ScrollViewer>
                             <ItemsControl x:Name="scheduleListBox">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel Margin="0,0,0,0"/>
+                                        <StackPanel Loaded="scheduleListBoxItemsPanel_Loaded" Margin="0,0,0,0"/>
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid Height="120">
-                                            <Rectangle Style="{StaticResource ListBoxItem_SplitBar_Style}"/>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="140"/>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="90"/>
-                                                </Grid.ColumnDefinitions>
-                                                <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,12,12,0">
-                                                    <TextBlock Text="{Binding StartTime,Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='MM/dd'}" 
+                                        <Grid Height="120" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Rectangle Grid.ColumnSpan="2" Style="{StaticResource Item_SplitBar_Bottom_Style}"/>
+
+                                            <controls:ContentButton Grid.Column="1" HorizontalAlignment="Stretch" Tap="Result_Tap">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="80"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <StackPanel Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="8,8,8,0">
+                                                        <TextBlock Text="{Binding StartTime,Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='MM/dd'}" 
                                                                Style="{StaticResource CategoryPage_Date_Text_Style}"/>
-                                                    <TextBlock Text="{Binding StartTime,Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='hh:mm'}" 
+                                                        <Rectangle Style="{StaticResource Item_SplitBar_Bottom_Style}" HorizontalAlignment="Stretch"/>
+                                                        <TextBlock Text="{Binding StartTime,Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='hh:mm'}" 
                                                                Style="{StaticResource CategoryPage_Date_Text_Style}"/>
-                                                </StackPanel>
-                                                <Image Grid.Column="1" Width="48" Height="48" Stretch="Uniform" VerticalAlignment="Center" 
-                                                       Source="/Assets/Images/Categories/Curling.png"/>
-                                                <StackPanel Grid.Column="2" Margin="12,10,12,0">
-                                                    <TextBlock Text="男子" Style="{StaticResource CategoryPage_Schedule_Title_Text_Style}"/>
-                                                    <TextBlock Text="{Binding Match}" Style="{StaticResource CategoryPage_Schedule_SubTitle_Text_Style}"/>
-                                                </StackPanel>
-                                                <controls:ContentButton Grid.Column="3" HorizontalAlignment="Center" Tap="ExpandSchedule_Tap">
-                                                    <Grid Background="#00000000">
-                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                            <TextBlock Text="赛果" Style="{StaticResource CategoryPage_Schedule_Title_Text_Style}"
+                                                    </StackPanel>
+                                                    <Image Grid.Column="1" Width="40" Height="40" Stretch="Uniform" VerticalAlignment="Top" 
+                                                       Source="/Assets/Images/Categories/Curling.png" Margin="0,8,0,0"/>
+                                                    <StackPanel Grid.Column="2" VerticalAlignment="Top" Margin="8,8,8,0">
+                                                        <TextBlock Text="{Binding Category}" Style="{StaticResource CategoryPage_Schedule_Title_Text_Style}"/>
+                                                        <TextBlock Text="{Binding Match}" Style="{StaticResource CategoryPage_Schedule_SubTitle_Text_Style}"/>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                                        <TextBlock Text="赛果" Style="{StaticResource CategoryPage_Schedule_Title_Text_Style}"
                                                                        Foreground="{StaticResource ArrowButton_Color}" />
-                                                            <Image Margin="8,0,0,0" Source="/Assets/Images/ArrowDown.png" Stretch="None"/>
-                                                        </StackPanel>
-                                                    </Grid>
-                                                </controls:ContentButton>
-                                            </Grid>
-                                            <controls:ContentButton VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0"
-                                                Tap="Subscribe_Tap">
-                                                <Image Margin="12,0,12,12" Source="/Assets/Images/Subscribe.png" Stretch="None"/>
+                                                        <Image Margin="4,0,0,0" Source="/Assets/Images/ArrowDown.png" Stretch="None"/>
+                                                    </StackPanel>
+                                                </Grid>
                                             </controls:ContentButton>
+
+                                            <controls:ImageToggleButton Grid.Column="0" VerticalAlignment="Top" Padding="0,0,0,0"
+                                                                        CheckedBackground="/Assets/Images/Subscribe.png" 
+                                                                        UnCheckedBackground="/Assets/Images/UnSubscribe.png" 
+                                                                        Tap="Subscribe_Tap"/>
                                         </Grid>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </ScrollViewer>
-                        <Rectangle Style="{StaticResource ListBoxItem_SplitBar_Style}"/>
+                        <Rectangle Style="{StaticResource Item_SplitBar_Top_Style}"/>
+                        <controls:Snow x:Name="snow1"/>
                     </Grid>
                 </phone:PivotItem>
+
                 <phone:PivotItem Header="奥运ABC">
                     <Grid>
                         <ScrollViewer>
                             <Image Source="/Assets/Sample/NewsDetailSample.jpg" Stretch="Uniform"/>
                         </ScrollViewer>
-                        <Rectangle Style="{StaticResource ListBoxItem_SplitBar_Style}"/>
+                        <Rectangle Style="{StaticResource Item_SplitBar_Top_Style}"/>
                     </Grid>
                 </phone:PivotItem>
             </phone:Pivot>
         </Grid>
+
     </Grid>
 
 </phone:PhoneApplicationPage>

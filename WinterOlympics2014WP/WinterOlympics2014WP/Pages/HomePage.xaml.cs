@@ -357,8 +357,5 @@ namespace WinterOlympics2014WP.Pages
 
         #endregion
 
-
-
-
     }
 }

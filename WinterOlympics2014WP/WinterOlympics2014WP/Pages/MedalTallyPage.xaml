@@ -93,7 +93,7 @@
                                         <TextBlock Grid.Column="4" Text="{Binding Bronze}" Style="{StaticResource MedalTallyPage_Table_Text_Style}"/>
                                         <TextBlock Grid.Column="5" Text="{Binding Total}" Style="{StaticResource MedalTallyPage_Table_Text_Style}"/>
 
-                                        <Rectangle Grid.ColumnSpan="6" Style="{StaticResource ListBoxItem_SplitBar_Style}" Margin="0,0,0,-3"/>
+                                        <Rectangle Grid.ColumnSpan="6" Style="{StaticResource Item_SplitBar_Bottom_Style}" Margin="0,0,0,-3"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>

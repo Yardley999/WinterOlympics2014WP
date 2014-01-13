@@ -27,10 +27,10 @@ namespace WinterOlympics2014WP.Models
         //public bool view { get; set; }
     }
 
-    [DataContract]
-    public class NewsList
-    {
-        [DataMember]
-        public News[] data { get; set; }
-    }
+    //[DataContract]
+    //public class NewsList
+    //{
+    //    [DataMember]
+    //    public News[] data { get; set; }
+    //}
 }

@@ -13,6 +13,10 @@ namespace WinterOlympics2014WP.Pages
 {
     public partial class CalendarPage : PhoneApplicationPage
     {
+        #region Property
+
+        #endregion
+
         #region Lifecycle
 
         public CalendarPage()

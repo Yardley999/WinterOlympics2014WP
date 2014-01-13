@@ -174,9 +174,12 @@ namespace WinterOlympics2014WP.Utility
                     Deployment.Current.Dispatcher.BeginInvoke(() =>
                     {
                         List<T> list = new List<T>();
-                        for (int i = 0; i < wrapper.data.Length; i++)
+                        if (wrapper.data != null)
                         {
-                            list.Add(wrapper.data[i]);
+                            for (int i = 0; i < wrapper.data.Length; i++)
+                            {
+                                list.Add(wrapper.data[i]);
+                            }
                         }
                         onCallback(list);
                     });
@@ -188,7 +191,7 @@ namespace WinterOlympics2014WP.Utility
                 }
                 Loaded = true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
             }
             finally
