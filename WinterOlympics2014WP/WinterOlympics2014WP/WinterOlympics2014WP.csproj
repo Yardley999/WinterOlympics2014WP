@@ -106,6 +106,7 @@
     <Compile Include="Controls\EPGList.xaml.cs">
       <DependentUpon>EPGList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ImageToggleButton.cs" />
     <Compile Include="Controls\QuickSelector.xaml.cs">
       <DependentUpon>QuickSelector.xaml</DependentUpon>
     </Compile>
