@@ -19,8 +19,6 @@ namespace WinterOlympics2014WP.Utility
         static string fileName = string.Empty;
         Action onDownloaded = null;
 
-
-
         public void Download(string uri, string folder, string file, Action callback)
         {
             try

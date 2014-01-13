@@ -62,7 +62,8 @@
                 <!--splash image-->
                 <phone:PanoramaItem>
                     <Grid Margin="-12,-48,0,0">
-                        <Image x:Name="splashImage" Stretch="UniformToFill" Tap="splashImage_Tap"/>
+                        <Image x:Name="splashImage" Stretch="UniformToFill" Tap="splashImage_Tap"
+                               Source="/Assets/Sample/SplashScreenSample.PNG"/>
                         <controls:BigSnow x:Name="bigSnow" VerticalAlignment="Top"/>
                         <!--<controls:Snow x:Name="snow" Width="80" Height="80"/>-->
                     </Grid>
@@ -124,35 +125,35 @@
                         <controls:ContentButton Grid.Row="0" Grid.Column="0" x:Name="medalTallyButton"  Margin="0,0,8,8" 
                                                 Tap="medalTallyButton_Tap">
                             <Grid Background="#FF1BA1E2">
-                                <Image Source="/Assets/AppBar/award.png" />
+                                <Image Source="/Assets/AppBar/award.png" Stretch="Uniform" Width="120" Margin="0,-16,0,0"/>
                                 <TextBlock Text="奖牌榜" Style="{StaticResource Tile_Text_Style}"/>
                             </Grid>
                         </controls:ContentButton>
                         <controls:ContentButton Grid.Row="0" Grid.Column="1" x:Name="calendarButton"  Margin="0,0,8,8" 
                                                 Tap="calendarButton_Tap">
                             <Grid Background="#FFA4C400">
-                                <Image Source="/Assets/AppBar/calendar.png"/>
+                                <Image Source="/Assets/AppBar/calendar.png" Stretch="Uniform" Width="120" Margin="0,-16,0,0"/>
                                 <TextBlock Text="赛事日历" Style="{StaticResource Tile_Text_Style}"/>
                             </Grid>
                         </controls:ContentButton>
                         <controls:ContentButton Grid.Row="1" Grid.Column="0" x:Name="categoryButton"  Margin="0,0,8,8"  
                                                 Tap="categoryButton_Tap">
-                            <Grid Background="#FFA20025">
-                                <Image Source="/Assets/AppBar/search.png"/>
+                            <Grid Background="#FFC72D57">
+                                <Image Source="/Assets/AppBar/search.png" Stretch="Uniform" Width="120" Margin="0,-16,0,0"/>
                                 <TextBlock Text="比赛项目" Style="{StaticResource Tile_Text_Style}"/>
                             </Grid>
                         </controls:ContentButton>
                         <controls:ContentButton Grid.Row="1" Grid.Column="1" x:Name="stadiumButton"  Margin="0,0,8,8"  
                                                 Tap="stadiumButton_Tap">
                             <Grid Background="#FFF0A30A">
-                                <Image Source="/Assets/AppBar/camera.png"/>
+                                <Image Source="/Assets/AppBar/camera.png" Stretch="Uniform" Width="120" Margin="0,-16,0,0"/>
                                 <TextBlock Text="场馆介绍" Style="{StaticResource Tile_Text_Style}"/>
                             </Grid>
                         </controls:ContentButton>
                         <controls:ContentButton Grid.Row="2" Grid.Column="0" Margin="0,0,8,8" 
                                                 Tap="subscribeButton_Tap">
                             <Grid Background="#FF76608A">
-                                <Image Source="/Assets/AppBar/alarm.png"/>
+                                <Image Source="/Assets/AppBar/alarm.png" Stretch="Uniform" Width="120" Margin="0,-16,0,0"/>
                                 <TextBlock Text="我的预约" Style="{StaticResource Tile_Text_Style}"/>
                             </Grid>
                         </controls:ContentButton>
