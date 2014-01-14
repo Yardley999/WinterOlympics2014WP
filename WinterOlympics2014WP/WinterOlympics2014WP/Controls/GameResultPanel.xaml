@@ -30,6 +30,8 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
+        <TextBlock x:Name="noData" Text="无赛果" Style="{StaticResource NoData_Text_Style}" Visibility="Collapsed"/>
+
         <ItemsControl x:Name="resultListBox" ItemsSource="{Binding RankList}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

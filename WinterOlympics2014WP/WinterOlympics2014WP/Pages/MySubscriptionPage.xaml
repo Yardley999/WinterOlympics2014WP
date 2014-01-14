@@ -22,6 +22,8 @@
             <Image Source="/Assets/Images/TopBarIcon.png" Stretch="None" Margin="24,12,0,12" HorizontalAlignment="Left"/>
         </Grid>
 
+        <TextBlock Grid.Row="1" x:Name="noData" Text="无预约" Style="{StaticResource NoData_Text_Style}" Visibility="Collapsed"/>
+
         <!--content-->
         <Grid x:Name="ContentPanel" Grid.Row="1">
             <ScrollViewer>
@@ -59,7 +61,8 @@
 
                                     <TextBlock Text="已结束" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"
                                                Style="{StaticResource CategoryPage_Schedule_Title_Text_Style}"
-                                               Foreground="{StaticResource ArrowButton_Color}" />
+                                               Foreground="{StaticResource ArrowButton_Color}" 
+                                               Visibility="{Binding EndTime, Converter={StaticResource AnythingToVisibilityConverter}, ConverterParameter='neg'}"/>
                                 </Grid>
                                 
                                 <controls:ImageToggleButton VerticalAlignment="Top" HorizontalAlignment="Left" Padding="12,0,12,12"

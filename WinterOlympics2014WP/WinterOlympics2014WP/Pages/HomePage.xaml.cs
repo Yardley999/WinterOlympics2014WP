@@ -20,8 +20,6 @@ namespace WinterOlympics2014WP.Pages
     {
         #region Property
 
-        private bool busy = false;
-
         #endregion
 
         #region Lifecycle

@@ -32,10 +32,18 @@ namespace WinterOlympics2014WP.Models
         public DateTime EndTime { get; set; }
 
         private bool subscribed = false;
+        [IgnoreDataMember]
         public bool Subscribed
         {
             get { return subscribed; }
             set { SetProperty(ref this.subscribed, value); }
+        }
+
+        private string arrowImage = "/Assets/Images/ArrowDown.png";//default value does not work, don't know why
+        public string ArrowImage
+        {
+            get { return arrowImage; }
+            set { SetProperty(ref this.arrowImage, value); }
         }
     }
 }

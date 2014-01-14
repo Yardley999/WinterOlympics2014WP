@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:WinterOlympics2014WP.Controls"
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="False"
@@ -94,6 +95,8 @@
             
             <TextBlock x:Name="indexTextBlock" Text="" Style="{StaticResource AlbumPage_Index_Text_Style}"/>
         </Grid>
+        <controls:Snow x:Name="snow1"/>
+
     </Grid>
 
 </phone:PhoneApplicationPage>

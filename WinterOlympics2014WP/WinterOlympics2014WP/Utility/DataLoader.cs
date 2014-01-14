@@ -50,7 +50,7 @@ namespace WinterOlympics2014WP.Utility
                 String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim();
                 HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
                 request.Method = "GET";
-                request.BeginGetResponse(GetMedalScoreList_Callback, request);
+                request.BeginGetResponse(GetData_Callback, request);
 
                 Loaded = false;
                 Busy = true;
@@ -63,7 +63,7 @@ namespace WinterOlympics2014WP.Utility
             }
         }
 
-        private async void GetMedalScoreList_Callback(IAsyncResult result)
+        private async void GetData_Callback(IAsyncResult result)
         {
             try
             {
@@ -146,7 +146,7 @@ namespace WinterOlympics2014WP.Utility
                 String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim();
                 HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
                 request.Method = "GET";
-                request.BeginGetResponse(GetMedalScoreList_Callback, request);
+                request.BeginGetResponse(GetData_Callback, request);
 
                 Loaded = false;
                 Busy = true;
@@ -159,7 +159,7 @@ namespace WinterOlympics2014WP.Utility
             }
         }
 
-        private async void GetMedalScoreList_Callback(IAsyncResult result)
+        private async void GetData_Callback(IAsyncResult result)
         {
             try
             {

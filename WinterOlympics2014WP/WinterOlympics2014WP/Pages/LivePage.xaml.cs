@@ -36,7 +36,9 @@ namespace WinterOlympics2014WP.Pages
 
         private void Albumn_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/AlbumPage.xaml", UriKind.Relative));
+            //TO-DO : pass correct album id
+            string naviString = string.Format("/Pages/AlbumPage.xaml?{0}={1}", NaviParam.ALBUM_ID, "4a303dc1070f25dd");
+            NavigationService.Navigate(new Uri(naviString, UriKind.Relative));
         }
 
         #region Description

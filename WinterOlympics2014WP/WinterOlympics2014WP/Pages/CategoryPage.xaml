@@ -77,7 +77,7 @@
                                                     <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
                                                         <TextBlock Text="赛果" Style="{StaticResource CategoryPage_Schedule_Title_Text_Style}"
                                                                        Foreground="{StaticResource ArrowButton_Color}" />
-                                                        <Image Margin="4,0,0,0" Source="/Assets/Images/ArrowDown.png" Stretch="None"/>
+                                                        <Image Margin="4,0,0,0" Source="{Binding ArrowImage}" Stretch="None"/>
                                                     </StackPanel>
                                                 </Grid>
                                             </controls:ContentButton>

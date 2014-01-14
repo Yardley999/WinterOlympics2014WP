@@ -82,6 +82,7 @@ namespace WinterOlympics2014WP.Pages
                         {
                             item.Subscribed = true;
                         }
+                        item.ArrowImage = "/Assets/Images/ArrowDown.png";
                     }
 
                     scheduleList = list;
@@ -148,17 +149,19 @@ namespace WinterOlympics2014WP.Pages
                 scheduleItemsPanel.Children.Remove(gameResultPanel);
             }
 
-            scheduleItemsPanel.DataContext = result;
+            gameResultPanel.DataContext = result;
 
             int index = scheduleList.IndexOf(schedule);
             scheduleItemsPanel.Children.Insert(index + 1, gameResultPanel);
-            gameResultPanel.Show();
+            gameResultPanel.Show(result.RankList.Length > 0);
+            schedule.ArrowImage = "/Assets/Images/ArrowUp.png";
             expandedSchedule = schedule;
         }
 
         private void HideResultPanel()
         {
             gameResultPanel.Hide(scheduleItemsPanel);
+            expandedSchedule.ArrowImage = "/Assets/Images/ArrowDown.png";
             expandedSchedule = null;
         }
 
@@ -181,10 +184,13 @@ namespace WinterOlympics2014WP.Pages
                 schedule.StartTime = schedule.StartTime;// DateTime.Now.AddSeconds(30);
                 try
                 {
-                    ReminderHelper.AddReminder(schedule.ID, schedule.Category, schedule.Match, schedule.StartTime, string.Format("/Pages/LivePage.xaml?{0}={1}", NaviParam.SCHEDULE_ID, schedule.ID));
-                    SubscriptionDataContext.Current.AddSubscription(schedule);
-                    schedule.Subscribed = true;
-                    toast.ShowMessage("成功添加预约。");
+                    var successful = ReminderHelper.AddReminder(schedule.ID, schedule.Category, schedule.Match, schedule.StartTime, string.Format("/Pages/LivePage.xaml?{0}={1}", NaviParam.SCHEDULE_ID, schedule.ID));
+                    if (successful)
+                    {
+                        SubscriptionDataContext.Current.AddSubscription(schedule);
+                        schedule.Subscribed = true;
+                        toast.ShowMessage("成功添加预约。");
+                    }
                 }
                 catch (Exception ex)
                 {

@@ -35,11 +35,20 @@ namespace WinterOlympics2014WP
 
         //subscription
         public const string KEY_SUBSCRIPTION_LIST = "subscription_list";
+
+        //album
+        public const string ALBUM_MODULE = "album";
+        public const string ALBUM_FILE_NAME_FORMAT = "album_{0}.txt";
+
+        //image helper
+        public const string KEY_IMAGE_CACHE = "image_cache";
     }
 
     public class NaviParam
     {
         public const string CATEGORY_ID = "category_id";
         public const string SCHEDULE_ID = "schedule_id";
+        public const string ALBUM_ID = "album_id";
+
     }
 }

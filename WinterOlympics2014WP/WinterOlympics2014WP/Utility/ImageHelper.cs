@@ -19,6 +19,52 @@ namespace WinterOlympics2014WP.Utility
         static string fileName = string.Empty;
         Action onDownloaded = null;
 
+        public async Task<BitmapImage> Download(string uri, string folder, string file)
+        {
+            BitmapImage bi = null;
+            try
+            {
+                //download
+                HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(uri));
+                request.Method = "GET";
+                HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
+
+                //save
+                StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
+                var dataFolder = await local.CreateFolderAsync(folder, CreationCollisionOption.OpenIfExists);
+
+                using (Stream stream = response.GetResponseStream())
+                {
+                    bi = new BitmapImage();
+
+                    byte[] fileBytes = new byte[response.ContentLength];
+                    await stream.ReadAsync(fileBytes, 0, (int)response.ContentLength);
+
+                    var newFile = await dataFolder.CreateFileAsync(file, CreationCollisionOption.ReplaceExisting);
+
+                    // Write the data
+                    using (var s = await newFile.OpenStreamForWriteAsync())
+                    {
+                        await s.WriteAsync(fileBytes, 0, fileBytes.Length);
+                    }
+                }
+
+                //read
+                dataFolder = await local.GetFolderAsync(folder);
+                var fileStream = await dataFolder.OpenStreamForReadAsync(file);
+                bi = new BitmapImage();
+                bi.SetSource(fileStream);
+                return bi;
+            }
+            catch (WebException e)
+            {
+            }
+            catch (Exception e)
+            {
+            }
+            return bi;
+        }
+
         public void Download(string uri, string folder, string file, Action callback)
         {
             try
@@ -101,7 +147,7 @@ namespace WinterOlympics2014WP.Utility
             catch (Exception ex)
             {
             }
-            
+
             return null;
         }
     }

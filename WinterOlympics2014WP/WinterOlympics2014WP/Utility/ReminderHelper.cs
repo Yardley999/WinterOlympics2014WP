@@ -7,8 +7,13 @@ namespace WinterOlympics2014WP.Utility
 {
     public class ReminderHelper
     {
-        public static void AddReminder(string name, string title, string content, DateTime beginTime, string navUri)
+        public static bool AddReminder(string name, string title, string content, DateTime beginTime, string navUri)
         {
+            if (beginTime < DateTime.Now)
+            {
+                return false;
+            }
+
             Reminder reminder = new Reminder(name);
             reminder.Title = title;
             reminder.Content = content;
@@ -25,12 +30,13 @@ namespace WinterOlympics2014WP.Utility
                     ScheduledActionService.Remove(name);
                 }
                 ScheduledActionService.Add(reminder);
+                return true;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            // Register the reminder with the system.
+            return false;
         }
 
         public static void RemoveReminder(string name)

@@ -7,6 +7,7 @@ using System.Windows.Media.Imaging;
 using System;
 using WinterOlympics2014WP.Models;
 using System.Collections.Generic;
+using WinterOlympics2014WP.Utility;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -17,8 +18,8 @@ namespace WinterOlympics2014WP.Pages
         private int imageCount = 0;
         private int currentIndex = 0;
         private bool bottomPanelShown = true;
-        private bool dataLoaded = false;
         Image imageCenter, imageLeft, imageRight;
+        private string albumID = string.Empty;
 
         #endregion
 
@@ -35,22 +36,45 @@ namespace WinterOlympics2014WP.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            albumID = NavigationContext.QueryString[NaviParam.ALBUM_ID];
             FitOrientation();
-            if (!dataLoaded)
-            {
-                LoadAlbumData();
-                dataLoaded = true;
-            }
+            LoadAlbumData(albumID);
         }
 
         #endregion
 
         #region Data
 
+        DataLoader<Album> albumloader = new DataLoader<Album>();
         ObservableCollection<AlbumItem> albumItems = new ObservableCollection<AlbumItem>();
 
-        private void LoadAlbumData()
+        private void LoadAlbumData(string id)
         {
+            if (albumloader.Loaded || albumloader.Busy)
+            {
+                return;
+            }
+
+            snow1.IsBusy = true;
+
+            albumloader.Load("getalbum", "&id=" + id,
+                album =>
+                {
+                    albumItems.Clear();
+                    foreach (var item in album.Items)
+                    {
+                        //TO-DO : remove following test line
+                        item.Image = "http://images.ccoo.cn/bbs/2010224/201022423410247.jpg";
+                        albumItems.Add(item);
+                    }
+                    imageCount = albumItems.Count;
+                    currentIndex = 0;
+                    UpdateCurrentIndex();
+                    snow1.IsBusy = false;
+                }, true, Constants.ALBUM_MODULE, string.Format(Constants.ALBUM_FILE_NAME_FORMAT, id));
+
+            return;
+
             albumItems.Add(new AlbumItem("http://sports.shangdu.com/uploadfile/2010_3/5/849017808.jpg", "2014年索契冬季奥运会（英语：2014 Winter Olympics）暨第22届冬季奥林匹克运动会，简称“索契奥运会”，将于2014年2月7日至2月23日在俄罗斯联邦索契市举行"));
             albumItems.Add(new AlbumItem("http://gb.cri.cn/mmsource/images/2010/02/15/wb100215055.jpg", "索契奥运会设15个大项，98小项。2014年索契冬季奥运会是俄罗斯历史上第一次举办冬季奥运会。"));
             albumItems.Add(new AlbumItem("http://img.gmw.cn/imgnews/attachement/jpg/site2/20060216/xin_190203161009468106262.jpg", "2013年9月28日2014年索契冬季奥运会圣火采集彩排仪式在希腊古奥林匹亚举行，组织者成功地采集到冬奥会圣火火种。"));
@@ -150,7 +174,7 @@ namespace WinterOlympics2014WP.Pages
             UpdateCurrentIndex();
         }
 
-        private void UpdateCurrentIndex()
+        private async void UpdateCurrentIndex()
         {
             indexTextBlock.Text = (currentIndex + 1).ToString() + "/" + imageCount.ToString();
             descriptionTextBlock.Text = albumItems[currentIndex].Title;
@@ -158,9 +182,12 @@ namespace WinterOlympics2014WP.Pages
             int indexForLeft = currentIndex == 0 ? (imageCount - 1) : (currentIndex - 1);
             int indexForRight = currentIndex == (imageCount - 1) ? 0 : (currentIndex + 1);
 
-            imageCenter.Source = new BitmapImage(new Uri(albumItems[currentIndex].Image, UriKind.RelativeOrAbsolute));
-            imageLeft.Source = new BitmapImage(new Uri(albumItems[indexForLeft].Image, UriKind.RelativeOrAbsolute));
-            imageRight.Source = new BitmapImage(new Uri(albumItems[indexForRight].Image, UriKind.RelativeOrAbsolute));
+            //imageCenter.Source = new BitmapImage(new Uri(albumItems[currentIndex].Image, UriKind.RelativeOrAbsolute));
+            //imageLeft.Source = new BitmapImage(new Uri(albumItems[indexForLeft].Image, UriKind.RelativeOrAbsolute));
+            //imageRight.Source = new BitmapImage(new Uri(albumItems[indexForRight].Image, UriKind.RelativeOrAbsolute));
+            imageCenter.Source = await ImageCacheDataContext.Current.GetImage(albumItems[currentIndex].Image, true);
+            imageLeft.Source = await ImageCacheDataContext.Current.GetImage(albumItems[indexForLeft].Image, true);
+            imageRight.Source = await ImageCacheDataContext.Current.GetImage(albumItems[indexForRight].Image, true);
         }
 
         #endregion

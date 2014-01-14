@@ -144,6 +144,8 @@ namespace WinterOlympics2014WP
             // on the next navigation to see if the page stack should be reset
             if (e.NavigationMode == NavigationMode.Reset)
                 RootFrame.Navigated += ClearBackStackAfterReset;
+
+            ImageCacheDataContext.Current.SaveImageCache();
         }
 
         private void ClearBackStackAfterReset(object sender, NavigationEventArgs e)

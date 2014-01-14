@@ -22,9 +22,9 @@ namespace WinterOlympics2014WP.Models
     }
 
     [DataContract]
-    public class AlbumItemList
+    public class Album
     {
-        [DataMember]
-        public AlbumItem[] data { get; set; }
+        [DataMember(Name = "album")]
+        public AlbumItem[] Items { get; set; }
     }
 }

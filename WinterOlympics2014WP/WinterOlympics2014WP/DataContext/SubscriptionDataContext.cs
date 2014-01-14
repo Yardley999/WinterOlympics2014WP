@@ -11,6 +11,11 @@ namespace WinterOlympics2014WP.DataContext
 
         private static SubscriptionDataContext instance = new SubscriptionDataContext();
 
+        static SubscriptionDataContext()
+        {
+            //for thread-safe
+        }
+
         private SubscriptionDataContext()
         {
         }
@@ -53,7 +58,7 @@ namespace WinterOlympics2014WP.DataContext
         {
             List<GameSchedule> list = LoadSubscriptions();
             var item = list.FirstOrDefault(x => x.ID == id);
-            if (item == null)
+            if (item != null)
             {
                 list.Remove(item);
                 SaveSubscriptions(list);

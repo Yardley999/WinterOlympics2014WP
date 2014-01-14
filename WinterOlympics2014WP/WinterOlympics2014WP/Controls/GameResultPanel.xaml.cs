@@ -11,8 +11,9 @@ namespace WinterOlympics2014WP.Controls
             InitializeComponent();
         }
 
-        public void Show()
+        public void Show(bool hasData)
         {
+            this.noData.Visibility = hasData ? Visibility.Collapsed : Visibility.Visible;
             VisualStateManager.GoToState(this, "Shown", true);
         }
 

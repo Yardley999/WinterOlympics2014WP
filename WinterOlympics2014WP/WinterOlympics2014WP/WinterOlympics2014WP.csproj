@@ -125,8 +125,10 @@
     <Compile Include="Controls\TopBar.xaml.cs">
       <DependentUpon>TopBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\AnythingToVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\QuickSelectorItemOpacityConverter.cs" />
+    <Compile Include="DataContext\ImageCacheDataContext.cs" />
     <Compile Include="DataContext\SubscriptionDataContext.cs" />
     <Compile Include="Global\ApplicationExtension.cs" />
     <Compile Include="Global\Constants.cs" />
@@ -142,6 +144,7 @@
     <Compile Include="Utility\DataLoader.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utility\HttpExtensions.cs" />
     <Compile Include="Utility\ImageHelper.cs" />
     <Compile Include="Utility\IsolatedStorageHelper.cs" />
     <Compile Include="Utility\JsonSerializer.cs" />

@@ -5,6 +5,8 @@ using WinterOlympics2014WP.Utility;
 using WinterOlympics2014WP.DataContext;
 using WinterOlympics2014WP.Models;
 using Microsoft.Phone.Shell;
+using System.Windows;
+using System;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -36,10 +38,23 @@ namespace WinterOlympics2014WP.Pages
         {
             scheduleList.Clear();
             var list = SubscriptionDataContext.Current.LoadSubscriptions();
-            foreach (var item in list)
+            if (list.Count == 0)
             {
-                scheduleList.Add(item);
+                this.noData.Visibility = System.Windows.Visibility.Visible;
             }
+            else
+            {
+                this.noData.Visibility = System.Windows.Visibility.Collapsed;
+                foreach (var item in list)
+                {
+                    scheduleList.Add(item);
+                }
+            }
+        }
+
+        private void CheckNoData()
+        {
+            this.noData.Visibility = scheduleList.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 
         #endregion
@@ -49,15 +64,14 @@ namespace WinterOlympics2014WP.Pages
         private void UnSubscribe_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             GameSchedule schedule = sender.GetDataContext<GameSchedule>();
-            if (schedule!=null)
+            if (schedule != null)
             {
                 ReminderHelper.RemoveReminder(schedule.ID);
             }
             SubscriptionDataContext.Current.RemoveSubscription(schedule.ID);
-
             scheduleList.Remove(schedule);
-
             toast.ShowMessage("成功取消预约。");
+            CheckNoData();
         }
 
         #endregion
@@ -84,6 +98,7 @@ namespace WinterOlympics2014WP.Pages
             SubscriptionDataContext.Current.ClearSubscriptions();
             scheduleList.Clear();
             toast.ShowMessage("成功取消全部预约。");
+            CheckNoData();
         }
 
         #endregion
