@@ -28,8 +28,7 @@ namespace WinterOlympics2014WP.Utility
             }
             catch (Exception ex)
             {
-                
-                throw;
+                throw ex;
             }
             // Register the reminder with the system.
         }
@@ -53,6 +52,15 @@ namespace WinterOlympics2014WP.Utility
         {
             var notifications = ScheduledActionService.GetActions<ScheduledNotification>();
             return notifications;
+        }
+
+        public static void ClearReminders()
+        {
+            var notifications = GetReminders();
+            foreach (var item in notifications)
+            {
+                ScheduledActionService.Remove(item.Name);
+            }
         }
     }
 }

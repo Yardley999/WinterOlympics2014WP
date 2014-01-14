@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using System.Collections.ObjectModel;
-using Microsoft.Phone.Net.NetworkInformation;
-using System.IO;
 using WinterOlympics2014WP.Utility;
 using WinterOlympics2014WP.Models;
-using System.Windows.Input;
 using WinterOlympics2014WP.Controls;
+using System.Windows.Input;
+using WinterOlympics2014WP.DataContext;
+using System.Linq;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -79,9 +75,24 @@ namespace WinterOlympics2014WP.Pages
             scheduleloader.Load("getschedule", "&id=" + categoryID,
                 list =>
                 {
-                    this.scheduleListBox.ItemsSource = scheduleList = list;
+                    var subscriptionList = GetSubscriptionList();
+                    foreach (var item in list)
+                    {
+                        if (subscriptionList.Any(x => x.ID == item.ID))
+                        {
+                            item.Subscribed = true;
+                        }
+                    }
+
+                    scheduleList = list;
+                    this.scheduleListBox.ItemsSource = scheduleList;
                     snow1.IsBusy = false;
                 }, true, Constants.SCHEDULE_MODULE, string.Format(Constants.SCHEDULE_FILE_NAME_FORMAT, categoryID));
+        }
+
+        private List<GameSchedule> GetSubscriptionList()
+        {
+            return SubscriptionDataContext.Current.LoadSubscriptions();
         }
 
         #endregion
@@ -109,7 +120,7 @@ namespace WinterOlympics2014WP.Pages
                 }, true, Constants.SCHEDULE_MODULE, string.Format(Constants.RESULT_FILE_NAME_FORMAT, schedule.ID));
         }
 
-        private void Result_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void Schedule_Tap(object sender, GestureEventArgs e)
         {
             var schedule = sender.GetDataContext<GameSchedule>();
             if (schedule == expandedSchedule)
@@ -118,7 +129,7 @@ namespace WinterOlympics2014WP.Pages
             }
             else
             {
-                if (expandedSchedule!=null)
+                if (expandedSchedule != null)
                 {
                     HideResultPanel();
                 }
@@ -155,11 +166,31 @@ namespace WinterOlympics2014WP.Pages
 
         #region Subscribe
 
-        private void Subscribe_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void Subscribe_Tap(object sender, GestureEventArgs e)
         {
             GameSchedule schedule = sender.GetDataContext<GameSchedule>();
-            schedule.StartTime = DateTime.Now.AddSeconds(30);
-            ReminderHelper.AddReminder(schedule.ID, schedule.Category, schedule.Match, schedule.StartTime, "/Pages/LivePage.xaml");
+            if (schedule.Subscribed)
+            {
+                ReminderHelper.RemoveReminder(schedule.ID);
+                SubscriptionDataContext.Current.RemoveSubscription(schedule.ID);
+                schedule.Subscribed = false;
+                toast.ShowMessage("成功取消预约。");
+            }
+            else
+            {
+                schedule.StartTime = schedule.StartTime;// DateTime.Now.AddSeconds(30);
+                try
+                {
+                    ReminderHelper.AddReminder(schedule.ID, schedule.Category, schedule.Match, schedule.StartTime, string.Format("/Pages/LivePage.xaml?{0}={1}", NaviParam.SCHEDULE_ID, schedule.ID));
+                    SubscriptionDataContext.Current.AddSubscription(schedule);
+                    schedule.Subscribed = true;
+                    toast.ShowMessage("成功添加预约。");
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
         }
 
         #endregion

@@ -52,7 +52,7 @@
 
                                             <Rectangle Grid.ColumnSpan="2" Style="{StaticResource Item_SplitBar_Bottom_Style}"/>
 
-                                            <controls:ContentButton Grid.Column="1" HorizontalAlignment="Stretch" Tap="Result_Tap">
+                                            <controls:ContentButton Grid.Column="1" HorizontalAlignment="Stretch" Tap="Schedule_Tap">
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="Auto"/>
@@ -83,9 +83,10 @@
                                             </controls:ContentButton>
 
                                             <controls:ImageToggleButton Grid.Column="0" VerticalAlignment="Top" Padding="0,0,0,0"
-                                                                        CheckedBackground="/Assets/Images/Subscribe.png" 
-                                                                        UnCheckedBackground="/Assets/Images/UnSubscribe.png" 
-                                                                        Tap="Subscribe_Tap"/>
+                                                                        UnCheckedBackground="/Assets/Images/Subscribe.png" 
+                                                                        CheckedBackground="/Assets/Images/UnSubscribe.png" 
+                                                                        Tap="Subscribe_Tap"
+                                                                        Checked="{Binding Subscribed}"/>
                                         </Grid>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -106,6 +107,8 @@
                 </phone:PivotItem>
             </phone:Pivot>
         </Grid>
+        
+        <controls:CuteToast x:Name="toast" Grid.RowSpan="2"/>
 
     </Grid>
 

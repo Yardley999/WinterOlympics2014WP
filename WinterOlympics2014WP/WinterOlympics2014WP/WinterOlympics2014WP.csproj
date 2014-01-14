@@ -103,6 +103,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ContentButton.cs" />
+    <Compile Include="Controls\CuteToast.xaml.cs">
+      <DependentUpon>CuteToast.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\EPGList.xaml.cs">
       <DependentUpon>EPGList.xaml</DependentUpon>
     </Compile>
@@ -124,8 +127,10 @@
     </Compile>
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\QuickSelectorItemOpacityConverter.cs" />
+    <Compile Include="DataContext\SubscriptionDataContext.cs" />
     <Compile Include="Global\ApplicationExtension.cs" />
     <Compile Include="Global\Constants.cs" />
+    <Compile Include="Infrastructures\BindableBase.cs" />
     <Compile Include="Models\AlbumItem.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\GameResult.cs" />
@@ -197,6 +202,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Controls\CuteToast.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\EPGList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

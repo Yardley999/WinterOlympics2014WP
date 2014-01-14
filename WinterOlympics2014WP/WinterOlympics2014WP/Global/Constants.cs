@@ -10,6 +10,8 @@ namespace WinterOlympics2014WP
     {
         public const string DOMAIN = "http://115.28.21.97";
 
+        public const string APP_NAME = "索契冬奥会";
+
         //splash
         public const string SPLASH_MODULE = "splash";
         public const string SPLASH_FILE_NAME = "splash.jpg";
@@ -31,11 +33,13 @@ namespace WinterOlympics2014WP
         public const string SCHEDULE_FILE_NAME_FORMAT = "schedule_list_{0}.txt";
         public const string RESULT_FILE_NAME_FORMAT = "result_list_{0}.txt";
 
-
+        //subscription
+        public const string KEY_SUBSCRIPTION_LIST = "subscription_list";
     }
 
     public class NaviParam
     {
         public const string CATEGORY_ID = "category_id";
+        public const string SCHEDULE_ID = "schedule_id";
     }
 }

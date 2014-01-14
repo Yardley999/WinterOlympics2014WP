@@ -175,6 +175,12 @@
         </Setter>
     </Style>
 
+    <Style x:Key="CuteToast_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="#ffffffff"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="12,4,12,4"/>
+    </Style>
 
     <!--quick selector-->
     <Style x:Key="QuickSelector_Item_Text_Style" TargetType="TextBlock">

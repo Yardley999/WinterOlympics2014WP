@@ -77,14 +77,14 @@ namespace WinterOlympics2014WP.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            //if (this.Checked == true)
-            //{
-            //    VisualStateManager.GoToState(this, "Checked", false);
-            //}
-            //else
-            //{
-            //    VisualStateManager.GoToState(this, "UnChecked", false);
-            //}
+            if (this.Checked == true)
+            {
+                VisualStateManager.GoToState(this, "Checked", false);
+            }
+            else
+            {
+                VisualStateManager.GoToState(this, "UnChecked", false);
+            }
         }
 
         #endregion
@@ -112,11 +112,11 @@ namespace WinterOlympics2014WP.Controls
             VisualStateManager.GoToState(this, "Normal", true);
         }
 
-        protected override void OnTap(System.Windows.Input.GestureEventArgs e)
-        {
-            base.OnTap(e);
-            this.Checked = !this.Checked;
-        }
+        //protected override void OnTap(System.Windows.Input.GestureEventArgs e)
+        //{
+        //    base.OnTap(e);
+        //    this.Checked = !this.Checked;
+        //}
 
     }
 }

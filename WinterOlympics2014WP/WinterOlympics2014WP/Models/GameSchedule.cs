@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using WinterOlympics2014WP.Infrastructures;
 
 namespace WinterOlympics2014WP.Models
 {
     [DataContract]
-    public class GameSchedule
+    public class GameSchedule : BindableBase
     {
-        [DataMember(Name="id")]
+        [DataMember(Name = "id")]
         public string ID { get; set; }
 
         [DataMember(Name = "desc")]
@@ -29,5 +30,12 @@ namespace WinterOlympics2014WP.Models
 
         [DataMember(Name = "end")]
         public DateTime EndTime { get; set; }
+
+        private bool subscribed = false;
+        public bool Subscribed
+        {
+            get { return subscribed; }
+            set { SetProperty(ref this.subscribed, value); }
+        }
     }
 }

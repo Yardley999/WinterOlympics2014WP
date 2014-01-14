@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
+﻿using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
 using WinterOlympics2014WP.Utility;
+using WinterOlympics2014WP.DataContext;
+using WinterOlympics2014WP.Models;
+using Microsoft.Phone.Shell;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -19,6 +15,8 @@ namespace WinterOlympics2014WP.Pages
         public MySubscriptionPage()
         {
             InitializeComponent();
+            BuildApplicationBar();
+
             scheduleListBox.ItemsSource = scheduleList;
         }
 
@@ -32,37 +30,63 @@ namespace WinterOlympics2014WP.Pages
 
         #region Subscription List
 
-        ObservableCollection<int> scheduleList = new ObservableCollection<int>();
+        ObservableCollection<GameSchedule> scheduleList = new ObservableCollection<GameSchedule>();
 
         private void LoadScheduleList()
         {
-            var xxx = ReminderHelper.GetReminders();
-
             scheduleList.Clear();
-
-            scheduleList.Add(0);
-            scheduleList.Add(1);
-            scheduleList.Add(2);
-            scheduleList.Add(3);
-            scheduleList.Add(4);
-            scheduleList.Add(5);
-            scheduleList.Add(6);
-            scheduleList.Add(7);
-            scheduleList.Add(8);
-            scheduleList.Add(9);
+            var list = SubscriptionDataContext.Current.LoadSubscriptions();
+            foreach (var item in list)
+            {
+                scheduleList.Add(item);
+            }
         }
 
         #endregion
 
+        #region UnSubscribe
+
         private void UnSubscribe_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            GameSchedule schedule = sender.GetDataContext<GameSchedule>();
+            if (schedule!=null)
+            {
+                ReminderHelper.RemoveReminder(schedule.ID);
+            }
+            SubscriptionDataContext.Current.RemoveSubscription(schedule.ID);
 
+            scheduleList.Remove(schedule);
+
+            toast.ShowMessage("成功取消预约。");
         }
 
-        private void ExpandSchedule_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        #endregion
+
+        #region App Bar
+
+        ApplicationBarMenuItem appBarClear;
+
+        private void BuildApplicationBar()
         {
+            ApplicationBar = new ApplicationBar();
+            ApplicationBar.Opacity = 0.9;
+            ApplicationBar.Mode = ApplicationBarMode.Minimized;
 
+            //clear
+            appBarClear = new ApplicationBarMenuItem("清空");
+            appBarClear.Click += appBarClear_Click;
+            ApplicationBar.MenuItems.Add(appBarClear);
         }
+
+        void appBarClear_Click(object sender, System.EventArgs e)
+        {
+            ReminderHelper.ClearReminders();
+            SubscriptionDataContext.Current.ClearSubscriptions();
+            scheduleList.Clear();
+            toast.ShowMessage("成功取消全部预约。");
+        }
+
+        #endregion
 
     }
 }

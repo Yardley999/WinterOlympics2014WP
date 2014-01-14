@@ -37,46 +37,47 @@
                                 <Rectangle Style="{StaticResource Item_SplitBar_Bottom_Style}"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="132"/>
+                                        <ColumnDefinition Width="128"/>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="110"/>
+                                        <ColumnDefinition Width="90"/>
                                     </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,12,12,0">
-                                        <TextBlock Text="02/10" Style="{StaticResource CategoryPage_Date_Text_Style}"/>
-                                        <TextBlock Text="13:00" Style="{StaticResource CategoryPage_Date_Text_Style}"/>
+
+                                    <StackPanel Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="8,8,8,0">
+                                        <TextBlock Text="{Binding StartTime,Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='MM/dd'}" 
+                                                               Style="{StaticResource CategoryPage_Date_Text_Style}"/>
+                                        <Rectangle Style="{StaticResource Item_SplitBar_Bottom_Style}" HorizontalAlignment="Stretch"/>
+                                        <TextBlock Text="{Binding StartTime,Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='hh:mm'}" 
+                                                               Style="{StaticResource CategoryPage_Date_Text_Style}"/>
                                     </StackPanel>
-                                    <Image Grid.Column="1" Width="48" Height="48" Stretch="Uniform" VerticalAlignment="Center" 
-                                                       Source="/Assets/Images/Categories/Curling.png"/>
-                                    <StackPanel Grid.Column="2" Margin="12,10,12,0">
-                                        <TextBlock Text="男子" Style="{StaticResource CategoryPage_Schedule_Title_Text_Style}"/>
-                                        <TextBlock Text="循环赛 第1轮 A赛道" Style="{StaticResource CategoryPage_Schedule_SubTitle_Text_Style}"/>
+                                    <Image Grid.Column="1" Width="40" Height="40" Stretch="Uniform" VerticalAlignment="Top" 
+                                                       Source="/Assets/Images/Categories/Curling.png" Margin="0,8,0,0"/>
+                                    <StackPanel Grid.Column="2" VerticalAlignment="Top" Margin="8,8,8,0">
+                                        <TextBlock Text="{Binding Category}" Style="{StaticResource CategoryPage_Schedule_Title_Text_Style}"/>
+                                        <TextBlock Text="{Binding Match}" Style="{StaticResource CategoryPage_Schedule_SubTitle_Text_Style}"/>
                                     </StackPanel>
-                                    <controls:ContentButton Grid.Column="3" HorizontalAlignment="Center"
-                                                            Tap="ExpandSchedule_Tap">
-                                        <Grid Background="#00000000">
-                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                <TextBlock Text="已结束" Style="{StaticResource CategoryPage_Schedule_Title_Text_Style}"
-                                                                       Foreground="{StaticResource ArrowButton_Color}" />
-                                                <Image Margin="4,0,0,0" Source="/Assets/Images/ArrowRight.png" Stretch="None"/>
-                                            </StackPanel>
-                                        </Grid>
-                                    </controls:ContentButton>
+
+                                    <TextBlock Text="已结束" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                               Style="{StaticResource CategoryPage_Schedule_Title_Text_Style}"
+                                               Foreground="{StaticResource ArrowButton_Color}" />
                                 </Grid>
-                                <!--<controls:ContentButton VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0"
-                                                Tap="UnSubscribe_Tap">
-                                    <Image Margin="12,0,12,12" Source="/Assets/Images/UnSubscribe.png" Stretch="None"/>
-                                </controls:ContentButton>-->
+                                
                                 <controls:ImageToggleButton VerticalAlignment="Top" HorizontalAlignment="Left" Padding="12,0,12,12"
-                                                            CheckedBackground="/Assets/Images/Subscribe.png" 
-                                                            UnCheckedBackground="/Assets/Images/UnSubscribe.png" />
+                                                            UnCheckedBackground="/Assets/Images/Subscribe.png" 
+                                                            CheckedBackground="/Assets/Images/UnSubscribe.png"
+                                                            Checked="True"
+                                                            Tap="UnSubscribe_Tap"/>
                                 
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
+
         </Grid>
+
+        <controls:CuteToast x:Name="toast" Grid.RowSpan="2"/>
+
     </Grid>
 
 </phone:PhoneApplicationPage>
