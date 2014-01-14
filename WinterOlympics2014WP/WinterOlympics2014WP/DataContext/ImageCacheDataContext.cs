@@ -63,18 +63,29 @@ namespace WinterOlympics2014WP
         public async Task<BitmapImage> GetImage(string url, bool downLoadIfNoCacheFound)
         {
             BitmapImage bi = null;
-
+            bool toDownload = false;
             if (ImageCache.ContainsKey(url))
             {
                 string file = ImageCache[url];
                 bi = await imageHelper.ReadImage(Constants.KEY_IMAGE_CACHE, file);
+                if (bi == null)
+                {
+                    //something is wrong, maybe the file is missing due to force deleting via external tool
+                    toDownload = true;
+                }
             }
             else
+            {
+                toDownload = true;
+            }
+
+            if (toDownload)
             {
                 string file = ComposeFileNameFromURL(url);
                 bi = await imageHelper.Download(url, Constants.KEY_IMAGE_CACHE, file);
                 AddImage(url);
             }
+
             return bi;
         }
 
