@@ -16,35 +16,51 @@ namespace WinterOlympics2014WP.Utility
         private Action<T> onCallback;
         string moduleName = string.Empty;
         string fileName = string.Empty;
-        private bool toSaveData = false;
+        private bool toCacheData = false;
 
         public void Load(string cmd, Action<T> callback)
         {
-            this.Load(cmd, string.Empty, callback, false, string.Empty, string.Empty);
+            this.Load(cmd, string.Empty, false, string.Empty, string.Empty, callback);
         }
 
-        public void Load(string cmd, Action<T> callback, string module, string file)
+        public async void Load(string cmd, string param, bool cacheData, string module, string file, Action<T> callback)
         {
-            this.Load(cmd, string.Empty, callback, true, module, file);
-        }
+            if (cacheData && (string.IsNullOrEmpty(module) || string.IsNullOrEmpty(file)))
+            {
+                return;
+            }
 
-        public void Load(string cmd, string param, Action<T> callback, bool saveData, string module, string file)
-        {
+            //for callback
+            onCallback = callback;
+            toCacheData = cacheData;
+            moduleName = module;
+            fileName = file;
+
+            //load cache
+            if (cacheData)
+            {
+                try
+                {
+                    var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
+                    JsonObjectWrapper<T> wrapper = JsonSerializer.Deserialize<JsonObjectWrapper<T>>(cachedJson);
+                    if (wrapper != null && wrapper.data != null)
+                    {
+                        Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        {
+                            onCallback(wrapper.data);
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+
+            //download new
             if (!DeviceNetworkInformation.IsNetworkAvailable)
             {
                 return;
             }
-
-            if (saveData && (string.IsNullOrEmpty(module) || string.IsNullOrEmpty(file)))
-            {
-                return;
-            }
-
-            onCallback = callback;
-            toSaveData = saveData;
-            moduleName = module;
-            fileName = file;
-
             try
             {
                 String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim();
@@ -75,12 +91,15 @@ namespace WinterOlympics2014WP.Utility
                 {
                     string json = reader.ReadToEnd();
                     JsonObjectWrapper<T> wrapper = JsonSerializer.Deserialize<JsonObjectWrapper<T>>(json);
-                    Deployment.Current.Dispatcher.BeginInvoke(() =>
+                    if (wrapper != null && wrapper.data != null)
                     {
-                        onCallback(wrapper.data);
-                    });
+                        Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        {
+                            onCallback(wrapper.data);
+                        });
+                    }
 
-                    if (toSaveData)
+                    if (toCacheData)
                     {
                         await IsolatedStorageHelper.WriteToFile(moduleName, fileName, json);
                     }
@@ -112,35 +131,56 @@ namespace WinterOlympics2014WP.Utility
         private Action<List<T>> onCallback;
         string moduleName = string.Empty;
         string fileName = string.Empty;
-        private bool toSaveData = false;
+        private bool toCacheData = false;
 
         public void Load(string cmd, Action<List<T>> callback)
         {
-            this.Load(cmd, string.Empty, callback, false, string.Empty, string.Empty);
+            this.Load(cmd, string.Empty, false, string.Empty, string.Empty, callback);
         }
 
-        public void Load(string cmd, Action<List<T>> callback, string module, string file)
+        public async void Load(string cmd, string param, bool cacheData, string module, string file, Action<List<T>> callback)
         {
-            this.Load(cmd, string.Empty, callback, true, module, file);
-        }
+            if (cacheData && (string.IsNullOrEmpty(module) || string.IsNullOrEmpty(file)))
+            {
+                return;
+            }
 
-        public void Load(string cmd, string param, Action<List<T>> callback, bool saveData, string module, string file)
-        {
+            //for callback
+            onCallback = callback;
+            moduleName = module;
+            fileName = file;
+            toCacheData = cacheData;
+
+            //load cache
+            if (cacheData)
+            {
+                try
+                {
+                    var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
+                    JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(cachedJson);
+                    if (wrapper != null && wrapper.data != null)
+                    {
+                        Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        {
+                            List<T> list = new List<T>();
+                            for (int i = 0; i < wrapper.data.Length; i++)
+                            {
+                                list.Add(wrapper.data[i]);
+                            }
+                            onCallback(list);
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+
+            //download new
             if (!DeviceNetworkInformation.IsNetworkAvailable)
             {
                 return;
             }
-
-            if (saveData && (string.IsNullOrEmpty(module) || string.IsNullOrEmpty(file)))
-            {
-                return;
-            }
-
-            onCallback = callback;
-            moduleName = module;
-            fileName = file;
-            toSaveData = saveData;
-
             try
             {
                 String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim();
@@ -170,21 +210,22 @@ namespace WinterOlympics2014WP.Utility
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     string json = reader.ReadToEnd();
+
                     JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(json);
-                    Deployment.Current.Dispatcher.BeginInvoke(() =>
+                    if (wrapper != null && wrapper.data != null)
                     {
-                        List<T> list = new List<T>();
-                        if (wrapper.data != null)
+                        Deployment.Current.Dispatcher.BeginInvoke(() =>
                         {
+                            List<T> list = new List<T>();
                             for (int i = 0; i < wrapper.data.Length; i++)
                             {
                                 list.Add(wrapper.data[i]);
                             }
-                        }
-                        onCallback(list);
-                    });
+                            onCallback(list);
+                        });
+                    }
 
-                    if (toSaveData)
+                    if (toCacheData)
                     {
                         await IsolatedStorageHelper.WriteToFile(moduleName, fileName, json);
                     }

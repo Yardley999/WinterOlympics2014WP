@@ -240,84 +240,15 @@ namespace WinterOlympics2014WP.Pages
                 return;
             }
 
-            newsLoader.Load("getnewslist",
+            newsLoader.Load("getnewslist", string.Empty, true, Constants.NEWS_MODULE, Constants.NEWS_FILE_NAME,
                 list =>
                 {
                     if (list != null)
                     {
                         newsListBox.ItemsSource = list;
                     }
-                }, Constants.NEWS_MODULE, Constants.NEWS_FILE_NAME);
+                });
         }
-
-        //bool newsLoaded = false;
-        //ObservableCollection<News> newsList = new ObservableCollection<News>();
-
-        //private void LoadNews_old()
-        //{
-        //    if (busy)
-        //    {
-        //        return;
-        //    }
-
-        //    if (newsLoaded)
-        //    {
-        //        return;
-        //    }
-
-        //    if (!DeviceNetworkInformation.IsNetworkAvailable)
-        //    {
-        //        return;
-        //    }
-
-        //    try
-        //    {
-        //        String url = "http://115.28.21.97/api/server?cmd=getnewslist";
-        //        HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
-        //        request.Method = "GET";
-        //        request.BeginGetResponse(GetNewsList_Callback, request);
-        //        busy = true;
-        //    }
-        //    catch (WebException e)
-        //    {
-        //    }
-        //    catch (Exception e)
-        //    {
-        //    }
-        //}
-
-        //private async void GetNewsList_Callback(IAsyncResult result)
-        //{
-        //    try
-        //    {
-        //        HttpWebRequest request = (HttpWebRequest)result.AsyncState;
-        //        WebResponse response = request.EndGetResponse(result);
-
-        //        using (Stream stream = response.GetResponseStream())
-        //        using (StreamReader reader = new StreamReader(stream))
-        //        {
-        //            string json = reader.ReadToEnd();
-        //            var list = JsonSerializer.Deserialize<NewsList>(json);
-        //            Dispatcher.BeginInvoke(() =>
-        //            {
-        //                for (int i = 0; i < list.data.Length; i++)
-        //                {
-        //                    newsList.Add(list.data[i]);
-        //                }
-        //            });
-
-        //            await IsolatedStorageHelper.WriteToFile(Constants.NEWS_MODULE, Constants.NEWS_FILE_NAME, json);
-        //        }
-        //        newsLoaded = true;
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //    finally
-        //    {
-        //        busy = false;
-        //    }
-        //}
 
         private void NewsItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {

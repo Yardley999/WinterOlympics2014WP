@@ -57,7 +57,7 @@ namespace WinterOlympics2014WP.Pages
 
             snow1.IsBusy = true;
 
-            albumloader.Load("getalbum", "&id=" + id,
+            albumloader.Load("getalbum", "&id=" + id,true, Constants.ALBUM_MODULE, string.Format(Constants.ALBUM_FILE_NAME_FORMAT, id),
                 album =>
                 {
                     albumItems.Clear();
@@ -71,7 +71,7 @@ namespace WinterOlympics2014WP.Pages
                     currentIndex = 0;
                     UpdateCurrentIndex();
                     snow1.IsBusy = false;
-                }, true, Constants.ALBUM_MODULE, string.Format(Constants.ALBUM_FILE_NAME_FORMAT, id));
+                });
 
             return;
 

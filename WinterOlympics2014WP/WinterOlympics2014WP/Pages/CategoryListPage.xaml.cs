@@ -31,11 +31,11 @@ namespace WinterOlympics2014WP.Pages
                 return;
             }
 
-            loader.Load("getcate",
+            loader.Load("getcate", string.Empty, true, Constants.CATEGORY_MODULE, Constants.CATEGORY_LIST_FILE_NAME,
                 list =>
                 {
                     categories = list;
-                }, Constants.CATEGORY_MODULE, Constants.CATEGORY_LIST_FILE_NAME);
+                });
         }
 
         private void PopulateCategoryListBox()

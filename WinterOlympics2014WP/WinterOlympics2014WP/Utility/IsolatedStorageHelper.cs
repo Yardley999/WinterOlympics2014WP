@@ -58,7 +58,7 @@ namespace WinterOlympics2014WP.Utility
             }
         }
 
-        public static async Task<string> ReadFile(string folderName, string fileName, string content)
+        public static async Task<string> ReadFile(string folderName, string fileName)
         {
             // Get the local folder.
             StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
@@ -68,6 +68,10 @@ namespace WinterOlympics2014WP.Utility
                 // Get the DataFolder folder.
                 var dataFolder = await local.GetFolderAsync(folderName);
 
+                if (dataFolder==null)
+                {
+                    return null;
+                }
                 // Get the file.
                 var file = await dataFolder.OpenStreamForReadAsync(fileName);
 

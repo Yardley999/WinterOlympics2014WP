@@ -72,7 +72,7 @@ namespace WinterOlympics2014WP.Pages
 
             snow1.IsBusy = true;
 
-            scheduleloader.Load("getschedule", "&id=" + categoryID,
+            scheduleloader.Load("getschedule", "&id=" + categoryID,true, Constants.SCHEDULE_MODULE, string.Format(Constants.SCHEDULE_FILE_NAME_FORMAT, categoryID),
                 list =>
                 {
                     var subscriptionList = GetSubscriptionList();
@@ -88,7 +88,7 @@ namespace WinterOlympics2014WP.Pages
                     scheduleList = list;
                     this.scheduleListBox.ItemsSource = scheduleList;
                     snow1.IsBusy = false;
-                }, true, Constants.SCHEDULE_MODULE, string.Format(Constants.SCHEDULE_FILE_NAME_FORMAT, categoryID));
+                });
         }
 
         private List<GameSchedule> GetSubscriptionList()
@@ -113,12 +113,12 @@ namespace WinterOlympics2014WP.Pages
 
             snow1.IsBusy = true;
 
-            resultLoader.Load("getresult", "&id=" + schedule.ID,
+            resultLoader.Load("getresult", "&id=" + schedule.ID,true, Constants.SCHEDULE_MODULE, string.Format(Constants.RESULT_FILE_NAME_FORMAT, schedule.ID),
                 list =>
                 {
                     ShowResultPanel(schedule, list);
                     snow1.IsBusy = false;
-                }, true, Constants.SCHEDULE_MODULE, string.Format(Constants.RESULT_FILE_NAME_FORMAT, schedule.ID));
+                });
         }
 
         private void Schedule_Tap(object sender, GestureEventArgs e)
