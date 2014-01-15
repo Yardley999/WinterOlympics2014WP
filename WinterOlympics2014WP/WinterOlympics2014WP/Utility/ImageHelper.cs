@@ -10,11 +10,14 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Resources;
 using Windows.Storage;
+using Microsoft.Phone.Net.NetworkInformation;
 
 namespace WinterOlympics2014WP.Utility
 {
     public class ImageHelper
     {
+        App App { get { return App.Current as App; } }
+
         static string folderName = string.Empty;
         static string fileName = string.Empty;
         Action onDownloaded = null;
@@ -67,6 +70,11 @@ namespace WinterOlympics2014WP.Utility
 
         public void Download(string uri, string folder, string file, Action callback)
         {
+            if (!DeviceNetworkInformation.IsNetworkAvailable)
+            {
+                return;
+            }
+
             try
             {
                 folderName = folder;

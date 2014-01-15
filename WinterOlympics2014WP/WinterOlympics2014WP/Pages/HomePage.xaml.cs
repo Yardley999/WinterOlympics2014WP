@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Media.Imaging;
-using System.Collections.ObjectModel;
-using System.IO;
 using WinterOlympics2014WP.Models;
 using WinterOlympics2014WP.Utility;
-using Microsoft.Phone.Net.NetworkInformation;
-using System.Collections.Generic;
-using System.IO.IsolatedStorage;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -36,7 +30,7 @@ namespace WinterOlympics2014WP.Pages
         {
             base.OnNavigatedTo(e);
             LoadSplashImage();
-            PopulateToday();
+            LoadEpg();
             LoadNews();
         }
 
@@ -45,10 +39,12 @@ namespace WinterOlympics2014WP.Pages
         #region Splash
 
         DataLoader<Splash> splashLoader = new DataLoader<Splash>();
-        ImageHelper imageHelper = new ImageHelper();
+        ImageHelper imageHelperSplash = new ImageHelper();
 
         private void LoadSplashImage()
         {
+            DisplayLocalSplashImage();
+
             if (splashLoader.Loaded || splashLoader.Busy)
             {
                 return;
@@ -56,30 +52,29 @@ namespace WinterOlympics2014WP.Pages
 
             bigSnow.IsBusy = true;
 
-            splashLoader.Load("getsplash",
+            splashLoader.LoadWithoutCaching("getsplash",
                 splash =>
                 {
                     if (splash != null)
                     {
-                        //this.splashImage.Source = new BitmapImage(new Uri(splash.Image, UriKind.RelativeOrAbsolute));
-                        imageHelper.Download(splash.Image, Constants.SPLASH_MODULE, Constants.SPLASH_FILE_NAME, OpenIamgeSafely);
+                        imageHelperSplash.Download(splash.Image, Constants.SPLASH_MODULE, Constants.SPLASH_FILE_NAME, SplashDownLoadCallback);
                     }
                 });
         }
 
-        private void OpenIamgeSafely()
+        private void SplashDownLoadCallback()
         {
             Dispatcher.BeginInvoke(() =>
             {
-                OpenIamge();
+                DisplayLocalSplashImage();
+                bigSnow.IsBusy = false;
             });
         }
 
-        private async void OpenIamge()
+        private async void DisplayLocalSplashImage()
         {
-            BitmapImage source = await imageHelper.ReadImage(Constants.SPLASH_MODULE, Constants.SPLASH_FILE_NAME);
+            BitmapImage source = await imageHelperSplash.ReadImage(Constants.SPLASH_MODULE, Constants.SPLASH_FILE_NAME);
             this.splashImage.Source = source;
-            bigSnow.IsBusy = false;
         }
 
         private void splashImage_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -222,9 +217,11 @@ namespace WinterOlympics2014WP.Pages
             epgList.QuickSelector = this.quickSelector;
         }
 
-        private void PopulateToday()
+        private void LoadEpg()
         {
-            epgList.PopulateData(DateTime.Today);
+            //TO-DO : get today instead of test date
+            DateTime today = new DateTime(2014, 2, 8);
+            epgList.LoadEpg(today);
         }
 
         #endregion

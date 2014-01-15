@@ -135,6 +135,7 @@
     <Compile Include="Infrastructures\BindableBase.cs" />
     <Compile Include="Models\AlbumItem.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\EPG.cs" />
     <Compile Include="Models\GameResult.cs" />
     <Compile Include="Models\IEnumberable.cs" />
     <Compile Include="Models\Splash.cs" />

@@ -42,7 +42,9 @@
             <ItemsControl x:Name="itemsControl" IsHitTestVisible="False" VerticalAlignment="Center">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Opacity="{Binding Value, Converter={StaticResource QuickSelectorItemOpacityConverter}}" Text="{Binding Key}" Style="{StaticResource QuickSelector_Item_Text_Style}"
+                        <TextBlock Opacity="{Binding Value, Converter={StaticResource QuickSelectorItemOpacityConverter}}" 
+                                   Text="{Binding Key, Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='HH:mm'}" 
+                                   Style="{StaticResource QuickSelector_Item_Text_Style}"
                                Height="26"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

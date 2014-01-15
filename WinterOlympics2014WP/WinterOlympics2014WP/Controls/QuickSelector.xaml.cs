@@ -11,16 +11,17 @@ using System.Windows.Input;
 
 namespace WinterOlympics2014WP.Controls
 {
-    public delegate void SelectionChangedEventHandler(object sender, int selectedIndex);
+    public delegate void SelectionChangedEventHandler(object sender, DateTime datetime);
 
     public partial class QuickSelector : UserControl
     {
         #region Property
 
+        private const string ITEM_STRING_FORMAT = "HH:mm";
         private const double UNIT_HEIGHT = 26d;
         private double offset_y = 0d;
-        private List<string> _keys;
-        private Dictionary<string, bool> _items;
+        private List<DateTime> _keys;
+        private Dictionary<DateTime, bool> _items;
         private bool eventRaised = false;
 
         private int _selectedIndex = -1;
@@ -48,8 +49,9 @@ namespace WinterOlympics2014WP.Controls
             //VisualStateManager.GoToState(this, "SelectionPreviewHidden", false);
         }
 
-        public void SetItems(Dictionary<string, bool> items)
+        public void SetItems(Dictionary<DateTime, bool> items)
         {
+            this.itemsControl.ItemsSource = null;
             this.itemsControl.ItemsSource = _items = items;
             _keys = _items.Keys.ToList();
             offset_y = UNIT_HEIGHT * ((items.Count - 1) * 0.5d);
@@ -77,7 +79,7 @@ namespace WinterOlympics2014WP.Controls
             //selectionPreviewTransform.TranslateY = y;
             selectionPreviewTransform.TranslateY = p.Y - offset_y - UNIT_HEIGHT * 0.5d;
 
-            selectionPreviewText.Text = _keys[SelectedIndex];
+            selectionPreviewText.Text = _keys[SelectedIndex].ToString(ITEM_STRING_FORMAT);
         }
 
         private void RaiseSelectionChanged()
@@ -93,7 +95,7 @@ namespace WinterOlympics2014WP.Controls
             {
                 if (this.SelectionChanged != null)
                 {
-                    SelectionChanged(this, _selectedIndex);
+                    SelectionChanged(this, _keys[SelectedIndex]);
                 }
             }
         }

@@ -3,6 +3,8 @@ using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
+using WinterOlympics2014WP.Utility;
+using WinterOlympics2014WP.Models;
 
 namespace WinterOlympics2014WP.Controls
 {
@@ -36,34 +38,50 @@ namespace WinterOlympics2014WP.Controls
         public EPGList()
         {
             InitializeComponent();
+            epgListBox.ItemsSource = epgList;
         }
 
         #endregion
 
         #region EPG List
 
-        ObservableCollection<int> epgList = new ObservableCollection<int>();
+        ObservableCollection<EPG> epgList = new ObservableCollection<EPG>();
+        ListDataLoader<EPG> epgLoader = new ListDataLoader<EPG>();
 
-        public void PopulateData(DateTime date)
+        public void LoadEpg(DateTime date)
         {
-            epgList.Clear();
+            if (epgLoader.Loaded || epgLoader.Busy)
+            {
+                return;
+            }
 
-            epgList.Add(0);
-            epgList.Add(1);
-            epgList.Add(2);
-            epgList.Add(3);
-            epgList.Add(4);
-            epgList.Add(5);
-            epgList.Add(6);
-            epgList.Add(7);
-            epgList.Add(8);
-            epgList.Add(9);
-            epgListBox.ItemsSource = epgList;
+            //TO-DO : get today instead of test date
+            //TO-DO : set token and sign 
+            string today = date.ToString("yyyy-MM-dd");
+            string param = "&date=" + today + "&token=&sign=&t=";
+
+            epgLoader.Load("getepg", param, true, Constants.EPG_MODULE, string.Format(Constants.EPG_FILE_NAME_FORMTAT, today),
+                list =>
+                {
+                    if (list != null)
+                    {
+                        epgList.Clear();
+                        List<DateTime> validHours = new List<DateTime>();
+
+                        foreach (var item in list)
+                        {
+                            epgList.Add(item);
+                            validHours.Add(item.Start);
+                        }
+
+                        SetQuickSelectorValidItems(validHours);
+                    }
+                });
         }
 
         private void EpgItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            if (HostingPage!=null)
+            if (HostingPage != null)
             {
                 HostingPage.NavigationService.Navigate(new Uri("/Pages/LivePage.xaml", UriKind.Relative));
             }
@@ -73,45 +91,40 @@ namespace WinterOlympics2014WP.Controls
 
         #region QuickSelector
 
-        Dictionary<string, bool> hoursOfDay = new Dictionary<string, bool>();
-        List<string> hoursList = new List<string>();
+        Dictionary<DateTime, bool> hoursOfDay = new Dictionary<DateTime, bool>();
 
         private void InitQuickSelector()
         {
-            hoursOfDay.Add("00:00", true);
-            hoursOfDay.Add("01:00", false);
-            hoursOfDay.Add("02:00", true);
-            hoursOfDay.Add("03:00", true);
-            hoursOfDay.Add("04:00", false);
-            hoursOfDay.Add("05:00", false);
-            hoursOfDay.Add("06:00", false);
-            hoursOfDay.Add("07:00", false);
-            hoursOfDay.Add("08:00", false);
-            hoursOfDay.Add("09:00", false);
-            hoursOfDay.Add("10:00", false);
-            hoursOfDay.Add("11:00", false);
-            hoursOfDay.Add("12:00", false);
-            hoursOfDay.Add("13:00", false);
-            hoursOfDay.Add("14:00", false);
-            hoursOfDay.Add("15:00", false);
-            hoursOfDay.Add("16:00", false);
-            hoursOfDay.Add("17:00", false);
-            hoursOfDay.Add("18:00", false);
-            hoursOfDay.Add("19:00", true);
-            hoursOfDay.Add("20:00", true);
-            hoursOfDay.Add("21:00", true);
-            hoursOfDay.Add("22:00", true);
-            hoursOfDay.Add("23:00", true);
+            DateTime dt = DateTime.Today;
+            for (int i = 0; i < 24; i++)
+            {
+                hoursOfDay.Add(dt, false);
+                dt = dt.AddHours(1);
+            }
+
+            //initial values, all are invalid items
             quickSelector.SetItems(hoursOfDay);
-
-            hoursList = hoursOfDay.Keys.ToList();
-
             quickSelector.SelectionChanged += QuickSelector_SelectionChanged;
         }
 
-        private void QuickSelector_SelectionChanged(object sender, int selectedIndex)
+        private void SetQuickSelectorValidItems(IEnumerable<DateTime> validItems)
         {
-            epgListBox.ScrollIntoView(6);
+            var keyList = hoursOfDay.Keys.ToList();
+            foreach (var key in keyList)
+            {
+                if (validItems.Any(x=>x.Hour == key.Hour))
+                {
+                    hoursOfDay[key] = true;
+                }
+            }
+
+            //update again
+            quickSelector.SetItems(hoursOfDay);
+        }
+
+        private void QuickSelector_SelectionChanged(object sender, DateTime selectedDateTime)
+        {
+            epgListBox.ScrollIntoView(epgList.FirstOrDefault(x=>x.Start.Hour == selectedDateTime.Hour));
         }
 
         #endregion

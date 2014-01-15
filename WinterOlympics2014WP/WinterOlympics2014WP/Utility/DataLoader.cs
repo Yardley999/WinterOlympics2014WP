@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace WinterOlympics2014WP.Utility
@@ -18,11 +19,15 @@ namespace WinterOlympics2014WP.Utility
         string fileName = string.Empty;
         private bool toCacheData = false;
 
-        public void Load(string cmd, Action<T> callback)
+        public void LoadWithoutCaching(string cmd, Action<T> callback)
         {
             this.Load(cmd, string.Empty, false, string.Empty, string.Empty, callback);
         }
 
+        /* don't even try to convert this method into an awaitable method, as the callback should be called twice: 
+         * first when local cache is loaded,  second when the new data is downloaded. Async-callback approach in better solution
+         * than awaitable method for such use case.
+        */
         public async void Load(string cmd, string param, bool cacheData, string module, string file, Action<T> callback)
         {
             if (cacheData && (string.IsNullOrEmpty(module) || string.IsNullOrEmpty(file)))
@@ -114,6 +119,7 @@ namespace WinterOlympics2014WP.Utility
                 Busy = false;
             }
         }
+
     }
 
     [DataContract]

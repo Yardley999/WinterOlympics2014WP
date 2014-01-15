@@ -60,10 +60,10 @@ namespace WinterOlympics2014WP
             }
         }
 
-        public async Task<BitmapImage> GetImage(string url, bool downLoadIfNoCacheFound)
+        public async Task<BitmapImage> GetImage(string url, bool cache)
         {
             BitmapImage bi = null;
-            bool toDownload = false;
+            bool noCacheFound = false;
             if (ImageCache.ContainsKey(url))
             {
                 string file = ImageCache[url];
@@ -71,15 +71,15 @@ namespace WinterOlympics2014WP
                 if (bi == null)
                 {
                     //something is wrong, maybe the file is missing due to force deleting via external tool
-                    toDownload = true;
+                    noCacheFound = true;
                 }
             }
             else
             {
-                toDownload = true;
+                noCacheFound = true;
             }
 
-            if (toDownload)
+            if (noCacheFound && cache)
             {
                 string file = ComposeFileNameFromURL(url);
                 bi = await imageHelper.Download(url, Constants.KEY_IMAGE_CACHE, file);

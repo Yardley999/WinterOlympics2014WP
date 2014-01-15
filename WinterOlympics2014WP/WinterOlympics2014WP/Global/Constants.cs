@@ -16,6 +16,10 @@ namespace WinterOlympics2014WP
         public const string SPLASH_MODULE = "splash";
         public const string SPLASH_FILE_NAME = "splash.jpg";
 
+        //epg
+        public const string EPG_MODULE = "epg";
+        public const string EPG_FILE_NAME_FORMTAT = "epg_{0}.txt";
+
         //news 
         public const string NEWS_MODULE = "news";
         public const string NEWS_FILE_NAME = "news.txt";

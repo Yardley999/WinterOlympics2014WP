@@ -40,7 +40,8 @@ namespace WinterOlympics2014WP.Pages
 
         private void PopulateEPGList()
         {
-            epgList.PopulateData(DateTime.Today);
+            //TO-DO : pass param to specify date
+            epgList.LoadEpg(DateTime.Today);
         }
 
         private void EpgItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)
