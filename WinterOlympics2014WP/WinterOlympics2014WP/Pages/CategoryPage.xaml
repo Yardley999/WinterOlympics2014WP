@@ -23,7 +23,7 @@
         <controls:TopBar x:Name="topBar"/>
 
         <!--content-->
-        <Grid x:Name="ContentPanel" Grid.Row="1">
+        <Grid x:Name="contentPanel" Grid.Row="1">
             <phone:Pivot>
                 <phone:Pivot.HeaderTemplate>
                     <DataTemplate>

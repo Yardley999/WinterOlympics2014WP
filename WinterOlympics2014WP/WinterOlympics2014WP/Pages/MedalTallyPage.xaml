@@ -28,9 +28,10 @@
             <Image Source="/Assets/Images/TopBarIcon.png" Stretch="None" Margin="24,12,0,12" HorizontalAlignment="Left"/>
         </Grid>
 
+        <Image Grid.RowSpan="2" Source="/Assets/Images/MedalTallyPageBackground.jpg" Stretch="UniformToFill"/>
+
         <!--content-->
-        <Grid x:Name="ContentPanel" Grid.Row="1">
-            <Image Source="/Assets/Images/MedalTallyPageBackground.jpg" Stretch="UniformToFill"/>
+        <Grid x:Name="contentPanel" Grid.Row="1">
             <Border BorderBrush="{StaticResource MedalTallyPage_Chrome_Color}" BorderThickness="1,0,1,0" Background="White"
                     Margin="12,100,12,0">
                 <Grid>

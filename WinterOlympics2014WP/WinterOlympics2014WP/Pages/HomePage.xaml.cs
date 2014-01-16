@@ -7,6 +7,7 @@ using Microsoft.Phone.Shell;
 using System.Windows.Media.Imaging;
 using WinterOlympics2014WP.Models;
 using WinterOlympics2014WP.Utility;
+using WinterOlympics2014WP.Animations;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -29,9 +30,12 @@ namespace WinterOlympics2014WP.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
             LoadSplashImage();
             LoadEpg();
             LoadNews();
+
+            fadeAnimation.InstanceFade(this.contentPanel, 0d, 1d, Constants.NAVIGATION_DURATION, null);
         }
 
         #endregion
@@ -258,27 +262,42 @@ namespace WinterOlympics2014WP.Pages
 
         private void medalTallyButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/MedalTallyPage.xaml", UriKind.Relative));
+            Navigate("/Pages/MedalTallyPage.xaml");
         }
 
         private void calendarButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/CalendarPage.xaml", UriKind.Relative));
+            Navigate("/Pages/CalendarPage.xaml");
         }
 
         private void categoryButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/CategoryListPage.xaml", UriKind.Relative));
+            Navigate("/Pages/CategoryListPage.xaml");
         }
 
         private void stadiumButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/StadiumListPage.xaml", UriKind.Relative));
+            Navigate("/Pages/StadiumListPage.xaml");
         }
 
         private void subscribeButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/MySubscriptionPage.xaml", UriKind.Relative));
+            Navigate("/Pages/MySubscriptionPage.xaml");
+        }
+
+        #endregion
+
+        #region Page Navigation Transition
+
+        FadeAnimation fadeAnimation = new FadeAnimation();
+
+        private void Navigate(string uriString)
+        {
+            fadeAnimation.InstanceFade(this.contentPanel, 1d, 0d, Constants.NAVIGATION_DURATION, 
+                fe =>
+                {
+                    NavigationService.Navigate(new Uri(uriString, UriKind.Relative));
+                });
         }
 
         #endregion

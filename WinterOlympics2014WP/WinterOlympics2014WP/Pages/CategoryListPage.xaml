@@ -23,7 +23,7 @@
         </Grid>
 
         <!--content-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" HorizontalAlignment="Center">
+        <Grid x:Name="contentPanel" Grid.Row="1" HorizontalAlignment="Center">
             <ScrollViewer>
                 <Grid>
                     <Grid.ColumnDefinitions>

@@ -54,7 +54,7 @@ namespace WinterOlympics2014WP.Animations
             _Storyboard.Children.Add(_Animation);
         }
 
-        public static void Fade(FrameworkElement element, double from, double to, TimeSpan duration, Action<FrameworkElement> completed)
+        public static FadeAnimation Fade(FrameworkElement element, double from, double to, TimeSpan duration, Action<FrameworkElement> completed)
         {
             FadeAnimation animation = null;
             if (AnimationPool.Count == 0)
@@ -66,7 +66,13 @@ namespace WinterOlympics2014WP.Animations
                 animation = AnimationPool.Pop();
             }
 
-            animation.Animate(element, from, to, duration, completed);
+            animation.InstanceFade(element, from, to, duration, completed);
+            return animation;
+        }
+
+        public void InstanceFade(FrameworkElement element, double from, double to, TimeSpan duration, Action<FrameworkElement> completed)
+        {
+            this.Animate(element, from, to, duration, completed);
         }
 
         private void Animate(FrameworkElement element, double from, double to, TimeSpan duration, Action<FrameworkElement> completed)

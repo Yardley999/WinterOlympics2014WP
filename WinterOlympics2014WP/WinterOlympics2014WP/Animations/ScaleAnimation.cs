@@ -78,6 +78,19 @@ namespace WinterOlympics2014WP.Animations
             _Storyboard.Children.Add(_Animation_Y);
         }
 
+        public static void SetScale(FrameworkElement cell, double x, double y)
+        {
+            CompositeTransform transform = cell.RenderTransform as CompositeTransform;
+            if (transform == null)
+            {
+                cell.RenderTransform = transform = new CompositeTransform();
+                cell.RenderTransformOrigin = new Point(0.5d, 0.5d);
+            }
+
+            cell.RenderTransform.SetValue(CompositeTransform.ScaleXProperty, x);
+            cell.RenderTransform.SetValue(CompositeTransform.ScaleYProperty, y);
+        }
+
         public static ScaleAnimation ScaleFromTo(FrameworkElement cell,
                 double from_x, double from_y,
                 double to_x, double to_y,
@@ -118,8 +131,15 @@ namespace WinterOlympics2014WP.Animations
                 double to_x, double to_y,
                 TimeSpan duration, Action<FrameworkElement> completed)
         {
-            cell.RenderTransform.SetValue(CompositeTransform.ScaleXProperty, from_x);
-            cell.RenderTransform.SetValue(CompositeTransform.ScaleYProperty, from_y);
+            //CompositeTransform transform = cell.RenderTransform as CompositeTransform;
+            //if (transform == null)
+            //{
+            //    cell.RenderTransform = transform = new CompositeTransform();
+            //    cell.RenderTransformOrigin = new Point(0.5d, 0.5d);
+            //}
+            //cell.RenderTransform.SetValue(CompositeTransform.ScaleXProperty, from_x);
+            //cell.RenderTransform.SetValue(CompositeTransform.ScaleYProperty, from_y);
+            SetScale(cell, from_x, from_y);
             this.InstanceScaleTo(cell, to_x, to_y, duration, completed);
         }
 
@@ -163,12 +183,14 @@ namespace WinterOlympics2014WP.Animations
 
         private void _Storyboard_Completed(object sender, object e)
         {
-            this.AnimationTarget.RenderTransform.SetValue(CompositeTransform.ScaleXProperty, TargetX);
-            this.AnimationTarget.RenderTransform.SetValue(CompositeTransform.ScaleYProperty, TargetY);
+            //this.AnimationTarget.RenderTransform.SetValue(CompositeTransform.ScaleXProperty, TargetX);
+            //this.AnimationTarget.RenderTransform.SetValue(CompositeTransform.ScaleYProperty, TargetY);
+            SetScale(this.AnimationTarget, TargetX, TargetY);
 
             if (AnimationCompleted != null)
             {
                 AnimationCompleted(AnimationTarget);
+                AnimationCompleted = null;
             }
 
             AnimationPool.Push(this);

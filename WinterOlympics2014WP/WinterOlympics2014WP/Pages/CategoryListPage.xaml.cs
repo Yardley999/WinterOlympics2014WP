@@ -9,15 +9,29 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using WinterOlympics2014WP.Models;
 using WinterOlympics2014WP.Utility;
+using WinterOlympics2014WP.Animations;
 
 namespace WinterOlympics2014WP.Pages
 {
     public partial class CategoryListPage : PhoneApplicationPage
     {
+        #region Lifecycle
+
         public CategoryListPage()
         {
             InitializeComponent();
         }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+            if (e.Uri.OriginalString != "app://external/")
+            {
+                HidePage();
+            }
+        }
+
+        #endregion
 
         #region Category List
 
@@ -35,12 +49,33 @@ namespace WinterOlympics2014WP.Pages
                 list =>
                 {
                     categories = list;
+                    ShowPage();
                 });
         }
 
         private void PopulateCategoryListBox()
         {
 
+        }
+
+        #endregion
+
+        #region Page Navigation Transition
+
+        FadeAnimation fadeAnimation = new FadeAnimation();
+        MoveAnimation moveAnimation = new MoveAnimation();
+
+        private void ShowPage()
+        {
+            contentPanel.UpdateLayout();
+            moveAnimation.InstanceMoveFromTo(this.contentPanel, 0, 90, 0, 0, Constants.NAVIGATION_DURATION, null);
+            fadeAnimation.InstanceFade(this.contentPanel, 0d, 1d, Constants.NAVIGATION_DURATION, null);
+        }
+
+        private void HidePage()
+        {
+            moveAnimation.InstanceMoveFromTo(this.contentPanel, 0, 0, 0, 90, Constants.NAVIGATION_DURATION, null);
+            fadeAnimation.InstanceFade(this.contentPanel, 1d, 0d, Constants.NAVIGATION_DURATION, null);
         }
 
         #endregion

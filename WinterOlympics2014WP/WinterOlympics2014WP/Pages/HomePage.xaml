@@ -45,7 +45,7 @@
         </Grid>
 
         <!--content panel-->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" x:Name="contentPanel">
             <phone:Panorama x:Name="panorama" Foreground="#ff000000" Margin="0,0,0,0" SelectionChanged="Panorama_SelectionChanged">
                 <phone:Panorama.Title>
                     <Grid Height="0"/>

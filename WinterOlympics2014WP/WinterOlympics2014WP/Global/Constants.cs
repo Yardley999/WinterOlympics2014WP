@@ -46,6 +46,9 @@ namespace WinterOlympics2014WP
 
         //image helper
         public const string KEY_IMAGE_CACHE = "image_cache";
+
+        //animation duration
+        public static TimeSpan NAVIGATION_DURATION = TimeSpan.FromMilliseconds(200);
     }
 
     public class NaviParam

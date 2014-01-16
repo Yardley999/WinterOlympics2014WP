@@ -197,9 +197,6 @@ namespace WinterOlympics2014WP.Utility
                 Loaded = false;
                 Busy = true;
             }
-            catch (WebException e)
-            {
-            }
             catch (Exception e)
             {
             }

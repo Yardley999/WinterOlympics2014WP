@@ -23,7 +23,7 @@
         </Grid>
 
         <!--content-->
-        <Grid x:Name="ContentPanel" Grid.Row="1">
+        <Grid x:Name="contentPanel" Grid.Row="1">
             <ScrollViewer>
                 <ItemsControl x:Name="stadiumListBox">
                     <ItemsControl.ItemsPanel>

@@ -7,6 +7,7 @@ using WinterOlympics2014WP.Models;
 using Microsoft.Phone.Shell;
 using System.Windows;
 using System;
+using WinterOlympics2014WP.Animations;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -26,6 +27,15 @@ namespace WinterOlympics2014WP.Pages
         {
             base.OnNavigatedTo(e);
             LoadScheduleList();
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+            if (e.Uri.OriginalString != "app://external/")
+            {
+                HidePage();
+            }
         }
 
         #endregion
@@ -50,6 +60,8 @@ namespace WinterOlympics2014WP.Pages
                     scheduleList.Add(item);
                 }
             }
+
+            ShowPage();
         }
 
         private void CheckNoData()
@@ -99,6 +111,26 @@ namespace WinterOlympics2014WP.Pages
             scheduleList.Clear();
             toast.ShowMessage("成功取消全部预约。");
             CheckNoData();
+        }
+
+        #endregion
+
+        #region Page Navigation Transition
+
+        FadeAnimation fadeAnimation = new FadeAnimation();
+        MoveAnimation moveAnimation = new MoveAnimation();
+
+        private void ShowPage()
+        {
+            this.contentPanel.UpdateLayout();
+            moveAnimation.InstanceMoveFromTo(this.contentPanel, 0, 90, 0, 0, Constants.NAVIGATION_DURATION, null);
+            fadeAnimation.InstanceFade(this.contentPanel, 0d, 1d, Constants.NAVIGATION_DURATION, null);
+        }
+
+        private void HidePage()
+        {
+            moveAnimation.InstanceMoveFromTo(this.contentPanel, 0, 0, 0, 90, Constants.NAVIGATION_DURATION, null);
+            fadeAnimation.InstanceFade(this.contentPanel, 1d, 0d, Constants.NAVIGATION_DURATION, null);
         }
 
         #endregion
