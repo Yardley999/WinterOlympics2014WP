@@ -13,6 +13,12 @@ namespace WinterOlympics2014WP.Pages
 {
     public partial class LivePage : PhoneApplicationPage
     {
+        #region Property
+
+        private string epgID = string.Empty;
+
+        #endregion
+
         #region Lifecycle
 
         public LivePage()
@@ -24,6 +30,7 @@ namespace WinterOlympics2014WP.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            epgID = NavigationContext.QueryString[NaviParam.EPG_ID];
             UpdateDescriptionList();
         }
 

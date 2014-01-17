@@ -11,6 +11,7 @@ using System.Windows.Input;
 using WinterOlympics2014WP.DataContext;
 using System.Linq;
 using WinterOlympics2014WP.Animations;
+using Microsoft.Phone.Net.NetworkInformation;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -38,14 +39,14 @@ namespace WinterOlympics2014WP.Pages
             LoadSchedules();
         }
 
-        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
-        {
-            base.OnNavigatingFrom(e);
-            if (e.Uri.OriginalString != "app://external/")
-            {
-                HidePage();
-            }
-        }
+        //protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        //{
+        //    base.OnNavigatingFrom(e);
+        //    if (e.Uri.OriginalString != "app://external/")
+        //    {
+        //        HidePage();
+        //    }
+        //}
 
         #endregion
 
@@ -70,19 +71,24 @@ namespace WinterOlympics2014WP.Pages
 
         #region Schedule List
 
-        ListDataLoader<GameSchedule> scheduleloader = new ListDataLoader<GameSchedule>();
+        ListDataLoader<GameSchedule> scheduleLoader = new ListDataLoader<GameSchedule>();
         List<GameSchedule> scheduleList = new List<GameSchedule>();
 
         private void LoadSchedules()
         {
-            if (scheduleloader.Loaded || scheduleloader.Busy)
+            if (scheduleLoader.Loaded || scheduleLoader.Busy)
+            {
+                return;
+            }
+
+            if (!DeviceNetworkInformation.IsNetworkAvailable)
             {
                 return;
             }
 
             snow1.IsBusy = true;
 
-            scheduleloader.Load("getschedule", "&id=" + categoryID,true, Constants.SCHEDULE_MODULE, string.Format(Constants.SCHEDULE_FILE_NAME_FORMAT, categoryID),
+            scheduleLoader.Load("getschedule", "&id=" + categoryID,true, Constants.SCHEDULE_MODULE, string.Format(Constants.SCHEDULE_FILE_NAME_FORMAT, categoryID),
                 list =>
                 {
                     var subscriptionList = GetSubscriptionList();
@@ -98,7 +104,7 @@ namespace WinterOlympics2014WP.Pages
                     scheduleList = list;
                     this.scheduleListBox.ItemsSource = scheduleList;
                     snow1.IsBusy = false;
-                    ShowPage();
+                    //ShowPage();
                 });
         }
 
@@ -212,24 +218,24 @@ namespace WinterOlympics2014WP.Pages
 
         #endregion
 
-        #region Page Navigation Transition
+        //#region Page Navigation Transition
 
-        FadeAnimation fadeAnimation = new FadeAnimation();
-        MoveAnimation moveAnimation = new MoveAnimation();
+        //FadeAnimation fadeAnimation = new FadeAnimation();
+        //MoveAnimation moveAnimation = new MoveAnimation();
 
-        private void ShowPage()
-        {
-            contentPanel.UpdateLayout();
-            moveAnimation.InstanceMoveFromTo(this.contentPanel, 0, 90, 0, 0, Constants.NAVIGATION_DURATION, null);
-            fadeAnimation.InstanceFade(this.contentPanel, 0d, 1d, Constants.NAVIGATION_DURATION, null);
-        }
+        //private void ShowPage()
+        //{
+        //    contentPanel.UpdateLayout();
+        //    moveAnimation.InstanceMoveFromTo(this.contentPanel, 0, 90, 0, 0, Constants.NAVIGATION_DURATION, null);
+        //    fadeAnimation.InstanceFade(this.contentPanel, 0d, 1d, Constants.NAVIGATION_DURATION, null);
+        //}
 
-        private void HidePage()
-        {
-            moveAnimation.InstanceMoveFromTo(this.contentPanel, 0, 0, 0, 90, Constants.NAVIGATION_DURATION, null);
-            fadeAnimation.InstanceFade(this.contentPanel, 1d, 0d, Constants.NAVIGATION_DURATION, null);
-        }
+        //private void HidePage()
+        //{
+        //    moveAnimation.InstanceMoveFromTo(this.contentPanel, 0, 0, 0, 90, Constants.NAVIGATION_DURATION, null);
+        //    fadeAnimation.InstanceFade(this.contentPanel, 1d, 0d, Constants.NAVIGATION_DURATION, null);
+        //}
 
-        #endregion
+        //#endregion
     }
 }

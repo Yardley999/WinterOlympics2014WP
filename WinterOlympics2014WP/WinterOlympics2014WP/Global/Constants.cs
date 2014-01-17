@@ -56,6 +56,6 @@ namespace WinterOlympics2014WP
         public const string CATEGORY_ID = "category_id";
         public const string SCHEDULE_ID = "schedule_id";
         public const string ALBUM_ID = "album_id";
-
+        public const string EPG_ID = "epg_id";
     }
 }

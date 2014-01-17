@@ -229,7 +229,7 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
-    <Style x:Key="Timeline_Tag_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+    <Style x:Key="EPG_Tag_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
         <Setter Property="FontSize" Value="22"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Foreground" Value="#ffffffff"/>
@@ -237,16 +237,22 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
-    <Style x:Key="Timeline_GameName_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+    <Style x:Key="EPG_GameName_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
         <Setter Property="FontSize" Value="30"/>
         <Setter Property="Foreground" Value="#ffffffff"/>
         <Setter Property="Margin" Value="0,0,0,0"/>
     </Style>
 
-    <Style x:Key="Timeline_GameSubName_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+    <Style x:Key="EPG_GameSubName_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="Foreground" Value="#ffffffff"/>
         <Setter Property="Margin" Value="0,0,0,0"/>
+    </Style>
+
+    <Style x:Key="EPG_SeePoint_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="#FF61E8E2"/>
+        <Setter Property="Margin" Value="0,24,0,0"/>
     </Style>
 
     <!--more page-->

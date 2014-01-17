@@ -29,8 +29,8 @@
                         </Grid.RowDefinitions>
                         <Ellipse Width="12" Height="12" Fill="#ff4d4d4d" VerticalAlignment="Top" Margin="0,10,0,0"/>
                         <Grid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
-                            <Image Source="/Assets/Images/TimelineTag.png" Stretch="None"/>
-                            <TextBlock Text="{Binding Start, Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='HH:mm'}" Style="{StaticResource Timeline_Tag_Text_Style}"/>
+                            <Image Source="/Assets/Images/EPGTag.png" Stretch="None"/>
+                            <TextBlock Text="{Binding Start, Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='HH:mm'}" Style="{StaticResource EPG_Tag_Text_Style}"/>
                         </Grid>
                         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Background="#00000000" 
                                                     HorizontalAlignment="Left" Margin="100,0,0,0" >
@@ -51,8 +51,15 @@
                                 <Grid>
                                     <Image Source="{Binding Image}" Stretch="UniformToFill" Margin="-13,-5"/>
                                     <StackPanel VerticalAlignment="Center" Margin="24,0,0,0">
-                                        <TextBlock Text="{Binding Category}" Style="{StaticResource Timeline_GameName_Text_Style}"/>
-                                        <TextBlock Text="{Binding Match}" Style="{StaticResource Timeline_GameSubName_Text_Style}"/>
+                                        <Grid>
+                                            <TextBlock Text="{Binding Category}" Style="{StaticResource EPG_GameName_Text_Style}" Foreground="#ff000000" Margin="1,1,0,0"/>
+                                            <TextBlock Text="{Binding Category}" Style="{StaticResource EPG_GameName_Text_Style}"/>
+                                        </Grid>
+                                        <Grid>
+                                            <TextBlock Text="{Binding Match}" Style="{StaticResource EPG_GameSubName_Text_Style}" Foreground="#ff000000" Margin="1,1,0,0"/>
+                                            <TextBlock Text="{Binding Match}" Style="{StaticResource EPG_GameSubName_Text_Style}"/>
+                                        </Grid>
+                                        <TextBlock Text="{Binding SeePoint}" Style="{StaticResource EPG_SeePoint_Text_Style}"/>
                                     </StackPanel>
                                 </Grid>
                             </controls:ContentButton>

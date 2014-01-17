@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
+using WinterOlympics2014WP.Models;
+using WinterOlympics2014WP.Utility;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -24,8 +20,6 @@ namespace WinterOlympics2014WP.Pages
         {
             base.OnNavigatedTo(e);
             PopulateEPGList();
-
-            bool xx = App.Current.Host.Content.ScaleFactor == 100;
         }
 
         #endregion
@@ -42,11 +36,6 @@ namespace WinterOlympics2014WP.Pages
         {
             //TO-DO : pass param to specify date
             epgList.LoadEpg(DateTime.Today);
-        }
-
-        private void EpgItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Pages/LivePage.xaml", UriKind.Relative));
         }
 
         #endregion

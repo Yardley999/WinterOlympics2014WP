@@ -15,8 +15,6 @@ namespace WinterOlympics2014WP.Pages
     {
         #region Property
 
-        private bool busy = false;
-
         #endregion
 
         #region Lifecycle
@@ -33,30 +31,25 @@ namespace WinterOlympics2014WP.Pages
             LoadMedalTally();
         }
 
-        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
-        {
-            base.OnNavigatingFrom(e);
-            if (e.Uri.OriginalString != "app://external/")
-            {
-                HidePage();
-            }
-        }
+        //protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        //{
+        //    base.OnNavigatingFrom(e);
+        //    if (e.Uri.OriginalString != "app://external/")
+        //    {
+        //        HidePage();
+        //    }
+        //}
 
         #endregion
 
         #region Medal Tally
 
-        bool MedalScoreLoaded = false;
         ObservableCollection<MedalScore> medalScoreList = new ObservableCollection<MedalScore>();
+        ListDataLoader<MedalScore> medalsLoader = new ListDataLoader<MedalScore>();
 
         private void LoadMedalTally()
         {
-            if (busy)
-            {
-                return;
-            }
-
-            if (MedalScoreLoaded)
+            if (medalsLoader.Loaded || medalsLoader.Busy)
             {
                 return;
             }
@@ -66,76 +59,40 @@ namespace WinterOlympics2014WP.Pages
                 return;
             }
 
-            try
-            {
-                String url = Constants.DOMAIN + "/api/server?cmd=getmedals";
-                HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
-                request.Method = "GET";
-                request.BeginGetResponse(GetMedalScoreList_Callback, request);
-                busy = true;
-            }
-            catch (WebException e)
-            {
-            }
-            catch (Exception e)
-            {
-            }
-        }
+            snow1.IsBusy = true;
 
-        private async void GetMedalScoreList_Callback(IAsyncResult result)
-        {
-            try
-            {
-                HttpWebRequest request = (HttpWebRequest)result.AsyncState;
-                WebResponse response = request.EndGetResponse(result);
-
-                using (Stream stream = response.GetResponseStream())
-                using (StreamReader reader = new StreamReader(stream))
+            medalsLoader.Load("getmedals", string.Empty, true, Constants.MEDAL_TALLY_MODULE, Constants.MEDAL_TALLY_FILE_NAME,
+                list =>
                 {
-                    string json = reader.ReadToEnd();
-                    var list = JsonSerializer.Deserialize<MedalScoreList>(json);
-                    Dispatcher.BeginInvoke(() =>
+                    medalScoreList.Clear();
+                    foreach (var item in list)
                     {
-                        for (int i = 0; i < list.data.Length; i++)
-                        {
-                            medalScoreList.Add(list.data[i]);
-                        }
-                    });
-
-                    await IsolatedStorageHelper.WriteToFile(Constants.MEDAL_TALLY_MODULE, Constants.MEDAL_TALLY_FILE_NAME, json);
-                }
-                MedalScoreLoaded = true;
-            }
-            catch (Exception)
-            {
-            }
-            finally
-            {
-                busy = false;
-                ShowPage();
-            }
+                        medalScoreList.Add(item);
+                    }
+                    snow1.IsBusy = false;
+                });
         }
 
         #endregion
 
-        #region Page Navigation Transition
+        //#region Page Navigation Transition
 
-        FadeAnimation fadeAnimation = new FadeAnimation();
-        MoveAnimation moveAnimation = new MoveAnimation();
+        //FadeAnimation fadeAnimation = new FadeAnimation();
+        //MoveAnimation moveAnimation = new MoveAnimation();
 
-        private void ShowPage()
-        {
-            this.contentPanel.UpdateLayout();
-            moveAnimation.InstanceMoveFromTo(this.contentPanel, 0, 90, 0, 0, Constants.NAVIGATION_DURATION, null);
-            fadeAnimation.InstanceFade(this.contentPanel, 0d, 1d, Constants.NAVIGATION_DURATION, null);
-        }
+        //private void ShowPage()
+        //{
+        //    this.contentPanel.UpdateLayout();
+        //    moveAnimation.InstanceMoveFromTo(this.contentPanel, 0, 90, 0, 0, Constants.NAVIGATION_DURATION, null);
+        //    fadeAnimation.InstanceFade(this.contentPanel, 0d, 1d, Constants.NAVIGATION_DURATION, null);
+        //}
 
-        private void HidePage()
-        {
-            moveAnimation.InstanceMoveFromTo(this.contentPanel, 0, 0, 0, 90, Constants.NAVIGATION_DURATION, null);
-            fadeAnimation.InstanceFade(this.contentPanel, 1d, 0d, Constants.NAVIGATION_DURATION, null);
-        }
+        //private void HidePage()
+        //{
+        //    moveAnimation.InstanceMoveFromTo(this.contentPanel, 0, 0, 0, 90, Constants.NAVIGATION_DURATION, null);
+        //    fadeAnimation.InstanceFade(this.contentPanel, 1d, 0d, Constants.NAVIGATION_DURATION, null);
+        //}
 
-        #endregion
+        //#endregion
     }
 }

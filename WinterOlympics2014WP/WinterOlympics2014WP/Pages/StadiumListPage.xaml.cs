@@ -27,14 +27,14 @@ namespace WinterOlympics2014WP.Pages
             LoadStadiums();
         }
 
-        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
-        {
-            base.OnNavigatingFrom(e);
-            if (e.Uri.OriginalString != "app://external/")
-            {
-                HidePage();
-            }
-        }
+        //protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        //{
+        //    base.OnNavigatingFrom(e);
+        //    if (e.Uri.OriginalString != "app://external/")
+        //    {
+        //        HidePage();
+        //    }
+        //}
 
         #endregion
 
@@ -58,7 +58,7 @@ namespace WinterOlympics2014WP.Pages
             stadiumList.Add(9);
 
             stadiumListBox.ItemsSource = stadiumList;
-            ShowPage();
+            //ShowPage();
         }
 
         #endregion
@@ -68,24 +68,24 @@ namespace WinterOlympics2014WP.Pages
             NavigationService.Navigate(new Uri("/Pages/StadiumDetailPage.xaml", UriKind.Relative));
         }
 
-        #region Page Navigation Transition
+        //#region Page Navigation Transition
 
-        FadeAnimation fadeAnimation = new FadeAnimation();
-        MoveAnimation moveAnimation = new MoveAnimation();
+        //FadeAnimation fadeAnimation = new FadeAnimation();
+        //MoveAnimation moveAnimation = new MoveAnimation();
 
-        private void ShowPage()
-        {
-            contentPanel.UpdateLayout();
-            moveAnimation.InstanceMoveFromTo(this.contentPanel, 0, 90, 0, 0, Constants.NAVIGATION_DURATION, null);
-            fadeAnimation.InstanceFade(this.contentPanel, 0d, 1d, Constants.NAVIGATION_DURATION, null);
-        }
+        //private void ShowPage()
+        //{
+        //    contentPanel.UpdateLayout();
+        //    moveAnimation.InstanceMoveFromTo(this.contentPanel, 0, 90, 0, 0, Constants.NAVIGATION_DURATION, null);
+        //    fadeAnimation.InstanceFade(this.contentPanel, 0d, 1d, Constants.NAVIGATION_DURATION, null);
+        //}
 
-        private void HidePage()
-        {
-            moveAnimation.InstanceMoveFromTo(this.contentPanel, 0, 0, 0, 90, Constants.NAVIGATION_DURATION, null);
-            fadeAnimation.InstanceFade(this.contentPanel, 1d, 0d, Constants.NAVIGATION_DURATION, null);
-        }
+        //private void HidePage()
+        //{
+        //    moveAnimation.InstanceMoveFromTo(this.contentPanel, 0, 0, 0, 90, Constants.NAVIGATION_DURATION, null);
+        //    fadeAnimation.InstanceFade(this.contentPanel, 1d, 0d, Constants.NAVIGATION_DURATION, null);
+        //}
 
-        #endregion
+        //#endregion
     }
 }

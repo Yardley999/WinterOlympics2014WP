@@ -35,7 +35,7 @@ namespace WinterOlympics2014WP.Pages
             LoadEpg();
             LoadNews();
 
-            fadeAnimation.InstanceFade(this.contentPanel, 0d, 1d, Constants.NAVIGATION_DURATION, null);
+            //fadeAnimation.InstanceFade(this.contentPanel, 0d, 1d, Constants.NAVIGATION_DURATION, null);
         }
 
         #endregion
@@ -47,7 +47,7 @@ namespace WinterOlympics2014WP.Pages
 
         private void LoadSplashImage()
         {
-            DisplayLocalSplashImage();
+            //DisplayLocalSplashImage();
 
             if (splashLoader.Loaded || splashLoader.Busy)
             {
@@ -56,35 +56,41 @@ namespace WinterOlympics2014WP.Pages
 
             bigSnow.IsBusy = true;
 
-            splashLoader.LoadWithoutCaching("getsplash",
+            splashLoader.Load("getsplash", string.Empty, true, Constants.SPLASH_MODULE, Constants.SPLASH_FILE_NAME,
                 splash =>
                 {
-                    if (splash != null)
-                    {
-                        imageHelperSplash.Download(splash.Image, Constants.SPLASH_MODULE, Constants.SPLASH_FILE_NAME, SplashDownLoadCallback);
-                    }
+                    this.splashImage.Source = new BitmapImage(new Uri(splash.Image, UriKind.RelativeOrAbsolute));
                 });
+
+            //splashLoader.LoadWithoutCaching("getsplash",
+            //    splash =>
+            //    {
+            //        if (splash != null)
+            //        {
+            //            imageHelperSplash.Download(splash.Image, Constants.SPLASH_MODULE, Constants.SPLASH_FILE_NAME, SplashDownLoadCallback);
+            //        }
+            //    });
+            
         }
 
-        private void SplashDownLoadCallback()
-        {
-            Dispatcher.BeginInvoke(() =>
-            {
-                DisplayLocalSplashImage();
-                bigSnow.IsBusy = false;
-            });
-        }
+        //private void SplashDownLoadCallback()
+        //{
+        //    Dispatcher.BeginInvoke(() =>
+        //    {
+        //        DisplayLocalSplashImage();
+        //        bigSnow.IsBusy = false;
+        //    });
+        //}
 
-        private async void DisplayLocalSplashImage()
-        {
-            BitmapImage source = await imageHelperSplash.ReadImage(Constants.SPLASH_MODULE, Constants.SPLASH_FILE_NAME);
-            this.splashImage.Source = source;
-        }
+        //private async void DisplayLocalSplashImage()
+        //{
+        //    BitmapImage source = await imageHelperSplash.ReadImage(Constants.SPLASH_MODULE, Constants.SPLASH_FILE_NAME);
+        //    this.splashImage.Source = source;
+        //}
 
         private void splashImage_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             bigSnow.IsBusy = !bigSnow.IsBusy;
-            //snow.IsBusy = !snow.IsBusy;
         }
 
         #endregion
@@ -289,15 +295,15 @@ namespace WinterOlympics2014WP.Pages
 
         #region Page Navigation Transition
 
-        FadeAnimation fadeAnimation = new FadeAnimation();
-
+        //FadeAnimation fadeAnimation = new FadeAnimation();
         private void Navigate(string uriString)
         {
-            fadeAnimation.InstanceFade(this.contentPanel, 1d, 0d, Constants.NAVIGATION_DURATION, 
-                fe =>
-                {
-                    NavigationService.Navigate(new Uri(uriString, UriKind.Relative));
-                });
+            NavigationService.Navigate(new Uri(uriString, UriKind.Relative));
+            //fadeAnimation.InstanceFade(this.contentPanel, 1d, 0d, Constants.NAVIGATION_DURATION, 
+            //    fe =>
+            //    {
+            //        NavigationService.Navigate(new Uri(uriString, UriKind.Relative));
+            //    });
         }
 
         #endregion
