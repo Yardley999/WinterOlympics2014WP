@@ -4,17 +4,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="88" d:DesignWidth="480"
+    d:DesignHeight="88" Width="480"
              VerticalAlignment="Top">
-    
+
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid Background="{StaticResource App_Theme_Color}">
-            <Image Source="/Assets/Images/TopBarIcon.png" Stretch="None" Margin="24,12,0,12" HorizontalAlignment="Left"/>
-        </Grid>
+        <Image Source="/Assets/Images/TopBar.png" Stretch="Uniform"/>
         <Grid x:Name="secondaryHeaderPanel" Grid.Row="1" Background="{StaticResource App_Theme_Color_Secondary}" Visibility="Collapsed">
             <TextBlock x:Name="secondaryHeaderTextBlock" Text="" Style="{StaticResource TopBar_Secondary_Text_Style}"/>
         </Grid>

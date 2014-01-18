@@ -8,6 +8,12 @@ namespace WinterOlympics2014WP.Pages
 {
     public partial class EPGListPage : PhoneApplicationPage
     {
+        #region Property
+
+        private string gameDate = string.Empty;
+
+        #endregion
+
         #region Lifecycle
 
         public EPGListPage()
@@ -19,7 +25,8 @@ namespace WinterOlympics2014WP.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            PopulateEPGList();
+            gameDate = NavigationContext.QueryString[NaviParam.CALENDAR_DATE];
+            PopulateEPGList(gameDate);
         }
 
         #endregion
@@ -32,10 +39,9 @@ namespace WinterOlympics2014WP.Pages
             epgList.QuickSelector = this.quickSelector;
         }
 
-        private void PopulateEPGList()
+        private void PopulateEPGList(string date)
         {
-            //TO-DO : pass param to specify date
-            epgList.LoadEpg(DateTime.Today);
+            epgList.LoadEpg(date);
         }
 
         #endregion

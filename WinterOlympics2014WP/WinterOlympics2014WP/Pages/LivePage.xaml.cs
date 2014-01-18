@@ -8,6 +8,8 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
+using WinterOlympics2014WP.Models;
+using WinterOlympics2014WP.Utility;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -15,7 +17,7 @@ namespace WinterOlympics2014WP.Pages
     {
         #region Property
 
-        private string epgID = string.Empty;
+        private string programID = string.Empty;
 
         #endregion
 
@@ -30,9 +32,40 @@ namespace WinterOlympics2014WP.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            epgID = NavigationContext.QueryString[NaviParam.EPG_ID];
-            UpdateDescriptionList();
+            programID = NavigationContext.QueryString[NaviParam.PROGRAM_ID];
+            LoadProgramData(programID);
         }
+
+        #endregion
+
+        #region Data
+
+        ListDataLoader<Program> programLoader = new ListDataLoader<Program>();
+
+        private void LoadProgramData(string id)
+        {
+            //TO-DO : remove test line
+            id = "1000000106";
+
+            if (programLoader.Loaded || programLoader.Busy)
+            {
+                return;
+            }
+
+            snow1.IsBusy = true;
+
+            programLoader.Load("getlivepage", "&id=" + id, true, Constants.PROGRAM_MODULE, string.Format(Constants.PROGRAM_FILE_NAME_FORMAT, id),
+                program =>
+                {
+                    this.DataContext = program;
+
+                    //TO-DO : check where to do this update
+                    UpdateDescriptionList();
+
+                    snow1.IsBusy = false;
+                });
+        }
+
 
         #endregion
 
@@ -54,6 +87,8 @@ namespace WinterOlympics2014WP.Pages
 
         private void UpdateDescriptionList()
         {
+            //TO-DO : do some real thing
+
             descriptionList.Add("距离比赛结束只有不到5分钟，突然杀出一个程咬金，在关键时刻打入制胜一球，上演了惊天大逆转！");
             descriptionList.Add("距离比赛结束只有不到5分钟，突然杀出一个程咬金，在关键时刻打入制胜一球，上演了惊天大逆转！");
             //descriptionList.Add("距离比赛结束只有不到5分钟，突然杀出一个程咬金，在关键时刻打入制胜一球，上演了惊天大逆转！");

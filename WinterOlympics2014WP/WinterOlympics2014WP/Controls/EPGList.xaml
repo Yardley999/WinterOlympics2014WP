@@ -50,17 +50,9 @@
                                 Tap="EpgItem_Tap">
                                 <Grid>
                                     <Image Source="{Binding Image}" Stretch="UniformToFill" Margin="-13,-5"/>
-                                    <StackPanel VerticalAlignment="Center" Margin="24,0,0,0">
-                                        <Grid>
-                                            <TextBlock Text="{Binding Category}" Style="{StaticResource EPG_GameName_Text_Style}" Foreground="#ff000000" Margin="1,1,0,0"/>
-                                            <TextBlock Text="{Binding Category}" Style="{StaticResource EPG_GameName_Text_Style}"/>
-                                        </Grid>
-                                        <Grid>
-                                            <TextBlock Text="{Binding Match}" Style="{StaticResource EPG_GameSubName_Text_Style}" Foreground="#ff000000" Margin="1,1,0,0"/>
-                                            <TextBlock Text="{Binding Match}" Style="{StaticResource EPG_GameSubName_Text_Style}"/>
-                                        </Grid>
-                                        <TextBlock Text="{Binding SeePoint}" Style="{StaticResource EPG_SeePoint_Text_Style}"/>
-                                    </StackPanel>
+                                    <TextBlock Text="{Binding Description}" Style="{StaticResource EPG_GameName_Text_Style}" Foreground="#ff000000" Margin="25,25,0,0"/>
+                                    <TextBlock Text="{Binding Description}" Style="{StaticResource EPG_GameName_Text_Style}" Margin="24,24,0,0"/>
+                                    <TextBlock Text="{Binding SeePoint}" Style="{StaticResource EPG_SeePoint_Text_Style}" VerticalAlignment="Bottom" Margin="24,0,0,24"/>
                                 </Grid>
                             </controls:ContentButton>
                         </Grid>

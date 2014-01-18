@@ -50,17 +50,21 @@ namespace WinterOlympics2014WP.Controls
 
         public void LoadEpg(DateTime date)
         {
+            string dateStr = date.ToString("yyyy-MM-dd");
+            LoadEpg(dateStr);
+        }
+
+        public void LoadEpg(string date)
+        {
             if (epgLoader.Loaded || epgLoader.Busy)
             {
                 return;
             }
 
-            //TO-DO : get today instead of test date
             //TO-DO : set token and sign 
-            string today = date.ToString("yyyy-MM-dd");
-            string param = "&date=" + today + "&token=&sign=&t=";
+            string param = "&date=" + date + "&token=&sign=&t=";
 
-            epgLoader.Load("getepg", param, true, Constants.EPG_MODULE, string.Format(Constants.EPG_FILE_NAME_FORMTAT, today),
+            epgLoader.Load("getepg", param, true, Constants.EPG_MODULE, string.Format(Constants.EPG_FILE_NAME_FORMTAT, date),
                 list =>
                 {
                     if (list != null)
@@ -70,6 +74,8 @@ namespace WinterOlympics2014WP.Controls
 
                         foreach (var item in list)
                         {
+                            //TO-DO : remove test lin
+                            item.SeePoint = "重点赛事直播";
                             epgList.Add(item);
                             validHours.Add(item.Start);
                         }
@@ -84,7 +90,7 @@ namespace WinterOlympics2014WP.Controls
             if (HostingPage != null)
             {
                 EPG epg = sender.GetDataContext<EPG>();
-                string naviStr = string.Format("/Pages/LivePage.xaml?{0}={1}", NaviParam.EPG_ID, epg.ID);
+                string naviStr = string.Format("/Pages/LivePage.xaml?{0}={1}", NaviParam.PROGRAM_ID, epg.ID);
                 HostingPage.NavigationService.Navigate(new Uri(naviStr, UriKind.Relative));
             }
         }

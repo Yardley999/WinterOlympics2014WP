@@ -54,11 +54,6 @@ namespace WinterOlympics2014WP.Pages
                 return;
             }
 
-            if (!DeviceNetworkInformation.IsNetworkAvailable)
-            {
-                return;
-            }
-
             snow1.IsBusy = true;
 
             medalsLoader.Load("getmedals", string.Empty, true, Constants.MEDAL_TALLY_MODULE, Constants.MEDAL_TALLY_FILE_NAME,

@@ -44,6 +44,14 @@ namespace WinterOlympics2014WP
         public const string ALBUM_MODULE = "album";
         public const string ALBUM_FILE_NAME_FORMAT = "album_{0}.txt";
 
+        //live page
+        public const string PROGRAM_MODULE = "program";
+        public const string PROGRAM_FILE_NAME_FORMAT = "program_{0}.txt";
+
+        //news 
+        public const string CALENDAR_MODULE = "calendar";
+        public const string CALENDAR_FILE_NAME = "calendar.txt";
+
         //image helper
         public const string KEY_IMAGE_CACHE = "image_cache";
 
@@ -56,6 +64,7 @@ namespace WinterOlympics2014WP
         public const string CATEGORY_ID = "category_id";
         public const string SCHEDULE_ID = "schedule_id";
         public const string ALBUM_ID = "album_id";
-        public const string EPG_ID = "epg_id";
+        public const string PROGRAM_ID = "program_id";
+        public const string CALENDAR_DATE = "calendar_date";
     }
 }

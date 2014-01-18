@@ -40,9 +40,7 @@
         </VisualStateManager.CustomVisualStateManager>
 
         <!--top bar-->
-        <Grid Background="{StaticResource App_Theme_Color}">
-            <Image Source="/Assets/Images/TopBarIcon.png" Stretch="None" Margin="24,12,0,12" HorizontalAlignment="Left"/>
-        </Grid>
+        <Image Source="/Assets/Images/TopBar.png" Stretch="Uniform"/>
 
         <!--content panel-->
         <Grid Grid.Row="1" x:Name="contentPanel">
@@ -132,7 +130,7 @@
                                                 Tap="calendarButton_Tap">
                             <Grid Background="#FFA4C400">
                                 <Image Source="/Assets/AppBar/calendar.png" Stretch="Uniform" Width="120" Margin="0,-16,0,0"/>
-                                <TextBlock Text="赛事日历" Style="{StaticResource Tile_Text_Style}"/>
+                                <TextBlock Text="转播日历" Style="{StaticResource Tile_Text_Style}"/>
                             </Grid>
                         </controls:ContentButton>
                         <controls:ContentButton Grid.Row="1" Grid.Column="0" x:Name="categoryButton"  Margin="0,0,8,8"  

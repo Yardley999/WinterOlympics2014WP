@@ -9,6 +9,8 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
 using WinterOlympics2014WP.Animations;
+using WinterOlympics2014WP.Utility;
+using WinterOlympics2014WP.Models;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -28,7 +30,7 @@ namespace WinterOlympics2014WP.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            LoadDays();
+            LoadCalendar();
         }
 
         //protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -42,27 +44,45 @@ namespace WinterOlympics2014WP.Pages
 
         #endregion
 
-        #region Load Calendar
+        #region News
 
-        ObservableCollection<int> newsDays = new ObservableCollection<int>();
+        ListDataLoader<CalendarItem> calendarLoader = new ListDataLoader<CalendarItem>();
 
-        private void LoadDays()
+        private void LoadCalendar()
         {
-            newsDays.Clear();
+            if (calendarLoader.Loaded || calendarLoader.Busy)
+            {
+                return;
+            }
 
-            newsDays.Add(0);
-            newsDays.Add(1);
-            newsDays.Add(2);
-            newsDays.Add(3);
-            newsDays.Add(4);
-            newsDays.Add(5);
-            newsDays.Add(6);
-            newsDays.Add(7);
-            newsDays.Add(8);
-            newsDays.Add(9);
+            snow1.IsBusy = true;
 
-            daysListBox.ItemsSource = newsDays;
-            //ShowPage();
+            calendarLoader.Load("getcalendar", string.Empty, true, Constants.CALENDAR_MODULE, Constants.CALENDAR_FILE_NAME,
+                list =>
+                {
+                    if (list != null)
+                    {
+                        int gameDate = 1;
+                        foreach (var item in list)
+                        {
+                            item.GameDate = "DAY " + gameDate.ToString();
+                            //item.DateString = item.Date.ToString("M月d日 dddd");
+                            gameDate++;
+                        }
+                    }
+                    daysListBox.ItemsSource = list;
+                    snow1.IsBusy = false;
+
+                    int xxxx = 0;
+                    xxxx++;
+                });
+        }
+
+        private void Day_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            CalendarItem item = sender.GetDataContext<CalendarItem>();
+            string naviStr = string.Format("/Pages/EPGListPage.xaml?{0}={1}", NaviParam.CALENDAR_DATE, item.Date.ToString("yyyy-MM-dd"));
+            NavigationService.Navigate(new Uri(naviStr, UriKind.Relative));
         }
 
         #endregion
@@ -86,11 +106,6 @@ namespace WinterOlympics2014WP.Pages
         //}
 
         //#endregion
-
-        private void Day_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Pages/EPGListPage.xaml", UriKind.Relative));
-        }
 
     }
 }

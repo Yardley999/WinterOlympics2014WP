@@ -97,7 +97,7 @@
                     </Grid>
                 </phone:PivotItem>
 
-                <phone:PivotItem Header="奥运ABC">
+                <phone:PivotItem Header="冬奥ABC">
                     <Grid>
                         <ScrollViewer>
                             <Image Source="/Assets/Sample/NewsDetailSample.jpg" Stretch="Uniform"/>

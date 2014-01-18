@@ -135,6 +135,8 @@
     <Compile Include="Infrastructures\BindableBase.cs" />
     <Compile Include="Models\AlbumItem.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\CalendarItem.cs" />
+    <Compile Include="Models\Program.cs" />
     <Compile Include="Models\EPG.cs" />
     <Compile Include="Models\GameResult.cs" />
     <Compile Include="Models\IEnumberable.cs" />
@@ -333,6 +335,7 @@
     <Content Include="Assets\Images\Categories\Curling.png" />
     <Content Include="Assets\Images\CCTV1.png" />
     <Content Include="Assets\Images\CCTV5.png" />
+    <Content Include="Assets\Images\CCTV5Plus.png" />
     <Content Include="Assets\Images\Medal1.png" />
     <Content Include="Assets\Images\Medal2.png" />
     <Content Include="Assets\Images\Medal3.png" />
@@ -345,6 +348,7 @@
     <Content Include="Assets\Images\Snow\Snow4.png" />
     <Content Include="Assets\Images\Snow\SnowSky.png" />
     <Content Include="Assets\Images\Subscribe.png" />
+    <Content Include="Assets\Images\TopBar.png" />
     <Content Include="Assets\Images\UnSubscribe.png" />
     <Content Include="Assets\Sample\Country1.PNG" />
     <Content Include="Assets\Sample\Country2.PNG" />
@@ -356,7 +360,6 @@
     <Content Include="Assets\Tiles\icon100x100.png" />
     <Content Include="Assets\Images\QuickSelectorPreview.png" />
     <Content Include="Assets\Sample\SplashScreenSample.PNG" />
-    <Content Include="Assets\Images\TopBarIcon.png" />
     <Content Include="Assets\Tiles\icon159x159.png" />
     <Content Include="Assets\Tiles\icon336x336.png" />
     <Content Include="SplashScreenImage.screen-720p.jpg" />

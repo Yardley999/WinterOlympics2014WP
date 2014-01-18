@@ -22,9 +22,7 @@
         </Grid.RowDefinitions>
 
         <!--top bar-->
-        <Grid Background="{StaticResource App_Theme_Color}">
-            <Image Source="/Assets/Images/TopBarIcon.png" Stretch="None" Margin="24,12,0,12" HorizontalAlignment="Left"/>
-        </Grid>
+        <Image Source="/Assets/Images/TopBar.png" Stretch="Uniform"/>
 
         <!--content-->
         <ScrollViewer Grid.Row="1">
@@ -38,15 +36,12 @@
                 </Grid.RowDefinitions>
                 <!--title panel-->
                 <Grid Grid.Row="0" Height="180">
-                    <Image Source="/Assets/Sample/SportSample.jpg" Stretch="UniformToFill"/>
-                    <StackPanel Margin="24,24,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-                        <TextBlock Text="正在直播" Style="{StaticResource LivePage_Title_Text_Style}"/>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,24,0,0">
-                            <TextBlock Text="挪威" Style="{StaticResource LivePage_Title_Text_Style}"/>
-                            <TextBlock Text="VS" Style="{StaticResource LivePage_Title_Text_Style}"/>
-                            <TextBlock Text="瑞士" Style="{StaticResource LivePage_Title_Text_Style}"/>
-                        </StackPanel>
-                        <TextBlock Text="冰球：男子小组赛：A组 第13场" Style="{StaticResource LivePage_SubTitle_Text_Style}"/>
+                    <Image Source="{Binding BigImage}" Stretch="UniformToFill"/>
+                    <TextBlock Text="正在直播" Style="{StaticResource LivePage_Title_Text_Style}" VerticalAlignment="Top" Margin="24,24,0,0"/>
+
+                    <StackPanel Margin="24,0,0,24" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <TextBlock Text="{Binding Title}" Style="{StaticResource LivePage_Title_Text_Style}"/>
+                        <TextBlock Text="{Binding Description}" Style="{StaticResource LivePage_SubTitle_Text_Style}" Margin="0,4,0,0"/>
                     </StackPanel>
                 </Grid>
 
@@ -142,6 +137,9 @@
                 </Grid>
             </Grid>
         </ScrollViewer>
+
+        <controls:Snow x:Name="snow1" Grid.Row="1"/>
+
     </Grid>
 
 </phone:PhoneApplicationPage>
