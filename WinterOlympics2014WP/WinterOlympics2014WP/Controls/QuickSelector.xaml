@@ -54,8 +54,7 @@
                     <CompositeTransform x:Name="selectionPreviewTransform" TranslateY="0"/>
                 </Grid.RenderTransform>
                 <Image Source="/Assets/Images/QuickSelectorPreview.png" Stretch="None" />
-                <TextBlock x:Name="selectionPreviewText" Style="{StaticResource QuickSelector_Preview_Text_Style}"
-                       Margin="-10,0,0,0"/>
+                <TextBlock x:Name="selectionPreviewText" Style="{StaticResource QuickSelector_Preview_Text_Style}" Margin="-10,0,0,0"/>
             </Grid>
         </Grid>
 

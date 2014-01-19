@@ -80,6 +80,7 @@ namespace WinterOlympics2014WP.Controls
             selectionPreviewTransform.TranslateY = p.Y - offset_y - UNIT_HEIGHT * 0.5d;
 
             selectionPreviewText.Text = _keys[SelectedIndex].ToString(ITEM_STRING_FORMAT);
+            selectionPreviewText.Opacity = _items[_keys[SelectedIndex]] ? 1d : 0.3d;
         }
 
         private void RaiseSelectionChanged()
