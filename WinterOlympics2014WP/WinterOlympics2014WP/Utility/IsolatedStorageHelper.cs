@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.IO.IsolatedStorage;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.Storage.FileProperties;
 using Windows.Storage.Streams;
 
 namespace WinterOlympics2014WP.Utility
@@ -15,6 +12,8 @@ namespace WinterOlympics2014WP.Utility
 
     public class IsolatedStorageHelper
     {
+        public const string USER_DATA_FOLDER_NAME = "udata";
+
         public static async Task WriteToFile_msdn(string folderName, string fileName, string content)
         {
             // Get the text data 
@@ -38,6 +37,11 @@ namespace WinterOlympics2014WP.Utility
 
         public static async Task WriteToFile(string folderName, string fileName, string content)
         {
+            if (!folderName.StartsWith(USER_DATA_FOLDER_NAME + "\\"))
+            {
+                folderName = USER_DATA_FOLDER_NAME + "\\" + folderName;
+            }
+
             // Get the local folder.
             StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
 
@@ -60,6 +64,11 @@ namespace WinterOlympics2014WP.Utility
 
         public static async Task<string> ReadFile(string folderName, string fileName)
         {
+            if (!folderName.StartsWith(USER_DATA_FOLDER_NAME + "\\"))
+            {
+                folderName = USER_DATA_FOLDER_NAME + "\\" + folderName;
+            }
+
             // Get the local folder.
             StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
 
@@ -68,7 +77,7 @@ namespace WinterOlympics2014WP.Utility
                 // Get the DataFolder folder.
                 var dataFolder = await local.GetFolderAsync(folderName);
 
-                if (dataFolder==null)
+                if (dataFolder == null)
                 {
                     return null;
                 }
@@ -112,6 +121,47 @@ namespace WinterOlympics2014WP.Utility
                 }
             }
             return null;
+        }
+
+        public static async Task<ulong> GetUserDataSize()
+        {
+            StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
+            var folder = await local.CreateFolderAsync(USER_DATA_FOLDER_NAME, CreationCollisionOption.OpenIfExists);
+            return await GetFolderSize(folder);
+        }
+
+        public static async Task<ulong> GetFolderSize(StorageFolder folder)
+        {
+            ulong size = 0;
+
+            try
+            {
+                foreach (StorageFolder thisFolder in await folder.GetFoldersAsync())
+                {
+                    size += await GetFolderSize(thisFolder);
+                }
+
+                foreach (StorageFile thisFile in await folder.GetFilesAsync())
+                {
+                    BasicProperties props = await thisFile.GetBasicPropertiesAsync();
+                    size += props.Size;
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            
+            return size;
+        }
+
+        public static async Task ClearUserData()
+        {
+            StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
+            var folder = await local.GetFolderAsync(USER_DATA_FOLDER_NAME);
+            if (folder != null)
+            {
+                await folder.DeleteAsync(StorageDeleteOption.PermanentDelete);
+            }
         }
     }
 

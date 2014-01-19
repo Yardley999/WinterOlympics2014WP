@@ -14,7 +14,7 @@ namespace WinterOlympics2014WP
 
         //splash
         public const string SPLASH_MODULE = "splash";
-        public const string SPLASH_FILE_NAME = "splash.jpg";
+        public const string SPLASH_FILE_NAME = "splash.txt";
 
         //banner
         public const string BANNER_MODULE = "banner";

@@ -167,7 +167,12 @@ namespace WinterOlympics2014WP.Pages
 
             int index = scheduleList.IndexOf(schedule);
             scheduleItemsPanel.Children.Insert(index + 1, gameResultPanel);
-            gameResultPanel.Show(result.RankList.Length > 0);
+            bool hasResult = false;
+            if (result!=null && result.RankList != null && result.RankList.Length > 0)
+            {
+                hasResult = true;
+            }
+            gameResultPanel.Show(hasResult);
             schedule.ArrowImage = "/Assets/Images/ArrowUp.png";
             expandedSchedule = schedule;
         }

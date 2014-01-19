@@ -34,11 +34,16 @@
                 </phone:Pivot.HeaderTemplate>
                 <phone:PivotItem Header="设置">
                     <Grid>
+                        <StackPanel>
+                            <TextBlock x:Name="localFolderSizeTextBlock" Text="正在计算..." Foreground="Black"/>
+                            <Button Content="清空" Tap="ClearCacheButton_Tap" Background="Blue"/>
+                        </StackPanel>
+
                     </Grid>
                 </phone:PivotItem>
                 <phone:PivotItem Header="关于">
                     <Grid>
-                        
+
                     </Grid>
                 </phone:PivotItem>
             </phone:Pivot>
