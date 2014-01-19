@@ -68,7 +68,14 @@
 
                 <!--today-->
                 <phone:PanoramaItem Header="今天">
-                    <controls:EPGList x:Name="epgList"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <controls:BannerControl x:Name="bannerControl" Visibility="Collapsed"/>
+                        <controls:EPGList Grid.Row="1" x:Name="epgList"/>
+                    </Grid>
                 </phone:PanoramaItem>
 
                 <!--news-->

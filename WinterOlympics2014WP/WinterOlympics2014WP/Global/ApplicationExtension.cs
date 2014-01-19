@@ -11,6 +11,8 @@ namespace WinterOlympics2014WP
     {
         IsolatedStorageSettings _Settings = IsolatedStorageSettings.ApplicationSettings;
 
+        #region DownloadImageOnlyOnWifi
+
         private const string KEY_WIFI_IMAGE = "wifi_image";
 
         private bool _DownloadImageOnlyOnWifi = false;
@@ -30,6 +32,31 @@ namespace WinterOlympics2014WP
             }
         }
 
+        #endregion
+
+        #region Banner
+
+        private const string KEY_DISMISSED_BANNER = "banner";
+
+        private string _DismissedBannerId = string.Empty;
+        public string DismissedBannerId
+        {
+            get
+            {
+                return _DismissedBannerId;
+            }
+            set
+            {
+                if (_DismissedBannerId != value)
+                {
+                    _DismissedBannerId = value;
+                    UpdateSetting(KEY_DISMISSED_BANNER, value);
+                }
+            }
+        }
+
+        #endregion
+
         private void LoadSettings()
         {
             ////wifi image
@@ -42,7 +69,17 @@ namespace WinterOlympics2014WP
             //    _Settings.Add(KEY_WIFI_IMAGE, false);
             //}
 
-            //_Settings.Save();
+            //dismissed banner
+            if (_Settings.Contains(KEY_DISMISSED_BANNER))
+            {
+                _DismissedBannerId = (string)_Settings[KEY_DISMISSED_BANNER];
+            }
+            else
+            {
+                _Settings.Add(KEY_DISMISSED_BANNER, string.Empty);
+            }
+
+            _Settings.Save();
         }
 
         private void UpdateSetting(string key, object value)

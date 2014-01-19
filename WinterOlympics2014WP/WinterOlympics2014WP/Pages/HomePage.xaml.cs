@@ -16,6 +16,8 @@ namespace WinterOlympics2014WP.Pages
     {
         #region Property
 
+        App App { get { return App.Current as App; } }
+
         #endregion
 
         #region Lifecycle
@@ -24,6 +26,7 @@ namespace WinterOlympics2014WP.Pages
         {
             InitializeComponent();
             BuildApplicationBar();
+            InitBannerControl();
             InitEpgList();
             //newsListBox.ItemsSource = newsList;
         }
@@ -33,6 +36,7 @@ namespace WinterOlympics2014WP.Pages
             base.OnNavigatedTo(e);
 
             LoadSplashImage();
+            LoadBanner();
             LoadEpg(false);
             LoadNews(false);
 
@@ -71,7 +75,7 @@ namespace WinterOlympics2014WP.Pages
             //            imageHelperSplash.Download(splash.Image, Constants.SPLASH_MODULE, Constants.SPLASH_FILE_NAME, SplashDownLoadCallback);
             //        }
             //    });
-            
+
         }
 
         //private void SplashDownLoadCallback()
@@ -95,6 +99,51 @@ namespace WinterOlympics2014WP.Pages
         }
 
         #endregion
+
+        #region Banner
+
+        Banner theBanner = null;
+        ListDataLoader<Banner> bannerLoader = new ListDataLoader<Banner>();
+
+        private void InitBannerControl()
+        {
+            this.bannerControl.DismissAction = DismissBanner;
+        }
+
+        private void DismissBanner()
+        {
+            App.DismissedBannerId = theBanner.ID;
+            this.bannerControl.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        public void LoadBanner()
+        {
+            if (bannerLoader.Loaded || bannerLoader.Busy)
+            {
+                return;
+            }
+
+            bannerLoader.Load("getbanner", string.Empty, true, Constants.BANNER_MODULE, Constants.BANNER_FILE_NAME,
+                list =>
+                {
+                    if (list.Count > 0)
+                    {
+                        theBanner = list[0];
+                        if (theBanner.ID != App.DismissedBannerId)
+                        {
+                            bannerControl.Visibility = System.Windows.Visibility.Visible;
+                            this.DataContext = theBanner;
+                        }
+                        else
+                        {
+                            bannerControl.Visibility = System.Windows.Visibility.Collapsed;
+                        }
+                    }
+                });
+        }
+
+        #endregion
+
 
         #region Quick Selector
 

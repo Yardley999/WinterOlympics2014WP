@@ -7,6 +7,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using WinterOlympics2014WP.Resources;
+using WinterOlympics2014WP.Utility;
 
 namespace WinterOlympics2014WP
 {
@@ -62,6 +63,7 @@ namespace WinterOlympics2014WP
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
             LoadSettings();
+            //NetworkHelper.Current.StartListening();
         }
 
         // Code to execute when the application is activated (brought to foreground)

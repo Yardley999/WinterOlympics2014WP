@@ -102,6 +102,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BannerControl.xaml.cs">
+      <DependentUpon>BannerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CategoryButton.xaml.cs">
       <DependentUpon>CategoryButton.xaml</DependentUpon>
     </Compile>
@@ -139,6 +142,7 @@
     <Compile Include="Models\AlbumItem.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CalendarItem.cs" />
+    <Compile Include="Models\Banner.cs" />
     <Compile Include="Models\HTML.cs" />
     <Compile Include="Models\Stadium.cs" />
     <Compile Include="Models\Program.cs" />
@@ -203,6 +207,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utility\NetworkHelper.cs" />
     <Compile Include="Utility\ReminderHelper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +215,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Controls\BannerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CategoryButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -319,6 +328,7 @@
     <Content Include="Assets\Images\ArrowLeft.png" />
     <Content Include="Assets\Images\ArrowRight.png" />
     <Content Include="Assets\Images\ArrowUp.png" />
+    <Content Include="Assets\Images\BannerDismissButton.png" />
     <Content Include="Assets\Images\Categories\category1.png" />
     <Content Include="Assets\Images\Categories\category10.png" />
     <Content Include="Assets\Images\Categories\category11.png" />

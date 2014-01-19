@@ -18,7 +18,6 @@ namespace WinterOlympics2014WP.Controls
             get { return instance; }
         }
 
-
         #endregion
 
         public CuteToast()
