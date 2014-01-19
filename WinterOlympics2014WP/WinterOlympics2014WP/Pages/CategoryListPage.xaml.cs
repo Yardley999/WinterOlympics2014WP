@@ -82,6 +82,7 @@ namespace WinterOlympics2014WP.Pages
 
         private void Item_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            //TO-DO : pass correct category id
             string strUri = string.Format("/Pages/CategoryPage.xaml?{0}={1}", NaviParam.CATEGORY_ID, "20256");
             NavigationService.Navigate(new Uri(strUri, UriKind.Relative));
         }

@@ -81,11 +81,6 @@ namespace WinterOlympics2014WP.Pages
                 return;
             }
 
-            if (!DeviceNetworkInformation.IsNetworkAvailable)
-            {
-                return;
-            }
-
             snow1.IsBusy = true;
 
             scheduleLoader.Load("getschedule", "&id=" + categoryID,true, Constants.SCHEDULE_MODULE, string.Format(Constants.SCHEDULE_FILE_NAME_FORMAT, categoryID),
