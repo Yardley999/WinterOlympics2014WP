@@ -22,7 +22,7 @@
 
         <!--content-->
         <Grid x:Name="contentPanel" Grid.Row="1">
-            <ScrollViewer>
+            <ScrollViewer x:Name="scrollViewer">
                 <ItemsControl x:Name="daysListBox">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>

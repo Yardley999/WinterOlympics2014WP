@@ -1,13 +1,10 @@
-﻿using System;
-using System.Net;
-using System.Windows.Navigation;
+﻿using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using System.Collections.ObjectModel;
 using WinterOlympics2014WP.Models;
-using Microsoft.Phone.Net.NetworkInformation;
-using System.IO;
 using WinterOlympics2014WP.Utility;
-using WinterOlympics2014WP.Animations;
+using Microsoft.Phone.Shell;
+using System;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -22,6 +19,7 @@ namespace WinterOlympics2014WP.Pages
         public MedalTallyPage()
         {
             InitializeComponent();
+            BuildApplicationBar();
             medalListBox.ItemsSource = medalScoreList;
         }
 
@@ -64,8 +62,35 @@ namespace WinterOlympics2014WP.Pages
                     {
                         medalScoreList.Add(item);
                     }
+
+                    scrollViewer.ScrollToVerticalOffset(0);
                     snow1.IsBusy = false;
                 });
+        }
+
+        #endregion
+
+        #region App Bar
+
+        ApplicationBarIconButton appBarRefresh;
+
+        private void BuildApplicationBar()
+        {
+            ApplicationBar = new ApplicationBar();
+            ApplicationBar.Opacity = 0.9;
+            ApplicationBar.Mode = ApplicationBarMode.Minimized;
+
+            // refresh
+            appBarRefresh = new ApplicationBarIconButton(new Uri("/Assets/AppBar/refresh.png", UriKind.Relative));
+            appBarRefresh.Text = "刷新";
+            appBarRefresh.Click += appBarRefresh_Click;
+            ApplicationBar.Buttons.Add(appBarRefresh);
+        }
+
+        void appBarRefresh_Click(object sender, System.EventArgs e)
+        {
+            medalsLoader.Loaded = false;
+            LoadMedalTally();
         }
 
         #endregion

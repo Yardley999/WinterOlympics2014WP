@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
-using WinterOlympics2014WP.Animations;
+using WinterOlympics2014WP.Models;
+using WinterOlympics2014WP.Utility;
+using Microsoft.Phone.Shell;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -19,6 +15,8 @@ namespace WinterOlympics2014WP.Pages
         public StadiumListPage()
         {
             InitializeComponent();
+            BuildApplicationBar();
+            stadiumListBox.ItemsSource = stadiumList;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -38,35 +36,67 @@ namespace WinterOlympics2014WP.Pages
 
         #endregion
 
-        #region Load StadiumList
+        #region StadiumList
 
-        ObservableCollection<int> stadiumList = new ObservableCollection<int>();
+        ObservableCollection<Stadium> stadiumList = new ObservableCollection<Stadium>();
+        ListDataLoader<Stadium> stadiumLoader = new ListDataLoader<Stadium>();
 
         private void LoadStadiums()
         {
-            stadiumList.Clear();
+            if (stadiumLoader.Loaded || stadiumLoader.Busy)
+            {
+                return;
+            }
 
-            stadiumList.Add(0);
-            stadiumList.Add(1);
-            stadiumList.Add(2);
-            stadiumList.Add(3);
-            stadiumList.Add(4);
-            stadiumList.Add(5);
-            stadiumList.Add(6);
-            stadiumList.Add(7);
-            stadiumList.Add(8);
-            stadiumList.Add(9);
+            snow1.IsBusy = true;
 
-            stadiumListBox.ItemsSource = stadiumList;
-            //ShowPage();
+            stadiumLoader.Load("getstadiumlist", string.Empty, true, Constants.STADIUM_MODULE, Constants.STADIUM_LIST_FILE_NAME,
+                list =>
+                {
+                    stadiumList.Clear();
+                    foreach (var item in list)
+                    {
+                        stadiumList.Add(item);
+                    }
+                    scrollViewer.ScrollToVerticalOffset(0);
+                    snow1.IsBusy = false;
+                });
         }
-
-        #endregion
 
         private void Stadium_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/StadiumDetailPage.xaml", UriKind.Relative));
+            Stadium stadium = sender.GetDataContext<Stadium>();
+            string strUri = string.Format("/Pages/StadiumDetailPage.xaml?{0}={1}", NaviParam.STADIUM_ID, stadium.ID);
+            NavigationService.Navigate(new Uri(strUri, UriKind.Relative));
         }
+
+
+        #endregion
+
+        #region App Bar
+
+        ApplicationBarIconButton appBarRefresh;
+
+        private void BuildApplicationBar()
+        {
+            ApplicationBar = new ApplicationBar();
+            ApplicationBar.Opacity = 0.9;
+            ApplicationBar.Mode = ApplicationBarMode.Minimized;
+
+            // refresh
+            appBarRefresh = new ApplicationBarIconButton(new Uri("/Assets/AppBar/refresh.png", UriKind.Relative));
+            appBarRefresh.Text = "刷新";
+            appBarRefresh.Click += appBarRefresh_Click;
+            ApplicationBar.Buttons.Add(appBarRefresh);
+        }
+
+        void appBarRefresh_Click(object sender, System.EventArgs e)
+        {
+            stadiumLoader.Loaded = false;
+            LoadStadiums();
+        }
+
+        #endregion
 
         //#region Page Navigation Transition
 

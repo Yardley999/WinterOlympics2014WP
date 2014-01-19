@@ -68,8 +68,10 @@
                                                         <TextBlock Text="{Binding StartTime,Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='hh:mm'}" 
                                                                Style="{StaticResource CategoryPage_Date_Text_Style}"/>
                                                     </StackPanel>
-                                                    <Image Grid.Column="1" Width="40" Height="40" Stretch="Uniform" VerticalAlignment="Top" 
-                                                       Source="/Assets/Images/Categories/Curling.png" Margin="0,8,0,0"/>
+                                                    <Grid Grid.Column="1" Width="40" Height="40" VerticalAlignment="Top" Margin="0,8,0,0">
+                                                        <Rectangle Fill="{StaticResource App_Theme_Color}" RadiusX="4" RadiusY="4"/>
+                                                        <Image Stretch="Uniform" Source="{Binding Image}"/>
+                                                    </Grid>
                                                     <StackPanel Grid.Column="2" VerticalAlignment="Top" Margin="8,8,8,0">
                                                         <TextBlock Text="{Binding Category}" Style="{StaticResource CategoryPage_Schedule_Title_Text_Style}"/>
                                                         <TextBlock Text="{Binding Match}" Style="{StaticResource CategoryPage_Schedule_SubTitle_Text_Style}"/>
@@ -99,10 +101,9 @@
 
                 <phone:PivotItem Header="冬奥ABC">
                     <Grid>
-                        <ScrollViewer>
-                            <Image Source="/Assets/Sample/NewsDetailSample.jpg" Stretch="Uniform"/>
-                        </ScrollViewer>
+                        <phone:WebBrowser x:Name="browser"/>
                         <Rectangle Style="{StaticResource Item_SplitBar_Top_Style}"/>
+                        <controls:Snow x:Name="snow2"/>
                     </Grid>
                 </phone:PivotItem>
             </phone:Pivot>

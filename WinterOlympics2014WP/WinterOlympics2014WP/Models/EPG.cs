@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Windows;
 
 namespace WinterOlympics2014WP.Models
 {
@@ -35,5 +36,32 @@ namespace WinterOlympics2014WP.Models
 
         [DataMember(Name = "gold")]
         public int Gold { get; set; }
+
+        [IgnoreDataMember]
+        public Visibility CCTV1
+        {
+            get
+            {
+                return this.Channel.ToLower().Contains("cctv1")? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        [IgnoreDataMember]
+        public Visibility CCTV5
+        {
+            get
+            {
+                return this.Channel.ToLower().Contains("cctv5") ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        [IgnoreDataMember]
+        public Visibility CCTV5Plus
+        {
+            get
+            {
+                return this.Channel.ToLower().Contains("cctv5+") ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
     }
 }

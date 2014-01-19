@@ -102,6 +102,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CategoryButton.xaml.cs">
+      <DependentUpon>CategoryButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ContentButton.cs" />
     <Compile Include="Controls\CuteToast.xaml.cs">
       <DependentUpon>CuteToast.xaml</DependentUpon>
@@ -136,6 +139,8 @@
     <Compile Include="Models\AlbumItem.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CalendarItem.cs" />
+    <Compile Include="Models\HTML.cs" />
+    <Compile Include="Models\Stadium.cs" />
     <Compile Include="Models\Program.cs" />
     <Compile Include="Models\EPG.cs" />
     <Compile Include="Models\GameResult.cs" />
@@ -205,6 +210,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Controls\CategoryButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CuteToast.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -335,7 +344,7 @@
     <Content Include="Assets\Images\Categories\Curling.png" />
     <Content Include="Assets\Images\CCTV1.png" />
     <Content Include="Assets\Images\CCTV5.png" />
-    <Content Include="Assets\Images\CCTV5Plus.png" />
+    <Content Include="Assets\Images\CCTV5+.png" />
     <Content Include="Assets\Images\Medal1.png" />
     <Content Include="Assets\Images\Medal2.png" />
     <Content Include="Assets\Images\Medal3.png" />

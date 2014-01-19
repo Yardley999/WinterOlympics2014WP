@@ -73,36 +73,39 @@
 
                 <!--news-->
                 <phone:PanoramaItem Header="快讯">
-                    <ScrollViewer x:Name="newsListScrollViewer" IsHitTestVisible="False">
-                        <ItemsControl x:Name="newsListBox">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel Margin="0,0,0,72"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Margin="0,0,0,10">
-                                        <Rectangle Height="1" Fill="{StaticResource App_Theme_Color}" VerticalAlignment="Top"/>
-                                        <controls:ContentButton Tap="NewsItem_Tap">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="150"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Image Width="150" Height="120" Margin="0,10,0,0" Stretch="UniformToFill"
+                    <Grid>
+                        <ScrollViewer x:Name="newsListScrollViewer" IsHitTestVisible="False">
+                            <ItemsControl x:Name="newsListBox">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel Margin="0,0,0,72"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="0,0,0,10">
+                                            <Rectangle Height="1" Fill="{StaticResource App_Theme_Color}" VerticalAlignment="Top"/>
+                                            <controls:ContentButton Tap="NewsItem_Tap">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="150"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Width="150" Height="120" Margin="0,10,0,0" Stretch="UniformToFill"
                                                        Source="{Binding Image}"/>
-                                                <StackPanel Grid.Column="1" Margin="12,10,12,0">
-                                                    <TextBlock Text="{Binding Title}" Style="{StaticResource NewsList_ItemTitle_Text_Style}"/>
-                                                    <TextBlock Text="2014-02-07 02:35" Style="{StaticResource NewsList_ItemTime_Text_Style}"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </controls:ContentButton>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
+                                                    <StackPanel Grid.Column="1" Margin="12,10,12,0">
+                                                        <TextBlock Text="{Binding Title}" Style="{StaticResource NewsList_ItemTitle_Text_Style}"/>
+                                                        <TextBlock Text="2014-02-07 02:35" Style="{StaticResource NewsList_ItemTime_Text_Style}"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </controls:ContentButton>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                        <controls:Snow x:Name="snowNews"/>
+                    </Grid>
                 </phone:PanoramaItem>
 
                 <!--more-->

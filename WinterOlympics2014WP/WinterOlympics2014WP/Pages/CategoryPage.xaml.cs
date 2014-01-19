@@ -10,8 +10,6 @@ using WinterOlympics2014WP.Controls;
 using System.Windows.Input;
 using WinterOlympics2014WP.DataContext;
 using System.Linq;
-using WinterOlympics2014WP.Animations;
-using Microsoft.Phone.Net.NetworkInformation;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -20,6 +18,7 @@ namespace WinterOlympics2014WP.Pages
         #region Property
 
         private string categoryID = string.Empty;
+        private string categoryTitle = string.Empty;
 
         #endregion
 
@@ -35,8 +34,11 @@ namespace WinterOlympics2014WP.Pages
             base.OnNavigatedTo(e);
 
             categoryID = NavigationContext.QueryString[NaviParam.CATEGORY_ID];
-            SetTitle(categoryID);
+            categoryTitle = NavigationContext.QueryString[NaviParam.CATEGORY_TITLE];
+
+            SetTitle();
             LoadSchedules();
+            LoadABC();
         }
 
         //protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -52,9 +54,9 @@ namespace WinterOlympics2014WP.Pages
 
         #region Sub Title
 
-        private void SetTitle(string cateId)
+        private void SetTitle()
         {
-            this.topBar.SecondaryHeader = "短道速滑";
+            this.topBar.SecondaryHeader = categoryTitle;
         }
 
         #endregion
@@ -209,6 +211,29 @@ namespace WinterOlympics2014WP.Pages
 
                 }
             }
+        }
+
+        #endregion
+
+        #region Category ABC
+
+        DataLoader<HTML> htmlLoader = new DataLoader<HTML>();
+
+        private void LoadABC()
+        {
+            if (htmlLoader.Loaded || htmlLoader.Busy)
+            {
+                return;
+            }
+
+            snow2.IsBusy = true;
+
+            htmlLoader.Load("getabcdetail", "&id=" + categoryID, true, Constants.SCHEDULE_MODULE, string.Format(Constants.CATEGORY_ABC_FILE_NAME_FORMAT, categoryID),
+                html =>
+                {
+                    browser.NavigateToString(html.Content);
+                    snow2.IsBusy = false;
+                });
         }
 
         #endregion

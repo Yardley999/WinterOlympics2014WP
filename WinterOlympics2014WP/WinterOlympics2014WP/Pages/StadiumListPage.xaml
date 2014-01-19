@@ -22,7 +22,7 @@
 
         <!--content-->
         <Grid x:Name="contentPanel" Grid.Row="1">
-            <ScrollViewer>
+            <ScrollViewer x:Name="scrollViewer">
                 <ItemsControl x:Name="stadiumListBox">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -38,7 +38,7 @@
 
                                 <controls:ContentButton Tap="Stadium_Tap">
                                     <Grid>
-                                        <Image Source="/Assets/Sample/StadiumSample.jpg" Stretch="UniformToFill" Margin="-13,-5"/>
+                                        <Image Source="{Binding Image}" Stretch="UniformToFill" Margin="-13,-5"/>
                                         <Rectangle Width="240" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="-13,-5">
                                             <Rectangle.Fill>
                                                 <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5" >
@@ -47,7 +47,8 @@
                                                 </LinearGradientBrush>
                                             </Rectangle.Fill>
                                         </Rectangle>
-                                        <TextBlock Text="索契奥林匹克体育场" Style="{StaticResource StadiumListPage_Title_Text_Style}"/>
+                                        <TextBlock Text="{Binding NameCN}" Style="{StaticResource StadiumListPage_Title_Text_Style}" Foreground="#ff000000" Margin="25,0,0,23"/>
+                                        <TextBlock Text="{Binding NameCN}" Style="{StaticResource StadiumListPage_Title_Text_Style}" Margin="24,0,0,24"/>
                                     </Grid>
                                 </controls:ContentButton>
                             </Grid>
@@ -55,6 +56,8 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
+
+            <controls:Snow x:Name="snow1"/>
 
         </Grid>
     </Grid>

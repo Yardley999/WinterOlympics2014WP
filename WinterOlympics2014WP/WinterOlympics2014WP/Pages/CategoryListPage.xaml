@@ -22,34 +22,14 @@
 
         <!--content-->
         <Grid x:Name="contentPanel" Grid.Row="1" HorizontalAlignment="Center">
-            <ScrollViewer>
-                <Grid>
+            <ScrollViewer x:Name="scrollViewer">
+                <Grid x:Name="categoryListGrid" Margin="8,8,8,8">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="160"/>
-                        <ColumnDefinition Width="160"/>
-                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="154"/>
+                        <ColumnDefinition Width="154"/>
+                        <ColumnDefinition Width="154"/>
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="180"/>
-                        <RowDefinition Height="180"/>
-                        <RowDefinition Height="180"/>
-                        <RowDefinition Height="180"/>
-                        <RowDefinition Height="180"/>
-                        <RowDefinition Height="180"/>
-                        <RowDefinition Height="180"/>
-                        <RowDefinition Height="180"/>
-                    </Grid.RowDefinitions>
-
-                    <!--<Rectangle Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource ListBoxItem_SplitBar_Style}"/>
-                    <Rectangle Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource ListBoxItem_SplitBar_Style}"/>
-                    <Rectangle Grid.Row="2" Grid.ColumnSpan="3" Style="{StaticResource ListBoxItem_SplitBar_Style}"/>
-                    <Rectangle Grid.Row="3" Grid.ColumnSpan="3" Style="{StaticResource ListBoxItem_SplitBar_Style}"/>
-                    <Rectangle Grid.Row="4" Grid.ColumnSpan="3" Style="{StaticResource ListBoxItem_SplitBar_Style}"/>
-                    <Rectangle Grid.Row="5" Grid.ColumnSpan="3" Style="{StaticResource ListBoxItem_SplitBar_Style}"/>
-                    <Rectangle Grid.Row="6" Grid.ColumnSpan="3" Style="{StaticResource ListBoxItem_SplitBar_Style}"/>
-                    <Rectangle Grid.Row="7" Grid.ColumnSpan="3" Style="{StaticResource ListBoxItem_SplitBar_Style}"/>-->
-
-                    <controls:ContentButton Grid.Row="0" Grid.Column="0" Tag="1" Tap="Item_Tap">
+                    <!--<controls:ContentButton Grid.Row="0" Grid.Column="0" Tag="1" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category1.png" Stretch="Uniform"/>
                     </controls:ContentButton>
 
@@ -135,10 +115,13 @@
 
                     <controls:ContentButton Grid.Row="7" Grid.Column="0" Tag="22" Tap="Item_Tap">
                         <Image Source="/Assets/Images/Categories/category22.png" Stretch="Uniform"/>
-                    </controls:ContentButton>
+                    </controls:ContentButton>-->
 
                 </Grid>
             </ScrollViewer>
+
+            <controls:Snow x:Name="snow1"/>
+
         </Grid>
     </Grid>
 

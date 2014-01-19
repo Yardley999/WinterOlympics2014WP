@@ -6,9 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
+    xmlns:controls="clr-namespace:WinterOlympics2014WP.Controls"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
@@ -24,9 +22,8 @@
 
         <!--content-->
         <Grid x:Name="ContentPanel" Grid.Row="1">
-            <ScrollViewer>
-                <Image Source="/Assets/Sample/StadiumDetailSample.jpg" Stretch="Uniform"/>
-            </ScrollViewer>
+            <phone:WebBrowser x:Name="browser"/>
+            <controls:Snow x:Name="snow2"/>
         </Grid>
     </Grid>
 

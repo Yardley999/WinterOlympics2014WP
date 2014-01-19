@@ -22,11 +22,17 @@ namespace WinterOlympics2014WP
 
         //news 
         public const string NEWS_MODULE = "news";
-        public const string NEWS_FILE_NAME = "news.txt";
+        public const string NEWS_LIST_FILE_NAME = "news_list.txt";
+        public const string NEWS_DETAIL_FILE_NAME_FORMAT = "news_{0}.txt";
 
         //medal tally
         public const string MEDAL_TALLY_MODULE = "medaltally";
         public const string MEDAL_TALLY_FILE_NAME = "medaltally.txt";
+
+        //stadium
+        public const string STADIUM_MODULE = "stadium";
+        public const string STADIUM_LIST_FILE_NAME = "stadium_list.txt";
+        public const string STADIUM_DETAIL_FILE_NAME_FORMAT = "stadium_{0}.txt";
 
         //category 
         public const string CATEGORY_MODULE = "category";
@@ -36,6 +42,7 @@ namespace WinterOlympics2014WP
         public const string SCHEDULE_MODULE = "schedule";
         public const string SCHEDULE_FILE_NAME_FORMAT = "schedule_list_{0}.txt";
         public const string RESULT_FILE_NAME_FORMAT = "result_list_{0}.txt";
+        public const string CATEGORY_ABC_FILE_NAME_FORMAT = "category_abc_{0}.txt";
 
         //subscription
         public const string KEY_SUBSCRIPTION_LIST = "subscription_list";
@@ -62,9 +69,15 @@ namespace WinterOlympics2014WP
     public class NaviParam
     {
         public const string CATEGORY_ID = "category_id";
+        public const string CATEGORY_TITLE = "category_title";
+
         public const string SCHEDULE_ID = "schedule_id";
         public const string ALBUM_ID = "album_id";
         public const string PROGRAM_ID = "program_id";
         public const string CALENDAR_DATE = "calendar_date";
+
+        public const string STADIUM_ID = "stadium_id";
+        public const string NEWS_ID = "news_id";
+
     }
 }

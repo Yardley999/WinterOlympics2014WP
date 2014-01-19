@@ -54,6 +54,18 @@ namespace WinterOlympics2014WP.Controls
             LoadEpg(dateStr);
         }
 
+        public void ReloadEpg(DateTime date)
+        {
+            epgLoader.Loaded = false;
+            LoadEpg(date);
+        }
+
+        public void ReloadEpg(string date)
+        {
+            epgLoader.Loaded = false;
+            LoadEpg(date);
+        }
+
         public void LoadEpg(string date)
         {
             if (epgLoader.Loaded || epgLoader.Busy)
@@ -63,6 +75,8 @@ namespace WinterOlympics2014WP.Controls
 
             //TO-DO : set token and sign 
             string param = "&date=" + date + "&token=&sign=&t=";
+
+            snow1.IsBusy = true;
 
             epgLoader.Load("getepg", param, true, Constants.EPG_MODULE, string.Format(Constants.EPG_FILE_NAME_FORMTAT, date),
                 list =>
@@ -81,6 +95,9 @@ namespace WinterOlympics2014WP.Controls
                         }
 
                         SetQuickSelectorValidItems(validHours);
+
+                        epgListBox.ScrollIntoView(list.FirstOrDefault());
+                        snow1.IsBusy = false;
                     }
                 });
         }

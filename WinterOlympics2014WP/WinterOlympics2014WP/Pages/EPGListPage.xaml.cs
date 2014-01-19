@@ -3,6 +3,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using WinterOlympics2014WP.Models;
 using WinterOlympics2014WP.Utility;
+using Microsoft.Phone.Shell;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -20,13 +21,14 @@ namespace WinterOlympics2014WP.Pages
         {
             InitializeComponent();
             InitEpgList();
+            BuildApplicationBar();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             gameDate = NavigationContext.QueryString[NaviParam.CALENDAR_DATE];
-            PopulateEPGList(gameDate);
+            LoadEPGList();
         }
 
         #endregion
@@ -39,9 +41,33 @@ namespace WinterOlympics2014WP.Pages
             epgList.QuickSelector = this.quickSelector;
         }
 
-        private void PopulateEPGList(string date)
+        private void LoadEPGList()
         {
-            epgList.LoadEpg(date);
+            epgList.LoadEpg(gameDate);
+        }
+
+        #endregion
+
+        #region App Bar
+
+        ApplicationBarIconButton appBarRefresh;
+
+        private void BuildApplicationBar()
+        {
+            ApplicationBar = new ApplicationBar();
+            ApplicationBar.Opacity = 0.9;
+            ApplicationBar.Mode = ApplicationBarMode.Minimized;
+
+            // refresh
+            appBarRefresh = new ApplicationBarIconButton(new Uri("/Assets/AppBar/refresh.png", UriKind.Relative));
+            appBarRefresh.Text = "刷新";
+            appBarRefresh.Click += appBarRefresh_Click;
+            ApplicationBar.Buttons.Add(appBarRefresh);
+        }
+
+        void appBarRefresh_Click(object sender, System.EventArgs e)
+        {
+            epgList.ReloadEpg(gameDate);
         }
 
         #endregion

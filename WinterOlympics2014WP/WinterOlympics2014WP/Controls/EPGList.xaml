@@ -33,13 +33,14 @@
                             <TextBlock Text="{Binding Start, Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='HH:mm'}" Style="{StaticResource EPG_Tag_Text_Style}"/>
                         </Grid>
                         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Background="#00000000" 
-                                                    HorizontalAlignment="Left" Margin="100,0,0,0" >
+                                                    HorizontalAlignment="Left" Margin="92,0,0,0" >
                             <Image Source="/Assets/Images/PlayButton.png" Stretch="None"/>
                             <TextBlock Text="点播" Style="{StaticResource PlayButton_Text_Style}"/>
                         </StackPanel>
                         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Image Source="/Assets/Images/CCTV1.png" Stretch="Uniform" Height="16"/>
-                            <Image Source="/Assets/Images/CCTV5.png" Stretch="Uniform" Height="16" Margin="4,0,0,0"/>
+                            <Image Source="/Assets/Images/CCTV1.png" Visibility="{Binding CCTV1}" Stretch="Uniform" Height="16"/>
+                            <Image Source="/Assets/Images/CCTV5.png" Visibility="{Binding CCTV5}" Stretch="Uniform" Height="16" Margin="4,0,0,0"/>
+                            <Image Source="/Assets/Images/CCTV5+.png" Visibility="{Binding CCTV5Plus}" Stretch="Uniform" Height="16" Margin="4,0,0,0"/>
                         </StackPanel>
 
                         <Grid Width="400" Height="180" Grid.Row="1" Grid.Column="1" Margin="7,5,0,0" >
@@ -60,5 +61,8 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ListBox>
+
+        <controls:Snow x:Name="snow1"/>
+
     </Grid>
 </UserControl>

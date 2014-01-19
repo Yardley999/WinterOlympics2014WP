@@ -8,6 +8,7 @@ using System.Windows.Media.Imaging;
 using WinterOlympics2014WP.Models;
 using WinterOlympics2014WP.Utility;
 using WinterOlympics2014WP.Animations;
+using System.Linq;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -32,8 +33,8 @@ namespace WinterOlympics2014WP.Pages
             base.OnNavigatedTo(e);
 
             LoadSplashImage();
-            LoadEpg();
-            LoadNews();
+            LoadEpg(false);
+            LoadNews(false);
 
             //fadeAnimation.InstanceFade(this.contentPanel, 0d, 1d, Constants.NAVIGATION_DURATION, null);
         }
@@ -136,15 +137,27 @@ namespace WinterOlympics2014WP.Pages
             // refresh home
             appBarRefreshHome = new ApplicationBarIconButton(new Uri("/Assets/AppBar/refresh.png", UriKind.Relative));
             appBarRefreshHome.Text = "刷新";
+            appBarRefreshHome.Click += appBarRefreshHome_Click;
 
             // refresh news
             appBarRefreshNews = new ApplicationBarIconButton(new Uri("/Assets/AppBar/refresh.png", UriKind.Relative));
             appBarRefreshNews.Text = "刷新";
+            appBarRefreshNews.Click += appBarRefreshNews_Click;
 
             appBarSetting = new ApplicationBarMenuItem("设置");
             appBarSetting.Click += appBarSetting_Click;
 
             SetAppBarForSplash();
+        }
+
+        void appBarRefreshHome_Click(object sender, EventArgs e)
+        {
+            LoadEpg(true);
+        }
+
+        void appBarRefreshNews_Click(object sender, EventArgs e)
+        {
+            LoadNews(true);
         }
 
         void appBarSetting_Click(object sender, EventArgs e)
@@ -162,7 +175,7 @@ namespace WinterOlympics2014WP.Pages
         {
             ClearAppBar();
             ApplicationBar.MenuItems.Add(appBarSetting);
-            ApplicationBar.Mode = ApplicationBarMode.Minimized;
+            //ApplicationBar.Mode = ApplicationBarMode.Minimized;
         }
 
         private void SetAppBarForHome()
@@ -170,7 +183,7 @@ namespace WinterOlympics2014WP.Pages
             ClearAppBar();
             ApplicationBar.Buttons.Add(appBarRefreshHome);
             ApplicationBar.MenuItems.Add(appBarSetting);
-            ApplicationBar.Mode = ApplicationBarMode.Default;
+            //ApplicationBar.Mode = ApplicationBarMode.Default;
         }
 
         private void SetAppBarForNews()
@@ -178,14 +191,14 @@ namespace WinterOlympics2014WP.Pages
             ClearAppBar();
             ApplicationBar.Buttons.Add(appBarRefreshNews);
             ApplicationBar.MenuItems.Add(appBarSetting);
-            ApplicationBar.Mode = ApplicationBarMode.Default;
+            //ApplicationBar.Mode = ApplicationBarMode.Default;
         }
 
         private void SetAppBarForMore()
         {
             ClearAppBar();
             ApplicationBar.MenuItems.Add(appBarSetting);
-            ApplicationBar.Mode = ApplicationBarMode.Minimized;
+            //ApplicationBar.Mode = ApplicationBarMode.Minimized;
         }
 
         #endregion
@@ -227,11 +240,18 @@ namespace WinterOlympics2014WP.Pages
             epgList.QuickSelector = this.quickSelector;
         }
 
-        private void LoadEpg()
+        private void LoadEpg(bool reload)
         {
             //TO-DO : get today instead of test date
             DateTime today = new DateTime(2014, 2, 8);
-            epgList.LoadEpg(today);
+            if (reload)
+            {
+                epgList.ReloadEpg(today);
+            }
+            else
+            {
+                epgList.LoadEpg(today);
+            }
         }
 
         #endregion
@@ -240,26 +260,38 @@ namespace WinterOlympics2014WP.Pages
 
         ListDataLoader<News> newsLoader = new ListDataLoader<News>();
 
-        private void LoadNews()
+        private void LoadNews(bool reload)
         {
+            if (reload)
+            {
+                newsLoader.Loaded = false;
+            }
+
             if (newsLoader.Loaded || newsLoader.Busy)
             {
                 return;
             }
 
-            newsLoader.Load("getnewslist", string.Empty, true, Constants.NEWS_MODULE, Constants.NEWS_FILE_NAME,
+            snowNews.IsBusy = true;
+
+            newsLoader.Load("getnewslist", string.Empty, true, Constants.NEWS_MODULE, Constants.NEWS_LIST_FILE_NAME,
                 list =>
                 {
                     if (list != null)
                     {
                         newsListBox.ItemsSource = list;
                     }
+
+                    newsListScrollViewer.ScrollToVerticalOffset(0);
+                    snowNews.IsBusy = false;
                 });
         }
 
         private void NewsItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/NewsDetailPage.xaml", UriKind.Relative));
+            News news = sender.GetDataContext<News>();
+            string strUri = string.Format("/Pages/NewsDetailPage.xaml?{0}={1}", NaviParam.NEWS_ID, news.ID);
+            NavigationService.Navigate(new Uri(strUri, UriKind.Relative));
         }
 
         #endregion

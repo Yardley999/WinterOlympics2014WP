@@ -25,6 +25,7 @@ namespace WinterOlympics2014WP.Pages
         public CalendarPage()
         {
             InitializeComponent();
+            BuildApplicationBar();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -71,10 +72,8 @@ namespace WinterOlympics2014WP.Pages
                         }
                     }
                     daysListBox.ItemsSource = list;
+                    scrollViewer.ScrollToVerticalOffset(0);
                     snow1.IsBusy = false;
-
-                    int xxxx = 0;
-                    xxxx++;
                 });
         }
 
@@ -86,6 +85,32 @@ namespace WinterOlympics2014WP.Pages
         }
 
         #endregion
+
+        #region App Bar
+
+        ApplicationBarIconButton appBarRefresh;
+
+        private void BuildApplicationBar()
+        {
+            ApplicationBar = new ApplicationBar();
+            ApplicationBar.Opacity = 0.9;
+            ApplicationBar.Mode = ApplicationBarMode.Minimized;
+
+            // refresh
+            appBarRefresh = new ApplicationBarIconButton(new Uri("/Assets/AppBar/refresh.png", UriKind.Relative));
+            appBarRefresh.Text = "刷新";
+            appBarRefresh.Click += appBarRefresh_Click;
+            ApplicationBar.Buttons.Add(appBarRefresh);
+        }
+
+        void appBarRefresh_Click(object sender, System.EventArgs e)
+        {
+            calendarLoader.Loaded = false;
+            LoadCalendar();
+        }
+
+        #endregion
+
 
         //#region Page Navigation Transition
 
