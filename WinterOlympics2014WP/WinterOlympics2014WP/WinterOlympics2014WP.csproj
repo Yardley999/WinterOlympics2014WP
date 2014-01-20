@@ -119,6 +119,9 @@
       <DependentUpon>GameResultPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ImageToggleButton.cs" />
+    <Compile Include="Controls\ListMoreButton.xaml.cs">
+      <DependentUpon>ListMoreButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\QuickSelector.xaml.cs">
       <DependentUpon>QuickSelector.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,7 @@
     <Compile Include="Models\Splash.cs" />
     <Compile Include="Models\MedalScore.cs" />
     <Compile Include="Models\GameSchedule.cs" />
+    <Compile Include="Utility\BitmapImageExtension.cs" />
     <Compile Include="Utility\DataContextGetter.cs" />
     <Compile Include="Utility\DataLoader.cs">
       <SubType>Code</SubType>
@@ -232,6 +236,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\GameResultPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ListMoreButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -319,16 +327,19 @@
     <Content Include="Assets\AppBar\calendar.png" />
     <Content Include="Assets\AppBar\award.png" />
     <Content Include="Assets\AppBar\camera.png" />
+    <Content Include="Assets\AppBar\save.png" />
     <Content Include="Assets\AppBar\search.png" />
     <Content Include="Assets\AppBar\news.png" />
     <Content Include="Assets\AppBar\refresh.png" />
     <Content Include="Assets\AppBar\transport.ff.png" />
     <Content Include="Assets\AppBar\transport.rew.png" />
+    <Content Include="Assets\Images\Alarm.png" />
     <Content Include="Assets\Images\ArrowDown.png" />
     <Content Include="Assets\Images\ArrowLeft.png" />
     <Content Include="Assets\Images\ArrowRight.png" />
     <Content Include="Assets\Images\ArrowUp.png" />
     <Content Include="Assets\Images\BannerDismissButton.png" />
+    <Content Include="Assets\Images\Calendar.png" />
     <Content Include="Assets\Images\Categories\category1.png" />
     <Content Include="Assets\Images\Categories\category10.png" />
     <Content Include="Assets\Images\Categories\category11.png" />
@@ -355,6 +366,7 @@
     <Content Include="Assets\Images\CCTV1.png" />
     <Content Include="Assets\Images\CCTV5.png" />
     <Content Include="Assets\Images\CCTV5+.png" />
+    <Content Include="Assets\Images\Games.png" />
     <Content Include="Assets\Images\Medal1.png" />
     <Content Include="Assets\Images\Medal2.png" />
     <Content Include="Assets\Images\Medal3.png" />
@@ -365,9 +377,15 @@
     <Content Include="Assets\Images\Snow\Snow2.png" />
     <Content Include="Assets\Images\Snow\Snow3.png" />
     <Content Include="Assets\Images\Snow\Snow4.png" />
+    <Content Include="Assets\Images\Snow\Snow5.png" />
+    <Content Include="Assets\Images\Snow\Snow6.png" />
+    <Content Include="Assets\Images\Snow\Snow7.png" />
+    <Content Include="Assets\Images\Snow\Snow8.png" />
     <Content Include="Assets\Images\Snow\SnowSky.png" />
+    <Content Include="Assets\Images\Stadium.png" />
     <Content Include="Assets\Images\Subscribe.png" />
     <Content Include="Assets\Images\TopBar.png" />
+    <Content Include="Assets\Images\Trophy.png" />
     <Content Include="Assets\Images\UnSubscribe.png" />
     <Content Include="Assets\Sample\Country1.PNG" />
     <Content Include="Assets\Sample\Country2.PNG" />

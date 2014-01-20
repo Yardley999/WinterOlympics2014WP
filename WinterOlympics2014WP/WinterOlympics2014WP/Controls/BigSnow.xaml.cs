@@ -12,6 +12,7 @@ namespace WinterOlympics2014WP.Controls
     {
         private static Random random = new Random();
         private DispatcherTimer timer = new DispatcherTimer();
+        private static int SNOW_CANDIDATE_COUNT = 8;
 
         private bool isBusy = false;
         public bool IsBusy
@@ -79,7 +80,7 @@ namespace WinterOlympics2014WP.Controls
 
         private void GenerateSnow()
         {
-            string snowImage = "/Assets/Images/Snow/Snow" + random.Next(0, 4).ToString() + ".png";
+            string snowImage = "/Assets/Images/Snow/Snow" + random.Next(0, SNOW_CANDIDATE_COUNT).ToString() + ".png";
             Image image = new Image() { Source = new BitmapImage(new Uri(snowImage, UriKind.Relative)), Stretch = Stretch.Uniform, HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Top };
             int radius = random.Next(radius_min, radius_max);
             image.Width = image.Height = radius;

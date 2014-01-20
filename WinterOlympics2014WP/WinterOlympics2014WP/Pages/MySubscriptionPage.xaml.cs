@@ -6,8 +6,6 @@ using WinterOlympics2014WP.DataContext;
 using WinterOlympics2014WP.Models;
 using Microsoft.Phone.Shell;
 using System.Windows;
-using System;
-using WinterOlympics2014WP.Animations;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -95,7 +93,7 @@ namespace WinterOlympics2014WP.Pages
         private void BuildApplicationBar()
         {
             ApplicationBar = new ApplicationBar();
-            ApplicationBar.Opacity = 0.9;
+            //ApplicationBar.Opacity = 0.9;
             ApplicationBar.Mode = ApplicationBarMode.Minimized;
 
             //clear

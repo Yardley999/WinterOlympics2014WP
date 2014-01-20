@@ -9,6 +9,7 @@ using WinterOlympics2014WP.Models;
 using WinterOlympics2014WP.Utility;
 using WinterOlympics2014WP.Animations;
 using System.Linq;
+using WinterOlympics2014WP.Controls;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -144,7 +145,6 @@ namespace WinterOlympics2014WP.Pages
 
         #endregion
 
-
         #region Quick Selector
 
         bool quickSelectorShown = false;
@@ -180,7 +180,7 @@ namespace WinterOlympics2014WP.Pages
         private void BuildApplicationBar()
         {
             ApplicationBar = new ApplicationBar();
-            ApplicationBar.Opacity = 0.9;
+            //ApplicationBar.Opacity = 0.9;
             ApplicationBar.Mode = ApplicationBarMode.Minimized;
 
             // refresh home
@@ -326,12 +326,25 @@ namespace WinterOlympics2014WP.Pages
             newsLoader.Load("getnewslist", string.Empty, true, Constants.NEWS_MODULE, Constants.NEWS_LIST_FILE_NAME,
                 list =>
                 {
+                    if (newsListItemsPanel!=null)
+                    {
+                        if (newsListItemsPanel.Children.Contains(newsMoreButton))
+                        {
+                            newsListItemsPanel.Children.Remove(newsMoreButton);
+                        }
+                    }
+
                     if (list != null)
                     {
                         newsListBox.ItemsSource = list;
                     }
 
                     newsListScrollViewer.ScrollToVerticalOffset(0);
+
+                    if (newsListItemsPanel != null)
+                    {
+                        newsListItemsPanel.Children.Add(newsMoreButton);
+                    }
                     snowNews.IsBusy = false;
                 });
         }
@@ -341,6 +354,13 @@ namespace WinterOlympics2014WP.Pages
             News news = sender.GetDataContext<News>();
             string strUri = string.Format("/Pages/NewsDetailPage.xaml?{0}={1}", NaviParam.NEWS_ID, news.ID);
             NavigationService.Navigate(new Uri(strUri, UriKind.Relative));
+        }
+
+        StackPanel newsListItemsPanel = null;
+        ListMoreButton newsMoreButton = new ListMoreButton() { Margin = new Thickness(0,10,0,10) };
+        private void NewsListItemsPanel_Loaded(object sender, RoutedEventArgs e)
+        {
+            newsListItemsPanel = sender as StackPanel;
         }
 
         #endregion

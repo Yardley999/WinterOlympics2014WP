@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Height="80" Width="80"
+    Height="150" Width="150"
              IsHitTestVisible="False"
              Opacity="0">
     
@@ -18,7 +18,7 @@
 	</UserControl.Resources>
     
     <Grid x:Name="rootGrid">
-        <Image x:Name="bigSnow" Source="/Assets/Images/Snow/BigSnow.png" Stretch="Uniform" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="bigSnow" Source="/Assets/Images/Snow/BigSnow.png" Stretch="None" RenderTransformOrigin="0.5,0.5">
         	<Image.RenderTransform>
         		<CompositeTransform/>
         	</Image.RenderTransform>

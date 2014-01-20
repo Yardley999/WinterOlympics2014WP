@@ -191,6 +191,19 @@
         <Setter Property="Margin" Value="8,8,8,8"/>
     </Style>
 
+    <Style x:Key="Image_Border_Style" TargetType="Border">
+        <Setter Property="BorderBrush" Value="#ffa0a0a0"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+    </Style>
+
+    <Style x:Key="ListMoreButton_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="Foreground" Value="#ff6d6d6d"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
     <!--quick selector-->
     <Style x:Key="QuickSelector_Item_Text_Style" TargetType="TextBlock">
         <Setter Property="Height" Value="26"/>
@@ -243,6 +256,7 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
+    <!--epg-->
     <Style x:Key="EPG_Tag_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
         <Setter Property="FontSize" Value="22"/>
         <Setter Property="FontWeight" Value="Bold"/>
@@ -447,6 +461,17 @@
     <Style x:Key="GameResultPanel_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource CategoryPage_Schedule_SubTitle_Text_Style}">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="4,4,4,4"/>
+    </Style>
+
+    <!--settings-->
+    <Style x:Key="SettingsPage_Title_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="Foreground" Value="#ff000000"/>
+    </Style>
+    
+    <Style x:Key="SettingsPage_Description_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="Foreground" Value="#ff000000"/>
     </Style>
 
 </ResourceDictionary>

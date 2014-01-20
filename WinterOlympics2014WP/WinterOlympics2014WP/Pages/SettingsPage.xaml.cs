@@ -36,8 +36,12 @@ namespace WinterOlympics2014WP.Pages
 
         private async void ClearCacheButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            await IsolatedStorageHelper.ClearUserData();
-            UpdateLocalFolderSize();
+            var result = MessageBox.Show("缓存文件有助于您在无网络连接情况下仍然可以查阅曾经访问过的内容。确定要清除缓存吗？", "清除缓存", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
+            {
+                await IsolatedStorageHelper.ClearUserData();
+                UpdateLocalFolderSize();
+            }
         }
     }
 }

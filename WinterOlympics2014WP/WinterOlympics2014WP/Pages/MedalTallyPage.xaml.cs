@@ -77,7 +77,7 @@ namespace WinterOlympics2014WP.Pages
         private void BuildApplicationBar()
         {
             ApplicationBar = new ApplicationBar();
-            ApplicationBar.Opacity = 0.9;
+            //ApplicationBar.Opacity = 0.9;
             ApplicationBar.Mode = ApplicationBarMode.Minimized;
 
             // refresh

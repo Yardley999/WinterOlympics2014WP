@@ -6,8 +6,10 @@ using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 using System;
 using WinterOlympics2014WP.Models;
-using System.Collections.Generic;
 using WinterOlympics2014WP.Utility;
+using Microsoft.Xna.Framework.Media;
+using System.IO;
+using Microsoft.Phone.Shell;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -21,6 +23,9 @@ namespace WinterOlympics2014WP.Pages
         Image imageCenter, imageLeft, imageRight;
         private string albumID = string.Empty;
 
+        private const string FILE_NAME_PREFIX = "SochiWinterOlympics_";
+        BitmapImage centerBitmapImage = null;
+
         #endregion
 
         #region Lifecycle
@@ -28,6 +33,7 @@ namespace WinterOlympics2014WP.Pages
         public AlbumPage()
         {
             InitializeComponent();
+            BuildApplicationBar();
             imageCenter = image1;
             imageLeft = image3;
             imageRight = image2;
@@ -45,8 +51,9 @@ namespace WinterOlympics2014WP.Pages
 
         #region Data
 
-        DataLoader<Album> albumloader = new DataLoader<Album>();
+        DataLoader<WinterOlympics2014WP.Models.Album> albumloader = new DataLoader<WinterOlympics2014WP.Models.Album>();
         ObservableCollection<AlbumItem> albumItems = new ObservableCollection<AlbumItem>();
+        ImageHelper imageHelper = new ImageHelper();
 
         private void LoadAlbumData(string id)
         {
@@ -159,7 +166,7 @@ namespace WinterOlympics2014WP.Pages
             int indexForLeft = currentIndex == 0 ? (imageCount - 1) : (currentIndex - 1);
             int indexForRight = currentIndex == (imageCount - 1) ? 0 : (currentIndex + 1);
 
-            imageCenter.Source = new BitmapImage(new Uri(albumItems[currentIndex].Image, UriKind.RelativeOrAbsolute));
+            imageCenter.Source = centerBitmapImage = new BitmapImage(new Uri(albumItems[currentIndex].Image, UriKind.RelativeOrAbsolute));
             imageLeft.Source = new BitmapImage(new Uri(albumItems[indexForLeft].Image, UriKind.RelativeOrAbsolute));
             imageRight.Source = new BitmapImage(new Uri(albumItems[indexForRight].Image, UriKind.RelativeOrAbsolute));
             //imageCenter.Source = await ImageCacheDataContext.Current.GetImage(albumItems[currentIndex].Image, true);
@@ -223,6 +230,52 @@ namespace WinterOlympics2014WP.Pages
         }
 
         #endregion
+
+        #region Save
+
+        private void SaveImage()
+        {
+            Stream stream = centerBitmapImage.ToStream();
+
+            MediaLibrary library = new MediaLibrary();
+            string fileName = FILE_NAME_PREFIX + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".jpg";
+            library.SavePicture(fileName, stream);
+        }
+
+        #endregion
+
+        #region App Bar
+
+        ApplicationBarIconButton appBarSave;
+
+        private void BuildApplicationBar()
+        {
+            ApplicationBar = new ApplicationBar();
+            //ApplicationBar.Opacity = 0.9;
+            ApplicationBar.Mode = ApplicationBarMode.Minimized;
+
+            // refresh
+            appBarSave = new ApplicationBarIconButton(new Uri("/Assets/AppBar/save.png", UriKind.Relative));
+            appBarSave.Text = "保存";
+            appBarSave.Click += appBarSave_Click;
+            ApplicationBar.Buttons.Add(appBarSave);
+        }
+
+        void appBarSave_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                SaveImage();
+                toast.ShowMessage("保存成功！");
+            }
+            catch (Exception ex)
+            {
+                toast.ShowMessage("保存失败！");
+            }
+        }
+
+        #endregion
+
 
     }
 }

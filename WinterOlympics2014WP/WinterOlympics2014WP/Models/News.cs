@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace WinterOlympics2014WP.Models
 {
@@ -19,6 +20,9 @@ namespace WinterOlympics2014WP.Models
 
         [DataMember(Name = "type")]
         public string Type { get; set; }
+
+        [DataMember(Name = "time")]
+        public DateTime Time { get; set; }
 
         //[DataMember]
         //public bool hasfocus { get; set; }
