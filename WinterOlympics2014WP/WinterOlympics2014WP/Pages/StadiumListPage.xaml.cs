@@ -60,7 +60,12 @@ namespace WinterOlympics2014WP.Pages
                     }
                     scrollViewer.ScrollToVerticalOffset(0);
                     snow1.IsBusy = false;
-                });
+                }, Comparison);
+        }
+
+        private bool Comparison(Stadium item1, Stadium item2)
+        {
+            return item1.ID == item2.ID && item1.NameCN == item2.NameCN && item1.Image == item2.Image;
         }
 
         private void Stadium_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -69,7 +74,6 @@ namespace WinterOlympics2014WP.Pages
             string strUri = string.Format("/Pages/StadiumDetailPage.xaml?{0}={1}", NaviParam.STADIUM_ID, stadium.ID);
             NavigationService.Navigate(new Uri(strUri, UriKind.Relative));
         }
-
 
         #endregion
 

@@ -60,7 +60,8 @@
                 <!--splash image-->
                 <phone:PanoramaItem>
                     <Grid Margin="-12,-48,0,0">
-                        <Image x:Name="splashImage" Stretch="UniformToFill" Tap="splashImage_Tap"/>
+                        <!--<Image x:Name="splashImage" Stretch="UniformToFill" Tap="splashImage_Tap"/>-->
+                        <controls:FadingImage x:Name="splashImage" Tap="splashImage_Tap"/>
                         <controls:BigSnow x:Name="bigSnow" VerticalAlignment="Top"/>
                         <!--<controls:Snow x:Name="snow" Width="80" Height="80"/>-->
                     </Grid>
@@ -98,7 +99,7 @@
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Image Width="120" Height="100" Margin="0,10,0,0" Stretch="UniformToFill"
+                                                    <controls:FadingImage Width="120" Height="100" Margin="0,10,0,0" Stretch="UniformToFill"
                                                        Source="{Binding Image}"/>
                                                     <Border Width="120" Height="100" Margin="0,10,0,0" Style="{StaticResource Image_Border_Style}"/>
 

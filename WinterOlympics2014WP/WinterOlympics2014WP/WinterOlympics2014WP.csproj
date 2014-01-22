@@ -115,6 +115,9 @@
     <Compile Include="Controls\EPGList.xaml.cs">
       <DependentUpon>EPGList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FadingImage.xaml.cs">
+      <DependentUpon>FadingImage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GameResultPanel.xaml.cs">
       <DependentUpon>GameResultPanel.xaml</DependentUpon>
     </Compile>
@@ -232,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\EPGList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FadingImage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

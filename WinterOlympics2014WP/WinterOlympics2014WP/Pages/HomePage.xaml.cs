@@ -10,6 +10,7 @@ using WinterOlympics2014WP.Utility;
 using WinterOlympics2014WP.Animations;
 using System.Linq;
 using WinterOlympics2014WP.Controls;
+using System.Collections.ObjectModel;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -29,7 +30,7 @@ namespace WinterOlympics2014WP.Pages
             BuildApplicationBar();
             InitBannerControl();
             InitEpgList();
-            //newsListBox.ItemsSource = newsList;
+            newsListBox.ItemsSource = newsList;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -50,7 +51,7 @@ namespace WinterOlympics2014WP.Pages
 
         DataLoader<Splash> splashLoader = new DataLoader<Splash>();
         ImageHelper imageHelperSplash = new ImageHelper();
-
+        string openedSplashImageSource = string.Empty;
         private void LoadSplashImage()
         {
             //DisplayLocalSplashImage();
@@ -65,6 +66,11 @@ namespace WinterOlympics2014WP.Pages
             splashLoader.Load("getsplash", string.Empty, true, Constants.SPLASH_MODULE, Constants.SPLASH_FILE_NAME,
                 splash =>
                 {
+                    if (openedSplashImageSource == splash.Image)
+                    {
+                        return;
+                    }
+                    openedSplashImageSource = splash.Image;
                     this.splashImage.Source = new BitmapImage(new Uri(splash.Image, UriKind.RelativeOrAbsolute));
                 });
 
@@ -308,6 +314,7 @@ namespace WinterOlympics2014WP.Pages
         #region News
 
         ListDataLoader<News> newsLoader = new ListDataLoader<News>();
+        ObservableCollection<News> newsList = new ObservableCollection<News>();
 
         private void LoadNews(bool reload)
         {
@@ -326,6 +333,7 @@ namespace WinterOlympics2014WP.Pages
             newsLoader.Load("getnewslist", string.Empty, true, Constants.NEWS_MODULE, Constants.NEWS_LIST_FILE_NAME,
                 list =>
                 {
+                    newsList.Clear();
                     if (newsListItemsPanel!=null)
                     {
                         if (newsListItemsPanel.Children.Contains(newsMoreButton))
@@ -334,9 +342,9 @@ namespace WinterOlympics2014WP.Pages
                         }
                     }
 
-                    if (list != null)
+                    foreach (var item in list)
                     {
-                        newsListBox.ItemsSource = list;
+                        newsList.Add(item);
                     }
 
                     newsListScrollViewer.ScrollToVerticalOffset(0);
@@ -346,7 +354,12 @@ namespace WinterOlympics2014WP.Pages
                         newsListItemsPanel.Children.Add(newsMoreButton);
                     }
                     snowNews.IsBusy = false;
-                });
+                }, ComparisonNews);
+        }
+
+        private bool ComparisonNews(News item1, News item2)
+        {
+            return item1.ID == item2.ID && item1.Image == item2.Image && item1.Title == item2.Title && item1.Description == item2.Description;
         }
 
         private void NewsItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)

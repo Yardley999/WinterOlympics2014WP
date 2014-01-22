@@ -99,7 +99,12 @@ namespace WinterOlympics2014WP.Controls
                         epgListBox.ScrollIntoView(list.FirstOrDefault());
                         snow1.IsBusy = false;
                     }
-                });
+                }, Comparison);
+        }
+
+        private bool Comparison(EPG item1, EPG item2)
+        {
+            return item1.ID == item2.ID && item1.Image == item2.Image && item1.Description == item2.Description;
         }
 
         private void EpgItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -137,7 +142,7 @@ namespace WinterOlympics2014WP.Controls
             var keyList = hoursOfDay.Keys.ToList();
             foreach (var key in keyList)
             {
-                if (validItems.Any(x=>x.Hour == key.Hour))
+                if (validItems.Any(x => x.Hour == key.Hour))
                 {
                     hoursOfDay[key] = true;
                 }
@@ -149,7 +154,7 @@ namespace WinterOlympics2014WP.Controls
 
         private void QuickSelector_SelectionChanged(object sender, DateTime selectedDateTime)
         {
-            epgListBox.ScrollIntoView(epgList.FirstOrDefault(x=>x.Start.Hour == selectedDateTime.Hour));
+            epgListBox.ScrollIntoView(epgList.FirstOrDefault(x => x.Start.Hour == selectedDateTime.Hour));
         }
 
         #endregion

@@ -38,7 +38,7 @@
 
                                 <controls:ContentButton Tap="Day_Tap">
                                     <Grid>
-                                        <Image Source="{Binding Image}" Stretch="UniformToFill" Margin="-13,-5"/>
+                                        <controls:FadingImage Source="{Binding Image}" Stretch="UniformToFill" Margin="-13,-5"/>
                                         <Rectangle Width="240" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="-13,-5">
                                             <Rectangle.Fill>
                                                 <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5" >

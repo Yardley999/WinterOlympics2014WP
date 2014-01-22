@@ -50,7 +50,7 @@
                             <controls:ContentButton 
                                 Tap="EpgItem_Tap">
                                 <Grid>
-                                    <Image Source="{Binding Image}" Stretch="UniformToFill" Margin="-13,-5"/>
+                                    <controls:FadingImage Source="{Binding Image}" Stretch="UniformToFill" Margin="-13,-5"/>
                                     <TextBlock Text="{Binding Description}" Style="{StaticResource EPG_GameName_Text_Style}" Foreground="#ff000000" Margin="25,25,0,0"/>
                                     <TextBlock Text="{Binding Description}" Style="{StaticResource EPG_GameName_Text_Style}" Margin="24,24,0,0"/>
                                     <TextBlock Text="{Binding SeePoint}" Style="{StaticResource EPG_SeePoint_Text_Style}" VerticalAlignment="Bottom" Margin="24,0,0,24"/>

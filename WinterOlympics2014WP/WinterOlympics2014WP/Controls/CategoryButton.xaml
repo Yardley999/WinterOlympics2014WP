@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:WinterOlympics2014WP.Controls"
     mc:Ignorable="d"
     Height="146" Width="146"
              Margin="4">
@@ -28,11 +29,11 @@
     		</VisualStateGroup>
     	</VisualStateManager.VisualStateGroups>
         <Rectangle x:Name="backRect" Grid.RowSpan="2" Fill="#ff72bef2" RadiusX="8" RadiusY="8" Opacity="0"/>
-        <Image x:Name="image2" Width="80" Height="80" Source="{Binding Image2}" Stretch="Uniform" RenderTransformOrigin="0.5,0.5">
-            <Image.RenderTransform>
+        <controls:FadingImage x:Name="image2" Width="80" Height="80" Source="{Binding Image2}" Stretch="Uniform" RenderTransformOrigin="0.5,0.5">
+            <UserControl.RenderTransform>
                 <CompositeTransform/>
-            </Image.RenderTransform>
-        </Image>
+            </UserControl.RenderTransform>
+        </controls:FadingImage>
         <Image x:Name="image" Width="80" Height="80" Source="{Binding Image}" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" Opacity="0">
         	<Image.RenderTransform>
         		<CompositeTransform/>

@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
-using WinterOlympics2014WP.Animations;
 using WinterOlympics2014WP.Utility;
 using WinterOlympics2014WP.Models;
+using System.Linq;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -26,6 +21,7 @@ namespace WinterOlympics2014WP.Pages
         {
             InitializeComponent();
             BuildApplicationBar();
+            daysListBox.ItemsSource = calendarList;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -48,6 +44,7 @@ namespace WinterOlympics2014WP.Pages
         #region News
 
         ListDataLoader<CalendarItem> calendarLoader = new ListDataLoader<CalendarItem>();
+        ObservableCollection<CalendarItem> calendarList = new ObservableCollection<CalendarItem>();
 
         private void LoadCalendar()
         {
@@ -61,6 +58,7 @@ namespace WinterOlympics2014WP.Pages
             calendarLoader.Load("getcalendar", string.Empty, true, Constants.CALENDAR_MODULE, Constants.CALENDAR_FILE_NAME,
                 list =>
                 {
+                    calendarList.Clear();
                     if (list != null)
                     {
                         int gameDate = 1;
@@ -69,12 +67,17 @@ namespace WinterOlympics2014WP.Pages
                             item.GameDate = "DAY " + gameDate.ToString();
                             //item.DateString = item.Date.ToString("M月d日 dddd");
                             gameDate++;
+                            calendarList.Add(item);
                         }
                     }
-                    daysListBox.ItemsSource = list;
                     scrollViewer.ScrollToVerticalOffset(0);
                     snow1.IsBusy = false;
-                });
+                }, Comparison);
+        }
+
+        private bool Comparison(CalendarItem item1, CalendarItem item2)
+        {
+            return item1.Date == item2.Date && item1.Image == item2.Image;
         }
 
         private void Day_Tap(object sender, System.Windows.Input.GestureEventArgs e)
