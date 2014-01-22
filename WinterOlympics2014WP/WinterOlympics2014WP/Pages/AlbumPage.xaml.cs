@@ -10,6 +10,7 @@ using WinterOlympics2014WP.Utility;
 using Microsoft.Xna.Framework.Media;
 using System.IO;
 using Microsoft.Phone.Shell;
+using WinterOlympics2014WP.Controls;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -20,7 +21,7 @@ namespace WinterOlympics2014WP.Pages
         private int imageCount = 0;
         private int currentIndex = 0;
         private bool bottomPanelShown = true;
-        Image imageCenter, imageLeft, imageRight;
+        FadingImage imageCenter, imageLeft, imageRight;
         private string albumID = string.Empty;
 
         private const string FILE_NAME_PREFIX = "SochiWinterOlympics_";
