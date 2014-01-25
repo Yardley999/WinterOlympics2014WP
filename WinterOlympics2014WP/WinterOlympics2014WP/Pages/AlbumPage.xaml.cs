@@ -165,7 +165,8 @@ namespace WinterOlympics2014WP.Pages
             int indexForLeft = currentIndex == 0 ? (imageCount - 1) : (currentIndex - 1);
             int indexForRight = currentIndex == (imageCount - 1) ? 0 : (currentIndex + 1);
 
-            imageCenter.Source = centerBitmapImage = new BitmapImage(new Uri(albumItems[currentIndex].Image, UriKind.RelativeOrAbsolute));
+            centerBitmapImage = new BitmapImage(new Uri(albumItems[currentIndex].Image, UriKind.RelativeOrAbsolute));
+            imageCenter.Source = centerBitmapImage;
             imageLeft.Source = new BitmapImage(new Uri(albumItems[indexForLeft].Image, UriKind.RelativeOrAbsolute));
             imageRight.Source = new BitmapImage(new Uri(albumItems[indexForRight].Image, UriKind.RelativeOrAbsolute));
             //imageCenter.Source = await ImageCacheDataContext.Current.GetImage(albumItems[currentIndex].Image, true);
@@ -278,7 +279,6 @@ namespace WinterOlympics2014WP.Pages
         }
 
         #endregion
-
 
     }
 }

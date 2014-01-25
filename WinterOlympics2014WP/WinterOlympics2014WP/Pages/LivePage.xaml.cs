@@ -30,6 +30,7 @@ namespace WinterOlympics2014WP.Pages
         public LivePage()
         {
             InitializeComponent();
+            BuildApplicationBar();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -42,7 +43,7 @@ namespace WinterOlympics2014WP.Pages
             this.titleImage.Source = new BitmapImage(new Uri(liveImage, UriKind.RelativeOrAbsolute));
             this.titleTextBlock1.Text = this.titleTextBlock2.Text = liveTitle;
 
-            LoadData(liveID);
+            LoadData();
         }
 
         #endregion
@@ -51,10 +52,10 @@ namespace WinterOlympics2014WP.Pages
 
         GenericDataLoader<LiveData> liveLoader = new GenericDataLoader<LiveData>();
 
-        private void LoadData(string id)
+        private void LoadData()
         {
             //TO-DO : remove test line
-            id = "1000001804";
+            liveID = "1000001804";
 
             if (liveLoader.Loaded || liveLoader.Busy)
             {
@@ -63,7 +64,7 @@ namespace WinterOlympics2014WP.Pages
 
             snow1.IsBusy = true;
 
-            liveLoader.Load("getlivepage", "&id=" + id, true, Constants.LIVE_MODULE, string.Format(Constants.LIVE_FILE_NAME_FORMAT, id),
+            liveLoader.Load("getlivepage", "&id=" + liveID, true, Constants.LIVE_MODULE, string.Format(Constants.LIVE_FILE_NAME_FORMAT, liveID),
                 data =>
                 {
                     //TO-DO : check where to do this update
@@ -89,7 +90,7 @@ namespace WinterOlympics2014WP.Pages
                         control = new LivePageItemLiveText();//TO-DO : check design
                         break;
                     case 2:
-                        control = new LivePageItemAlbum();
+                        control = new LivePageItemAlbum() { HostingPage = this };
                         break;
                     case 12:
                         control = new LivePageItemLiveText();
@@ -99,7 +100,7 @@ namespace WinterOlympics2014WP.Pages
                         break;
                 }
 
-                if (control!=null)
+                if (control != null)
                 {
                     control.DataContext = item;
                     lineItemsStackPanel.Children.Add(control);
@@ -110,17 +111,30 @@ namespace WinterOlympics2014WP.Pages
 
         #endregion
 
-        private void Video_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
+        #region App Bar
 
+        ApplicationBarIconButton appBarRefresh;
+
+        private void BuildApplicationBar()
+        {
+            ApplicationBar = new ApplicationBar();
+            //ApplicationBar.Opacity = 0.9;
+            ApplicationBar.Mode = ApplicationBarMode.Minimized;
+
+            // refresh
+            appBarRefresh = new ApplicationBarIconButton(new Uri("/Assets/AppBar/refresh.png", UriKind.Relative));
+            appBarRefresh.Text = "刷新";
+            appBarRefresh.Click += appBarRefresh_Click;
+            ApplicationBar.Buttons.Add(appBarRefresh);
         }
 
-        private void Albumn_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        void appBarRefresh_Click(object sender, System.EventArgs e)
         {
-            //TO-DO : pass correct album id
-            string naviString = string.Format("/Pages/AlbumPage.xaml?{0}={1}", NaviParam.ALBUM_ID, "d89e0b65d8946fbe");
-            NavigationService.Navigate(new Uri(naviString, UriKind.Relative));
+            liveLoader.Loaded = false;
+            LoadData();
         }
+
+        #endregion
 
     }
 }
