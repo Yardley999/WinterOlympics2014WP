@@ -112,7 +112,8 @@ namespace WinterOlympics2014WP.Controls
             if (HostingPage != null)
             {
                 EPG epg = sender.GetDataContext<EPG>();
-                string naviStr = string.Format("/Pages/LivePage.xaml?{0}={1}", NaviParam.PROGRAM_ID, epg.ID);
+                string[] paramArray = new string[] { NaviParam.LIVE_ID, epg.ID, NaviParam.LIVE_IMAGE, epg.Image, NaviParam.LIVE_TITLE, epg.Description };
+                string naviStr = string.Format("/Pages/LivePage.xaml?{0}={1}&{2}={3}&{4}={5}", paramArray);
                 HostingPage.NavigationService.Navigate(new Uri(naviStr, UriKind.Relative));
             }
         }

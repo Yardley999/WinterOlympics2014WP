@@ -71,8 +71,6 @@ namespace WinterOlympics2014WP.Pages
                     albumItems.Clear();
                     foreach (var item in album.Items)
                     {
-                        //TO-DO : remove following test line
-                        item.Image = "http://images.ccoo.cn/bbs/2010224/201022423410247.jpg";
                         albumItems.Add(item);
                     }
                     imageCount = albumItems.Count;
@@ -219,6 +217,8 @@ namespace WinterOlympics2014WP.Pages
                 panoramaTransform.ScaleY = portrait_scale;
                 grid1.Width = grid2.Width = grid3.Width = portrait_grid_width;
                 grid1.Height = grid2.Height = grid3.Height = portrait_grid_height;
+
+                this.LayoutRoot.Margin = new Thickness(0, 0, 0, 0);
             }
             else if (this.Orientation == PageOrientation.LandscapeLeft || this.Orientation == PageOrientation.LandscapeRight)
             {
@@ -227,6 +227,8 @@ namespace WinterOlympics2014WP.Pages
                 panoramaTransform.ScaleY = landscape_scale;
                 grid1.Width = grid2.Width = grid3.Width = landscape_grid_width;
                 grid1.Height = grid2.Height = grid3.Height = landscape_grid_height;
+
+                this.LayoutRoot.Margin = new Thickness(0, 0, 48, 0);
             }
         }
 

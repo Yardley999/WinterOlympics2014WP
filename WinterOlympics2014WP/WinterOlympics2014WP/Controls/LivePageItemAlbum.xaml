@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="WinterOlympics2014WP.Controls.LivePageItemAlbum"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:WinterOlympics2014WP.Controls"
+    mc:Ignorable="d"
+    Height="100" d:DesignWidth="480" Margin="12,0,12,12">
+
+    <Grid x:Name="LayoutRoot" Background="#ffffffff">
+        <ItemsControl ItemsSource="{Binding Album}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <controls:FadingImage Source="{Binding Image}" Width="90" Height="90" Stretch="UniformToFill" Margin="5,5"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>

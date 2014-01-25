@@ -49,8 +49,14 @@
                     <Grid Margin="12,0,12,0">
                         <StackPanel VerticalAlignment="Center">
                             <TextBlock Text="索契冬奥会" Style="{StaticResource SettingsPage_Title_Style}" HorizontalAlignment="Center"/>
-                            <TextBlock Text="CCTV官方应用" Style="{StaticResource SettingsPage_Description_Style}" HorizontalAlignment="Center"/>
-                            <TextBlock Text="Version: 1.0" Style="{StaticResource SettingsPage_Description_Style}" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+                            <TextBlock Style="{StaticResource SettingsPage_Description_Style}" HorizontalAlignment="Center"
+                                       Text="CCTV5出品" />
+                            <TextBlock Style="{StaticResource SettingsPage_Description_Style}" HorizontalAlignment="Center"
+                                       Text="Version 1.0" Margin="0,0,0,20"/>
+                            <TextBlock Style="{StaticResource SettingsPage_Description_Style}" HorizontalAlignment="Center"
+                                       Text="中央电视台 版权所有" />
+                            <TextBlock Style="{StaticResource SettingsPage_Description_Style}" HorizontalAlignment="Center"
+                                       Text="2014 All Right Reserved." />
                         </StackPanel>
                         <Rectangle Style="{StaticResource Item_SplitBar_Top_Style}"/>
                     </Grid>

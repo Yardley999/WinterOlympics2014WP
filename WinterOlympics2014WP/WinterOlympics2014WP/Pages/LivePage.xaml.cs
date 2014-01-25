@@ -10,6 +10,8 @@ using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
 using WinterOlympics2014WP.Models;
 using WinterOlympics2014WP.Utility;
+using System.Windows.Media.Imaging;
+using WinterOlympics2014WP.Controls;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -17,7 +19,9 @@ namespace WinterOlympics2014WP.Pages
     {
         #region Property
 
-        private string programID = string.Empty;
+        private string liveID = string.Empty;
+        private string liveTitle = string.Empty;
+        private string liveImage = string.Empty;
 
         #endregion
 
@@ -26,44 +30,81 @@ namespace WinterOlympics2014WP.Pages
         public LivePage()
         {
             InitializeComponent();
-            descriptionListBox.ItemsSource = descriptionList;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            programID = NavigationContext.QueryString[NaviParam.PROGRAM_ID];
-            LoadProgramData(programID);
+            liveID = NavigationContext.QueryString[NaviParam.LIVE_ID];
+            liveImage = NavigationContext.QueryString[NaviParam.LIVE_IMAGE];
+            liveTitle = NavigationContext.QueryString[NaviParam.LIVE_TITLE];
+
+            this.titleImage.Source = new BitmapImage(new Uri(liveImage, UriKind.RelativeOrAbsolute));
+            this.titleTextBlock1.Text = this.titleTextBlock2.Text = liveTitle;
+
+            LoadData(liveID);
         }
 
         #endregion
 
         #region Data
 
-        ListDataLoader<Program> programLoader = new ListDataLoader<Program>();
+        GenericDataLoader<LiveData> liveLoader = new GenericDataLoader<LiveData>();
 
-        private void LoadProgramData(string id)
+        private void LoadData(string id)
         {
             //TO-DO : remove test line
-            id = "1000000106";
+            id = "1000001804";
 
-            if (programLoader.Loaded || programLoader.Busy)
+            if (liveLoader.Loaded || liveLoader.Busy)
             {
                 return;
             }
 
             snow1.IsBusy = true;
 
-            programLoader.Load("getlivepage", "&id=" + id, true, Constants.PROGRAM_MODULE, string.Format(Constants.PROGRAM_FILE_NAME_FORMAT, id),
-                program =>
+            liveLoader.Load("getlivepage", "&id=" + id, true, Constants.LIVE_MODULE, string.Format(Constants.LIVE_FILE_NAME_FORMAT, id),
+                data =>
                 {
-                    this.DataContext = program;
-
                     //TO-DO : check where to do this update
-                    UpdateDescriptionList();
+                    PopulateLineItems(data);
 
                     snow1.IsBusy = false;
                 });
+        }
+
+        private void PopulateLineItems(LiveData data)
+        {
+            FrameworkElement control = null;
+            lineItemsStackPanel.Children.Clear();
+
+            foreach (var item in data.LineItems)
+            {
+                switch (item.Type)
+                {
+                    case 0:
+                        control = new LivePageItemVideo();
+                        break;
+                    case 1:
+                        control = new LivePageItemLiveText();//TO-DO : check design
+                        break;
+                    case 2:
+                        control = new LivePageItemAlbum();
+                        break;
+                    case 12:
+                        control = new LivePageItemLiveText();
+                        break;
+                    default:
+                        control = null;
+                        break;
+                }
+
+                if (control!=null)
+                {
+                    control.DataContext = item;
+                    lineItemsStackPanel.Children.Add(control);
+                }
+            }
         }
 
 
@@ -77,25 +118,9 @@ namespace WinterOlympics2014WP.Pages
         private void Albumn_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             //TO-DO : pass correct album id
-            string naviString = string.Format("/Pages/AlbumPage.xaml?{0}={1}", NaviParam.ALBUM_ID, "4a303dc1070f25dd");
+            string naviString = string.Format("/Pages/AlbumPage.xaml?{0}={1}", NaviParam.ALBUM_ID, "d89e0b65d8946fbe");
             NavigationService.Navigate(new Uri(naviString, UriKind.Relative));
         }
 
-        #region Description
-
-        ObservableCollection<string> descriptionList = new ObservableCollection<string>();
-
-        private void UpdateDescriptionList()
-        {
-            //TO-DO : do some real thing
-
-            descriptionList.Add("距离比赛结束只有不到5分钟，突然杀出一个程咬金，在关键时刻打入制胜一球，上演了惊天大逆转！");
-            descriptionList.Add("距离比赛结束只有不到5分钟，突然杀出一个程咬金，在关键时刻打入制胜一球，上演了惊天大逆转！");
-            //descriptionList.Add("距离比赛结束只有不到5分钟，突然杀出一个程咬金，在关键时刻打入制胜一球，上演了惊天大逆转！");
-            //descriptionList.Add("距离比赛结束只有不到5分钟，突然杀出一个程咬金，在关键时刻打入制胜一球，上演了惊天大逆转！");
-            //descriptionList.Add("距离比赛结束只有不到5分钟，突然杀出一个程咬金，在关键时刻打入制胜一球，上演了惊天大逆转！");
-        }
-
-        #endregion
     }
 }

@@ -56,8 +56,8 @@ namespace WinterOlympics2014WP
         public const string ALBUM_FILE_NAME_FORMAT = "album_{0}.txt";
 
         //live page
-        public const string PROGRAM_MODULE = "program";
-        public const string PROGRAM_FILE_NAME_FORMAT = "program_{0}.txt";
+        public const string LIVE_MODULE = "live";
+        public const string LIVE_FILE_NAME_FORMAT = "live_{0}.txt";
 
         //news 
         public const string CALENDAR_MODULE = "calendar";
@@ -77,7 +77,9 @@ namespace WinterOlympics2014WP
 
         public const string SCHEDULE_ID = "schedule_id";
         public const string ALBUM_ID = "album_id";
-        public const string PROGRAM_ID = "program_id";
+        public const string LIVE_ID = "live_id";
+        public const string LIVE_IMAGE = "live_image";
+        public const string LIVE_TITLE = "live_title";
         public const string CALENDAR_DATE = "calendar_date";
 
         public const string STADIUM_ID = "stadium_id";

@@ -10,6 +10,118 @@ using System.Linq;
 
 namespace WinterOlympics2014WP.Utility
 {
+    public class GenericDataLoader<T> where T : class
+    {
+        public bool Busy = false;
+        public bool Loaded = false;
+
+        private Action<T> onCallback;
+        string moduleName = string.Empty;
+        string fileName = string.Empty;
+        private bool toCacheData = false;
+
+        public void LoadWithoutCaching(string cmd, Action<T> callback)
+        {
+            this.Load(cmd, string.Empty, false, string.Empty, string.Empty, callback);
+        }
+
+        /* don't even try to convert this method into an awaitable method, as the callback should be called twice: 
+         * first when local cache is loaded,  second when the new data is downloaded. Async-callback approach in better solution
+         * than awaitable method for such use case.
+        */
+        public async void Load(string cmd, string param, bool cacheData, string module, string file, Action<T> callback)
+        {
+            if (cacheData && (string.IsNullOrEmpty(module) || string.IsNullOrEmpty(file)))
+            {
+                return;
+            }
+
+            //for callback
+            onCallback = callback;
+            toCacheData = cacheData;
+            moduleName = module;
+            fileName = file;
+
+            //load cache
+            if (cacheData)
+            {
+                try
+                {
+                    var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
+                    T obj = JsonSerializer.Deserialize<T>(cachedJson);
+                    if (obj != null)
+                    {
+                        Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        {
+                            onCallback(obj);
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+
+            //download new
+            if (!DeviceNetworkInformation.IsNetworkAvailable)
+            {
+                return;
+            }
+            try
+            {
+                String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim();
+                HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
+                request.Method = "GET";
+                request.BeginGetResponse(GetData_Callback, request);
+
+                Loaded = false;
+                Busy = true;
+            }
+            catch (WebException e)
+            {
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+        private async void GetData_Callback(IAsyncResult result)
+        {
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)result.AsyncState;
+                WebResponse response = request.EndGetResponse(result);
+
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string json = reader.ReadToEnd();
+                    JsonObjectWrapper<T> wrapper = JsonSerializer.Deserialize<JsonObjectWrapper<T>>(json);
+                    if (wrapper != null && wrapper.data != null)
+                    {
+                        Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        {
+                            onCallback(wrapper.data);
+                        });
+                    }
+
+                    if (toCacheData)
+                    {
+                        await IsolatedStorageHelper.WriteToFile(moduleName, fileName, json);
+                    }
+                }
+                Loaded = true;
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                Busy = false;
+            }
+        }
+    }
+
     public class DataLoader<T> where T : class
     {
         public bool Busy = false;
@@ -120,7 +232,6 @@ namespace WinterOlympics2014WP.Utility
                 Busy = false;
             }
         }
-
     }
 
     [DataContract]
@@ -161,9 +272,6 @@ namespace WinterOlympics2014WP.Utility
             moduleName = module;
             fileName = file;
             toCacheData = cacheData;
-
-            //clear list
-
 
             //load cache
             if (cacheData)
@@ -410,6 +518,11 @@ namespace WinterOlympics2014WP.Utility
                 isEqual = true;
             }
             return isEqual;
+        }
+
+        internal void Load(string p1, string p2, bool p3, string p4, string p5, Action<List<Models.LiveData>> action)
+        {
+            throw new NotImplementedException();
         }
     }
 

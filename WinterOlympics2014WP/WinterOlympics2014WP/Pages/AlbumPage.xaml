@@ -95,6 +95,7 @@
             
             <TextBlock x:Name="indexTextBlock" Text="" Style="{StaticResource AlbumPage_Index_Text_Style}"/>
         </Grid>
+        
         <controls:Snow x:Name="snow1"/>
 
         <controls:CuteToast x:Name="toast"/>

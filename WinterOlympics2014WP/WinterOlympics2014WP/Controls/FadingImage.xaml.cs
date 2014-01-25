@@ -18,7 +18,7 @@ namespace WinterOlympics2014WP.Controls
         #region Property
 
         //duration
-        private static TimeSpan FadingDuration = TimeSpan.FromMilliseconds(900);
+        private static TimeSpan FadingDuration = TimeSpan.FromMilliseconds(500);
 
         //source
         private ImageSource _Source = null;
@@ -56,12 +56,14 @@ namespace WinterOlympics2014WP.Controls
             set { SetValue(StretchProperty, value); }
         }
         public static readonly DependencyProperty StretchProperty =
-            DependencyProperty.Register("Stretch", typeof(Stretch), typeof(FadingImage), new PropertyMetadata(Stretch.UniformToFill));
+            DependencyProperty.Register("Stretch", typeof(Stretch), typeof(FadingImage), new PropertyMetadata(Stretch.UniformToFill, OnStretchPropertyChanged));
 
-        ////loaded
-        //private bool _Loaded = false;
-        ////image
-        //private bool _ImageOpened = false;
+        private static void OnStretchPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            FadingImage control = d as FadingImage;
+            Stretch newValue = (Stretch)e.NewValue;
+            control.image.Stretch = newValue;
+        }
 
         #endregion
 

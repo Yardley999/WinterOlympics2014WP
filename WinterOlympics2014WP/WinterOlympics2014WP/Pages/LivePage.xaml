@@ -10,7 +10,7 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
-    
+
     <phone:PhoneApplicationPage.Resources>
         <SolidColorBrush x:Key="LivePage_Description_SplitBar_Color" Color="#ff808080"/>
     </phone:PhoneApplicationPage.Resources>
@@ -34,18 +34,17 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
+                
                 <!--title panel-->
-                <Grid Grid.Row="0" Height="180">
-                    <Image Source="{Binding BigImage}" Stretch="UniformToFill"/>
-                    <TextBlock Text="正在直播" Style="{StaticResource LivePage_Title_Text_Style}" VerticalAlignment="Top" Margin="24,24,0,0"/>
-
-                    <StackPanel Margin="24,0,0,24" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                        <TextBlock Text="{Binding Title}" Style="{StaticResource LivePage_Title_Text_Style}"/>
-                        <TextBlock Text="{Binding Description}" Style="{StaticResource LivePage_SubTitle_Text_Style}" Margin="0,4,0,0"/>
-                    </StackPanel>
+                <Grid Grid.Row="0" Height="180" Background="Gray">
+                    <controls:FadingImage x:Name="titleImage" Stretch="UniformToFill"/>
+                    <TextBlock x:Name="titleTextBlock2" Style="{StaticResource LivePage_Title_Text_Style}"
+                               VerticalAlignment="Bottom" Margin="25,0,0,23" Foreground="#ff000000"/>
+                    <TextBlock x:Name="titleTextBlock1" Style="{StaticResource LivePage_Title_Text_Style}"
+                               VerticalAlignment="Bottom" Margin="24,0,0,24" />
                 </Grid>
 
-                <!--title panel-->
+                <!--score panel-->
                 <Grid Grid.Row="1" Height="64">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -65,29 +64,15 @@
                         <TextBlock Text="瑞士" Style="{StaticResource LivePage_Country_Text_Style}"/>
                     </StackPanel>
                 </Grid>
+                
+                <!--TO-DO : ranklist panel-->
 
-                <!--title panel-->
-                <Grid Grid.Row="2" MaxHeight="400">
-                    <ItemsControl x:Name="descriptionListBox">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Height="80" Margin="0,0,0,0">
-                                    <Rectangle Style="{StaticResource Item_SplitBar_Top_Style}" Margin="12,0,12,0"/>
-                                    <TextBlock Text="{Binding}" 
-                                                   Style="{StaticResource LivePage_Description_Text_Style}"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                <!--live content panel-->
+                <Grid Grid.Row="2" Background="LightGray">
+                    <StackPanel x:Name="lineItemsStackPanel" Margin="0,12,0,0"/>
                 </Grid>
 
-                <!--title panel-->
-                <Grid Grid.Row="3">
+                <!--<Grid Grid.Row="3">
                     <Grid Height="180" Margin="0,0,0,1">
                         <Grid.Clip>
                             <RectangleGeometry Rect="0,0,480,180"/>
@@ -111,7 +96,6 @@
                     </Grid>
                 </Grid>
 
-                <!--title panel-->
                 <Grid Grid.Row="4">
                     <Grid Height="180" Margin="0,0,0,1">
                         <Grid.Clip>
@@ -134,7 +118,7 @@
                             </Grid>
                         </controls:ContentButton>
                     </Grid>
-                </Grid>
+                </Grid>-->
             </Grid>
         </ScrollViewer>
 

@@ -109,6 +109,12 @@
       <DependentUpon>CategoryButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ContentButton.cs" />
+    <Compile Include="Controls\LivePageItemVideo.xaml.cs">
+      <DependentUpon>LivePageItemVideo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LivePageItemAlbum.xaml.cs">
+      <DependentUpon>LivePageItemAlbum.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CuteToast.xaml.cs">
       <DependentUpon>CuteToast.xaml</DependentUpon>
     </Compile>
@@ -124,6 +130,9 @@
     <Compile Include="Controls\ImageToggleButton.cs" />
     <Compile Include="Controls\ListMoreButton.xaml.cs">
       <DependentUpon>ListMoreButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LivePageItemLiveText.xaml.cs">
+      <DependentUpon>LivePageItemLiveText.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\QuickSelector.xaml.cs">
       <DependentUpon>QuickSelector.xaml</DependentUpon>
@@ -149,9 +158,10 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CalendarItem.cs" />
     <Compile Include="Models\Banner.cs" />
+    <Compile Include="Models\Enum.cs" />
     <Compile Include="Models\HTML.cs" />
     <Compile Include="Models\Stadium.cs" />
-    <Compile Include="Models\Program.cs" />
+    <Compile Include="Models\LiveData.cs" />
     <Compile Include="Models\EPG.cs" />
     <Compile Include="Models\GameResult.cs" />
     <Compile Include="Models\IEnumberable.cs" />
@@ -230,6 +240,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\LivePageItemVideo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\LivePageItemAlbum.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\CuteToast.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -247,6 +265,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ListMoreButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LivePageItemLiveText.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
