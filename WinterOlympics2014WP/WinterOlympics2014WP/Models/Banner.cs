@@ -16,5 +16,11 @@ namespace WinterOlympics2014WP.Models
 
         [DataMember(Name = "img")]
         public string Image { get; set; }
+
+        [DataMember(Name = "type")]
+        public string Type { get; set; }
+
+        [DataMember(Name = "url")]
+        public string URL { get; set; }
     }
 }

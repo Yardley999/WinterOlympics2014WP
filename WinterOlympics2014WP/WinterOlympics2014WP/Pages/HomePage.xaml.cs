@@ -7,8 +7,6 @@ using Microsoft.Phone.Shell;
 using System.Windows.Media.Imaging;
 using WinterOlympics2014WP.Models;
 using WinterOlympics2014WP.Utility;
-using WinterOlympics2014WP.Animations;
-using System.Linq;
 using WinterOlympics2014WP.Controls;
 using System.Collections.ObjectModel;
 
@@ -40,8 +38,7 @@ namespace WinterOlympics2014WP.Pages
             LoadSplashImage();
             LoadBanner();
             LoadEpg(false);
-            LoadNews(false);
-
+            LoadNews();
             //fadeAnimation.InstanceFade(this.contentPanel, 0d, 1d, Constants.NAVIGATION_DURATION, null);
         }
 
@@ -114,7 +111,7 @@ namespace WinterOlympics2014WP.Pages
 
         private void InitBannerControl()
         {
-            this.bannerControl.DismissAction = DismissBanner;
+            this.bannerControl.HostingPage = this;
         }
 
         private void DismissBanner()
@@ -212,7 +209,7 @@ namespace WinterOlympics2014WP.Pages
 
         void appBarRefreshNews_Click(object sender, EventArgs e)
         {
-            LoadNews(true);
+            ReloadNews();
         }
 
         void appBarSetting_Click(object sender, EventArgs e)
@@ -297,7 +294,8 @@ namespace WinterOlympics2014WP.Pages
 
         private void LoadEpg(bool reload)
         {
-            DateTime today = DateTime.Today;
+            //TO-DO : assign today
+            DateTime today = new DateTime(2014, 2, 8);// DateTime.Today.AddDays(-1);
             if (reload)
             {
                 epgList.ReloadEpg(today);
@@ -312,48 +310,66 @@ namespace WinterOlympics2014WP.Pages
 
         #region News
 
-        ListDataLoader<News> newsLoader = new ListDataLoader<News>();
+        GenericDataLoader<NewsList> newsLoader = new GenericDataLoader<NewsList>();
         ObservableCollection<News> newsList = new ObservableCollection<News>();
+        int newsPageIndex = 1;
+        int newsPageCount = 1;
 
-        private void LoadNews(bool reload)
+        private void LoadNews()
         {
-            if (reload)
-            {
-                newsLoader.Loaded = false;
-            }
-
             if (newsLoader.Loaded || newsLoader.Busy)
             {
                 return;
             }
 
+            //busy
             snowNews.IsBusy = true;
 
-            newsLoader.Load("getnewslist", string.Empty, true, Constants.NEWS_MODULE, Constants.NEWS_LIST_FILE_NAME,
+            //load
+            newsLoader.Load("getnewslist", "&page=" + newsPageIndex.ToString(), true, Constants.NEWS_MODULE, string.Format(Constants.NEWS_LIST_FILE_NAME_FORMAT, newsPageIndex),
                 list =>
                 {
-                    newsList.Clear();
-                    if (newsListItemsPanel!=null)
-                    {
-                        if (newsListItemsPanel.Children.Contains(newsMoreButton))
-                        {
-                            newsListItemsPanel.Children.Remove(newsMoreButton);
-                        }
-                    }
+                    newsPageCount = list.TotalPageCount;
+                    
+                    //remove more button
+                    TryRemoveMoreButton();
 
-                    foreach (var item in list)
+                    foreach (var item in list.data)
                     {
                         newsList.Add(item);
                     }
 
-                    newsListScrollViewer.ScrollToVerticalOffset(0);
-
-                    if (newsListItemsPanel != null)
+                    if (newsPageIndex < newsPageCount)
                     {
-                        newsListItemsPanel.Children.Add(newsMoreButton);
+                        //add more button
+                        EnsureMoreButton();
                     }
+
+                    //not busy
                     snowNews.IsBusy = false;
-                }, ComparisonNews);
+                });
+        }
+
+        private void LoadMoreNews()
+        {
+            newsPageIndex++;
+            if (newsPageIndex <= newsPageCount)
+            {
+                newsLoader.Loaded = false;
+                LoadNews();
+            }
+        }
+
+        private void ReloadNews()
+        {
+            //reset values
+            newsPageIndex = 1;
+            newsPageCount = 1;
+            newsListScrollViewer.ScrollToVerticalOffset(0);
+            newsList.Clear();
+
+            newsLoader.Loaded = false;
+            LoadNews();
         }
 
         private bool ComparisonNews(News item1, News item2)
@@ -364,15 +380,52 @@ namespace WinterOlympics2014WP.Pages
         private void NewsItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             News news = sender.GetDataContext<News>();
-            string strUri = string.Format("/Pages/NewsDetailPage.xaml?{0}={1}", NaviParam.NEWS_ID, news.ID);
-            NavigationService.Navigate(new Uri(strUri, UriKind.Relative));
+            string naviString = string.Empty;
+            switch (news.Type)
+            {
+                case "0":
+                    VideoPage.PlayVideo(this, news.ID, this.snowNews);
+                    break;
+                case "1":
+                    naviString = string.Format("/Pages/NewsDetailPage.xaml?{0}={1}", NaviParam.NEWS_ID, news.ID);
+                    NavigationService.Navigate(new Uri(naviString, UriKind.Relative));
+                    break;
+                case "2":
+                    naviString = string.Format("/Pages/AlbumPage.xaml?{0}={1}", NaviParam.ALBUM_ID, news.ID);
+                    NavigationService.Navigate(new Uri(naviString, UriKind.Relative));
+                    break;
+                default:
+                    break;
+            }
         }
 
         StackPanel newsListItemsPanel = null;
-        ListMoreButton newsMoreButton = new ListMoreButton() { Margin = new Thickness(0,10,0,10) };
+        ListMoreButton newsMoreButton = new ListMoreButton() { Margin = new Thickness(0, 10, 0, 10) };
         private void NewsListItemsPanel_Loaded(object sender, RoutedEventArgs e)
         {
             newsListItemsPanel = sender as StackPanel;
+            newsMoreButton.Tap += newsMoreButton_Tap;
+        }
+
+        private void newsMoreButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            LoadMoreNews();
+        }
+
+        private void TryRemoveMoreButton()
+        {
+            if (newsListItemsPanel != null && newsListItemsPanel.Children.Contains(newsMoreButton))
+            {
+                newsListItemsPanel.Children.Remove(newsMoreButton);
+            }
+        }
+
+        private void EnsureMoreButton()
+        {
+            if (newsListItemsPanel != null && !newsListItemsPanel.Children.Contains(newsMoreButton))
+            {
+                newsListItemsPanel.Children.Add(newsMoreButton);
+            }
         }
 
         #endregion

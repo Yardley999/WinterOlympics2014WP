@@ -63,7 +63,7 @@ namespace WinterOlympics2014WP.Pages
                     //ShowPage();
                     this.scrollViewer.ScrollToVerticalOffset(0);
                     snow1.IsBusy = false;
-                }, Comparison);
+                });
         }
 
         private bool Comparison(Category item1, Category item2)

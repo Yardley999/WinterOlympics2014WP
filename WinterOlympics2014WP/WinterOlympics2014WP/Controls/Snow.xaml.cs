@@ -50,6 +50,7 @@ namespace WinterOlympics2014WP.Controls
             if (snowing)
             {
                 snowing = false;
+                _FadeAnimation.Stop();
                 _FadeAnimation.InstanceFade(this, 1d, 0, TimeSpan.FromMilliseconds(300),
                 fe =>
                 {

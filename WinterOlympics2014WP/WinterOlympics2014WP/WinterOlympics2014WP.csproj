@@ -109,6 +109,9 @@
       <DependentUpon>CategoryButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ContentButton.cs" />
+    <Compile Include="Controls\LivePageItemNews.xaml.cs">
+      <DependentUpon>LivePageItemNews.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LivePageItemVideo.xaml.cs">
       <DependentUpon>LivePageItemVideo.xaml</DependentUpon>
     </Compile>
@@ -158,13 +161,12 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CalendarItem.cs" />
     <Compile Include="Models\Banner.cs" />
-    <Compile Include="Models\Enum.cs" />
+    <Compile Include="Models\VOD.cs" />
     <Compile Include="Models\HTML.cs" />
     <Compile Include="Models\Stadium.cs" />
     <Compile Include="Models\LiveData.cs" />
     <Compile Include="Models\EPG.cs" />
     <Compile Include="Models\GameResult.cs" />
-    <Compile Include="Models\IEnumberable.cs" />
     <Compile Include="Models\Splash.cs" />
     <Compile Include="Models\MedalScore.cs" />
     <Compile Include="Models\GameSchedule.cs" />
@@ -244,6 +246,10 @@
     <Page Include="Controls\CategoryButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LivePageItemNews.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\LivePageItemVideo.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -405,11 +411,14 @@
     <Content Include="Assets\Images\CCTV5.png" />
     <Content Include="Assets\Images\CCTV5+.png" />
     <Content Include="Assets\Images\Games.png" />
+    <Content Include="Assets\Images\LivePageItemArrow.png" />
     <Content Include="Assets\Images\Medal1.png" />
     <Content Include="Assets\Images\Medal2.png" />
     <Content Include="Assets\Images\Medal3.png" />
     <Content Include="Assets\Images\MedalTallyPageBackground.jpg" />
     <Content Include="Assets\Images\PlayButton.png" />
+    <Content Include="Assets\Images\PlayButton48.png" />
+    <Content Include="Assets\Images\PlayButton99.png" />
     <Content Include="Assets\Images\Snow\BigSnow.png" />
     <Content Include="Assets\Images\Snow\Snow1.png" />
     <Content Include="Assets\Images\Snow\Snow2.png" />
@@ -425,21 +434,12 @@
     <Content Include="Assets\Images\TopBar.png" />
     <Content Include="Assets\Images\Trophy.png" />
     <Content Include="Assets\Images\UnSubscribe.png" />
-    <Content Include="Assets\Sample\Country1.PNG" />
-    <Content Include="Assets\Sample\Country2.PNG" />
-    <Content Include="Assets\Sample\SportSample.jpg" />
     <Content Include="Assets\Images\TimelineTag.png" />
-    <Content Include="Assets\Sample\NewsDetailSample.jpg" />
-    <Content Include="Assets\Sample\StadiumDetailSample.jpg" />
-    <Content Include="Assets\Sample\StadiumSample.jpg" />
     <Content Include="Assets\Tiles\icon100x100.png" />
     <Content Include="Assets\Images\QuickSelectorPreview.png" />
-    <Content Include="Assets\Sample\SplashScreenSample.PNG" />
     <Content Include="Assets\Tiles\icon159x159.png" />
     <Content Include="Assets\Tiles\icon336x336.png" />
-    <Content Include="SplashScreenImage.screen-720p.jpg" />
-    <Content Include="SplashScreenImage.screen-WVGA.jpg" />
-    <Content Include="SplashScreenImage.screen-WXGA.jpg" />
+    <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">

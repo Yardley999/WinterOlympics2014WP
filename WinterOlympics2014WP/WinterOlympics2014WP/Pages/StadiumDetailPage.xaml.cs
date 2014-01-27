@@ -40,13 +40,13 @@ namespace WinterOlympics2014WP.Pages
                 return;
             }
 
-            snow2.IsBusy = true;
+            snow1.IsBusy = true;
 
             htmlLoader.Load("getstadiumdetail", "&id=" + stadiumID, true, Constants.STADIUM_MODULE, string.Format(Constants.STADIUM_DETAIL_FILE_NAME_FORMAT, stadiumID),
                 html =>
                 {
                     browser.NavigateToString(html.Content);
-                    snow2.IsBusy = false;
+                    snow1.IsBusy = false;
                 });
         }
 

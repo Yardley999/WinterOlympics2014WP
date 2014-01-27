@@ -23,18 +23,19 @@ namespace WinterOlympics2014WP.Models
 
         [DataMember(Name = "time")]
         public DateTime Time { get; set; }
-
-        //[DataMember]
-        //public bool hasfocus { get; set; }
-
-        //[DataMember]
-        //public bool view { get; set; }
     }
 
-    //[DataContract]
-    //public class NewsList
-    //{
-    //    [DataMember]
-    //    public News[] data { get; set; }
-    //}
+    [DataContract]
+    public class NewsList
+    {
+        [DataMember]
+        public News[] data { get; set; }
+
+        [DataMember(Name = "total")]
+        public int TotalPageCount { get; set; }
+
+        [DataMember(Name = "page")]
+        public int CurrentPageIndex { get; set; }
+
+    }
 }

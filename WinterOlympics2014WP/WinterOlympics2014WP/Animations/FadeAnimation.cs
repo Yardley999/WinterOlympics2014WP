@@ -111,6 +111,14 @@ namespace WinterOlympics2014WP.Animations
             AnimationPool.Push(this);
         }
 
+        public void Stop()
+        {
+            if (_Storyboard!=null)
+            {
+                _Storyboard.Stop();
+            }
+        }
+
         #endregion
 
     }

@@ -15,7 +15,7 @@
         <SolidColorBrush x:Key="LivePage_Description_SplitBar_Color" Color="#ff808080"/>
     </phone:PhoneApplicationPage.Resources>
 
-    <Grid x:Name="LayoutRoot" Background="White">
+    <Grid x:Name="LayoutRoot" Background="#ffe0e0e0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -31,21 +31,20 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <!--title panel-->
-                <Grid Grid.Row="0" Height="180" Background="Gray">
+                <Grid Grid.Row="0" Height="180" Background="#ffffffff">
                     <controls:FadingImage x:Name="titleImage" Stretch="UniformToFill"/>
                     <TextBlock x:Name="titleTextBlock2" Style="{StaticResource LivePage_Title_Text_Style}"
-                               VerticalAlignment="Bottom" Margin="25,0,0,23" Foreground="#ff000000"/>
+                               VerticalAlignment="Bottom" Margin="25,0,23,23" Foreground="#ff000000"/>
                     <TextBlock x:Name="titleTextBlock1" Style="{StaticResource LivePage_Title_Text_Style}"
-                               VerticalAlignment="Bottom" Margin="24,0,0,24" />
+                               VerticalAlignment="Bottom" Margin="24,0,24,24" />
                 </Grid>
 
                 <!--score panel-->
-                <Grid Grid.Row="1" Height="64">
+                <Grid x:Name="scorePanel" Grid.Row="1" Background="#ffffffff" Visibility="Collapsed">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
@@ -53,15 +52,17 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Source="/Assets/Sample/Country1.png" HorizontalAlignment="Right" Margin="0,0,24,0" Width="64" Stretch="Uniform"/>
-                    <Image Grid.Column="4" Source="/Assets/Sample/Country2.png" HorizontalAlignment="Left" Margin="24,0,24,0" Width="64" Stretch="Uniform"/>
+                    <Rectangle Grid.ColumnSpan="5" Style="{StaticResource Item_SplitBar_Bottom_Style}"/>
 
-                    <TextBlock Grid.Column="1" Text="3" Style="{StaticResource LivePage_Score_Text_Style}"/>
-                    <TextBlock Grid.Column="3" Text="2" Style="{StaticResource LivePage_Score_Text_Style}"/>
+                    <Image Grid.Column="0" Source="{Binding Image1}" HorizontalAlignment="Right" Margin="0,12,24,12" Width="64" Height="64" Stretch="Uniform"/>
+                    <Image Grid.Column="4" Source="{Binding Image2}" HorizontalAlignment="Left" Margin="24,12,24,12" Width="64" Height="64" Stretch="Uniform"/>
+
+                    <TextBlock Grid.Column="1" Text="{Binding Score1}" Style="{StaticResource LivePage_Score_Text_Style}"/>
+                    <TextBlock Grid.Column="3" Text="{Binding Score2}" Style="{StaticResource LivePage_Score_Text_Style}"/>
                     <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="12,0,12,0" VerticalAlignment="Center">
-                        <TextBlock Text="挪威" Style="{StaticResource LivePage_Country_Text_Style}"/>
-                        <TextBlock Text="VS" Style="{StaticResource LivePage_Country_Text_Style}"/>
-                        <TextBlock Text="瑞士" Style="{StaticResource LivePage_Country_Text_Style}"/>
+                        <TextBlock Text="{Binding Player1}" Style="{StaticResource LivePage_Country_Text_Style}"/>
+                        <TextBlock Text=" VS " Style="{StaticResource LivePage_Country_Text_Style}"/>
+                        <TextBlock Text="{Binding Player2}" Style="{StaticResource LivePage_Country_Text_Style}"/>
                     </StackPanel>
                 </Grid>
 
@@ -69,14 +70,14 @@
                 <ItemsControl Grid.Row="2" x:Name="rankListBox">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Margin="0,0,0,0"/>
+                            <StackPanel Margin="0,0,0,0" Background="#ffffffff"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Height="64" >
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="32"/>
+                                    <ColumnDefinition Width="48"/>
                                     <ColumnDefinition Width="32"/>
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="*"/>
@@ -94,7 +95,19 @@
                 </ItemsControl>
 
                 <!--live content panel-->
-                <StackPanel Grid.Row="3" x:Name="lineItemsStackPanel" Margin="0,12,0,0"/>
+                <Grid Grid.Row="3">
+                    <StackPanel x:Name="lineItemsStackPanel" Margin="0,0,0,12" />
+                </Grid>
+
+                <!--shadow-->
+                <Rectangle Grid.Row="0" IsHitTestVisible="False" VerticalAlignment="Bottom" Height="8" Margin="0,0,0,-8">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#ff808080" Offset="0"/>
+                            <GradientStop Color="#00808080" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
 
                 <!--<Grid Grid.Row="3">
                     <Grid Height="180" Margin="0,0,0,1">

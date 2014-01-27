@@ -7,11 +7,33 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="clr-namespace:WinterOlympics2014WP.Controls"
-    SupportedOrientations="Landscape" Orientation="Landscape"
+    SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
-    <Grid x:Name="LayoutRoot" Background="White">
+    <Grid x:Name="LayoutRoot" Background="#ff000000">
+        <ScrollViewer>
+            <ItemsControl x:Name="videoListBox">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Margin="0,0,0,12"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="456" Height="304" Margin="12,0,12,12" 
+                                BorderBrush="#ffffffff" BorderThickness="1">
+                            <Grid>
+                                <controls:FadingImage Source="{Binding Image}" Stretch="UniformToFill" />
+                                <controls:ContentButton Tap="Video_Tap">
+                                    <Image Source="/Assets/Images/PlayButton99.png" Stretch="None" />
+                                </controls:ContentButton>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 
 </phone:PhoneApplicationPage>

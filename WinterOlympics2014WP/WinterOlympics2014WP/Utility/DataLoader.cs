@@ -26,7 +26,7 @@ namespace WinterOlympics2014WP.Utility
         }
 
         /* don't even try to convert this method into an awaitable method, as the callback should be called twice: 
-         * first when local cache is loaded,  second when the new data is downloaded. Async-callback approach in better solution
+         * first when local cache is loaded,  second when the new data is downloaded. Async-callback approach is better solution
          * than awaitable method for such use case.
         */
         public async void Load(string cmd, string param, bool cacheData, string module, string file, Action<T> callback)
@@ -42,31 +42,31 @@ namespace WinterOlympics2014WP.Utility
             moduleName = module;
             fileName = file;
 
-            //load cache
-            if (cacheData)
+            if (!DeviceNetworkInformation.IsNetworkAvailable)
             {
-                try
+                //load cache
+                if (cacheData)
                 {
-                    var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
-                    T obj = JsonSerializer.Deserialize<T>(cachedJson);
-                    if (obj != null)
+                    try
                     {
-                        Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
+                        T obj = JsonSerializer.Deserialize<T>(cachedJson);
+                        if (obj != null)
                         {
-                            onCallback(obj);
-                        });
+                            Deployment.Current.Dispatcher.BeginInvoke(() =>
+                            {
+                                onCallback(obj);
+                            });
+                        }
+                    }
+                    catch (Exception ex)
+                    {
                     }
                 }
-                catch (Exception ex)
-                {
-                }
+                return;
             }
 
             //download new
-            if (!DeviceNetworkInformation.IsNetworkAvailable)
-            {
-                return;
-            }
             try
             {
                 String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim();
@@ -96,12 +96,12 @@ namespace WinterOlympics2014WP.Utility
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     string json = reader.ReadToEnd();
-                    JsonObjectWrapper<T> wrapper = JsonSerializer.Deserialize<JsonObjectWrapper<T>>(json);
-                    if (wrapper != null && wrapper.data != null)
+                    T obj = JsonSerializer.Deserialize<T>(json);
+                    if (obj != null)
                     {
                         Deployment.Current.Dispatcher.BeginInvoke(() =>
                         {
-                            onCallback(wrapper.data);
+                            onCallback(obj);
                         });
                     }
 
@@ -138,7 +138,7 @@ namespace WinterOlympics2014WP.Utility
         }
 
         /* don't even try to convert this method into an awaitable method, as the callback should be called twice: 
-         * first when local cache is loaded,  second when the new data is downloaded. Async-callback approach in better solution
+         * first when local cache is loaded,  second when the new data is downloaded. Async-callback approach is better solution
          * than awaitable method for such use case.
         */
         public async void Load(string cmd, string param, bool cacheData, string module, string file, Action<T> callback)
@@ -154,31 +154,31 @@ namespace WinterOlympics2014WP.Utility
             moduleName = module;
             fileName = file;
 
-            //load cache
-            if (cacheData)
+            if (!DeviceNetworkInformation.IsNetworkAvailable)
             {
-                try
+                //load cache
+                if (cacheData)
                 {
-                    var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
-                    JsonObjectWrapper<T> wrapper = JsonSerializer.Deserialize<JsonObjectWrapper<T>>(cachedJson);
-                    if (wrapper != null && wrapper.data != null)
+                    try
                     {
-                        Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
+                        JsonObjectWrapper<T> wrapper = JsonSerializer.Deserialize<JsonObjectWrapper<T>>(cachedJson);
+                        if (wrapper != null && wrapper.data != null)
                         {
-                            onCallback(wrapper.data);
-                        });
+                            Deployment.Current.Dispatcher.BeginInvoke(() =>
+                            {
+                                onCallback(wrapper.data);
+                            });
+                        }
+                    }
+                    catch (Exception ex)
+                    {
                     }
                 }
-                catch (Exception ex)
-                {
-                }
+                return;
             }
 
             //download new
-            if (!DeviceNetworkInformation.IsNetworkAvailable)
-            {
-                return;
-            }
             try
             {
                 String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim();
@@ -273,36 +273,36 @@ namespace WinterOlympics2014WP.Utility
             fileName = file;
             toCacheData = cacheData;
 
-            //load cache
-            if (cacheData)
+            if (!DeviceNetworkInformation.IsNetworkAvailable)
             {
-                try
+                //load cache
+                if (cacheData)
                 {
-                    var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
-                    JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(cachedJson);
-                    if (wrapper != null && wrapper.data != null)
+                    try
                     {
-                        Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
+                        JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(cachedJson);
+                        if (wrapper != null && wrapper.data != null)
                         {
-                            List<T> list = new List<T>();
-                            for (int i = 0; i < wrapper.data.Length; i++)
+                            Deployment.Current.Dispatcher.BeginInvoke(() =>
                             {
-                                list.Add(wrapper.data[i]);
-                            }
-                            onCallback(list);
-                        });
+                                List<T> list = new List<T>();
+                                for (int i = 0; i < wrapper.data.Length; i++)
+                                {
+                                    list.Add(wrapper.data[i]);
+                                }
+                                onCallback(list);
+                            });
+                        }
+                    }
+                    catch (Exception ex)
+                    {
                     }
                 }
-                catch (Exception ex)
-                {
-                }
+                return;
             }
 
             //download new
-            if (!DeviceNetworkInformation.IsNetworkAvailable)
-            {
-                return;
-            }
             try
             {
                 String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim();
@@ -386,36 +386,36 @@ namespace WinterOlympics2014WP.Utility
 
                 _Comparison = comparison;
 
-                //load cache
-                if (cacheData)
+                if (!DeviceNetworkInformation.IsNetworkAvailable)
                 {
-                    try
+                    //load cache
+                    if (cacheData)
                     {
-                        var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
-                        JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(cachedJson);
-                        if (wrapper != null && wrapper.data != null)
+                        try
                         {
-                            Deployment.Current.Dispatcher.BeginInvoke(() =>
+                            var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
+                            JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(cachedJson);
+                            if (wrapper != null && wrapper.data != null)
                             {
-                                _LoadedList.Clear();
-                                for (int i = 0; i < wrapper.data.Length; i++)
+                                Deployment.Current.Dispatcher.BeginInvoke(() =>
                                 {
-                                    _LoadedList.Add(wrapper.data[i]);
-                                }
-                                onCallback(_LoadedList);
-                            });
+                                    _LoadedList.Clear();
+                                    for (int i = 0; i < wrapper.data.Length; i++)
+                                    {
+                                        _LoadedList.Add(wrapper.data[i]);
+                                    }
+                                    onCallback(_LoadedList);
+                                });
+                            }
+                        }
+                        catch (Exception ex)
+                        {
                         }
                     }
-                    catch (Exception ex)
-                    {
-                    }
+                    return;
                 }
 
                 //download new
-                if (!DeviceNetworkInformation.IsNetworkAvailable)
-                {
-                    return;
-                }
                 try
                 {
                     String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim();

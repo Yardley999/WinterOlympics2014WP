@@ -366,6 +366,7 @@
         <Setter Property="FontSize" Value="30"/>
         <Setter Property="Foreground" Value="#ffffffff"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
     <Style x:Key="LivePage_Country_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
@@ -381,6 +382,14 @@
         <Setter Property="Margin" Value="0,0,0,0"/>
     </Style>
 
+    <Style x:Key="LivePage_ItemTime_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="#ff5d5d5d"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="0,-6,20,0"/>
+    </Style>
+    
     <Style x:Key="LivePage_LiveText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="Foreground" Value="#ff000000"/>
@@ -388,13 +397,13 @@
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
 
-    <Style x:Key="LivePage_ItemText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
+    <Style x:Key="LivePage_ItemTitle_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Foreground" Value="#ff000000"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
-    
+
     <!--category page-->
     <Style x:Key="CategoryPage_Date_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
         <Setter Property="FontSize" Value="20"/>

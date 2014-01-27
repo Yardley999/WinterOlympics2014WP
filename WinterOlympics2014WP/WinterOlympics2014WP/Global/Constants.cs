@@ -26,7 +26,7 @@ namespace WinterOlympics2014WP
 
         //news 
         public const string NEWS_MODULE = "news";
-        public const string NEWS_LIST_FILE_NAME = "news_list.txt";
+        public const string NEWS_LIST_FILE_NAME_FORMAT = "news_list_page_{0}.txt";
         public const string NEWS_DETAIL_FILE_NAME_FORMAT = "news_{0}.txt";
 
         //medal tally
@@ -68,6 +68,10 @@ namespace WinterOlympics2014WP
 
         //animation duration
         public static TimeSpan NAVIGATION_DURATION = TimeSpan.FromMilliseconds(200);
+
+        //vod
+        public const string VOD_MODULE = "vod";
+        public const string VOD_FILE_NAME_FORMAT = "vod_{0}.txt";
     }
 
     public class NaviParam
@@ -84,6 +88,7 @@ namespace WinterOlympics2014WP
 
         public const string STADIUM_ID = "stadium_id";
         public const string NEWS_ID = "news_id";
+        //public const string VOD_ID = "vod_id";
 
     }
 }

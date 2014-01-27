@@ -60,7 +60,7 @@ namespace WinterOlympics2014WP.Pages
                     }
                     scrollViewer.ScrollToVerticalOffset(0);
                     snow1.IsBusy = false;
-                }, Comparison);
+                });
         }
 
         private bool Comparison(Stadium item1, Stadium item2)

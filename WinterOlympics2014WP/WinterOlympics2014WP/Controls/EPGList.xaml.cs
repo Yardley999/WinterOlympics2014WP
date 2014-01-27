@@ -99,7 +99,7 @@ namespace WinterOlympics2014WP.Controls
                         epgListBox.ScrollIntoView(list.FirstOrDefault());
                         snow1.IsBusy = false;
                     }
-                }, Comparison);
+                });
         }
 
         private bool Comparison(EPG item1, EPG item2)

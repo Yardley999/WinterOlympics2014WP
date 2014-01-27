@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using WinterOlympics2014WP.Utility;
 using WinterOlympics2014WP.Models;
+using WinterOlympics2014WP.Pages;
+using Microsoft.Phone.Tasks;
 
 namespace WinterOlympics2014WP.Controls
 {
     public partial class BannerControl : UserControl
     {
-        public Action DismissAction = null;
+        public Page HostingPage { get; set; }
+        App App { get { return App.Current as App; } }
 
         public BannerControl()
         {
@@ -23,12 +19,47 @@ namespace WinterOlympics2014WP.Controls
 
         private void dismissButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            if (DismissAction!=null)
-            {
-                DismissAction();
-            }
+            Banner banner = sender.GetDataContext<Banner>();
+            App.DismissedBannerId = banner.ID;
+            this.Visibility = System.Windows.Visibility.Collapsed;
         }
 
+        private void banner_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (HostingPage != null)
+            {
+                Banner banner = sender.GetDataContext<Banner>();
+                if (banner != null)
+                {
+                    string naviString = string.Empty;
+                    switch (banner.Type)
+                    {
+                        case "0":
+                            VideoPage.PlayVideo(HostingPage, banner.ID, this.snow1);
+                            break;
+                        case "1":
+                            naviString = string.Format("/Pages/NewsDetailPage.xaml?{0}={1}", NaviParam.NEWS_ID, banner.ID);
+                            HostingPage.NavigationService.Navigate(new Uri(naviString, UriKind.Relative));
+                            break;
+                        case "2":
+                            naviString = string.Format("/Pages/AlbumPage.xaml?{0}={1}", NaviParam.ALBUM_ID, banner.ID);
+                            HostingPage.NavigationService.Navigate(new Uri(naviString, UriKind.Relative));
+                            break;
+                        case "4":
+                            if (!string.IsNullOrEmpty(banner.URL))
+                            {
+                                WebBrowserTask webbrowser = new WebBrowserTask();
+                                webbrowser.Uri = new Uri(banner.URL, UriKind.Absolute);
+                                webbrowser.Show();
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+            }
+        }
 
     }
 }
