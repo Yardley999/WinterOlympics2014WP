@@ -34,7 +34,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                
+
                 <!--title panel-->
                 <Grid Grid.Row="0" Height="180" Background="Gray">
                     <controls:FadingImage x:Name="titleImage" Stretch="UniformToFill"/>
@@ -64,13 +64,37 @@
                         <TextBlock Text="瑞士" Style="{StaticResource LivePage_Country_Text_Style}"/>
                     </StackPanel>
                 </Grid>
-                
+
                 <!--TO-DO : ranklist panel-->
+                <ItemsControl Grid.Row="2" x:Name="rankListBox">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Margin="0,0,0,0"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="64" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="32"/>
+                                    <ColumnDefinition Width="32"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <Rectangle Grid.ColumnSpan="5" Style="{StaticResource Item_SplitBar_Bottom_Style}"/>
+                                <TextBlock Grid.Column="0" Text="{Binding Rank}" Style="{StaticResource GameResultPanel_Text_Style}" HorizontalAlignment="Center"/>
+                                <Image Grid.Column="1" Width="32" Height="32" Stretch="Uniform" Source="{Binding Image}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Country}" Style="{StaticResource GameResultPanel_Text_Style}"/>
+                                <TextBlock Grid.Column="3" Text="{Binding Player}" Style="{StaticResource GameResultPanel_Text_Style}"/>
+                                <TextBlock Grid.Column="4" Text="{Binding Score}" Style="{StaticResource GameResultPanel_Text_Style}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
                 <!--live content panel-->
-                <Grid Grid.Row="2" Background="LightGray">
-                    <StackPanel x:Name="lineItemsStackPanel" Margin="0,12,0,0"/>
-                </Grid>
+                <StackPanel Grid.Row="3" x:Name="lineItemsStackPanel" Margin="0,12,0,0"/>
 
                 <!--<Grid Grid.Row="3">
                     <Grid Height="180" Margin="0,0,0,1">

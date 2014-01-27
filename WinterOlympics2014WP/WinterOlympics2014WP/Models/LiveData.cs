@@ -13,7 +13,7 @@ namespace WinterOlympics2014WP.Models
         public LiveScore Score { get; set; }
 
         [DataMember(Name = "ranklist")]
-        public LiveRankListItem[] RankList { get; set; }
+        public RankItem[] RankList { get; set; }
     }
 
     [DataContract]
@@ -66,19 +66,22 @@ namespace WinterOlympics2014WP.Models
         public int Score2 { get; set; }
     }
 
-    [DataContract]
-    public class LiveRankListItem
-    {
-        [DataMember(Name = "country")]
-        public string Country { get; set; }
+    //[DataContract]
+    //public class LiveRankListItem
+    //{
+    //    [DataMember(Name = "rank")]
+    //    public string Rank { get; set; }
 
-        [DataMember(Name = "img")]
-        public string Image { get; set; }
+    //    [DataMember(Name = "country")]
+    //    public string Country { get; set; }
 
-        [DataMember(Name = "player")]
-        public string Player { get; set; }
+    //    [DataMember(Name = "img")]
+    //    public string Image { get; set; }
 
-        [DataMember(Name = "score")]
-        public string Score { get; set; }
-    }
+    //    [DataMember(Name = "player")]
+    //    public string Player { get; set; }
+
+    //    [DataMember(Name = "score")]
+    //    public string Score { get; set; }
+    //}
 }

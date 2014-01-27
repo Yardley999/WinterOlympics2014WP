@@ -297,8 +297,7 @@ namespace WinterOlympics2014WP.Pages
 
         private void LoadEpg(bool reload)
         {
-            //TO-DO : get today instead of test date
-            DateTime today = new DateTime(2014, 2, 8);
+            DateTime today = DateTime.Today;
             if (reload)
             {
                 epgList.ReloadEpg(today);

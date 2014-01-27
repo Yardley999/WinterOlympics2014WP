@@ -13,6 +13,7 @@ namespace WinterOlympics2014WP.Controls
         public LivePageItemAlbum()
         {
             InitializeComponent();
+            this.Tap += UserControl_Tap;
         }
 
         private void UserControl_Tap(object sender, System.Windows.Input.GestureEventArgs e)

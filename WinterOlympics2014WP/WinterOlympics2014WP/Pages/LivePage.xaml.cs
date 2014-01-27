@@ -54,9 +54,6 @@ namespace WinterOlympics2014WP.Pages
 
         private void LoadData()
         {
-            //TO-DO : remove test line
-            liveID = "1000001804";
-
             if (liveLoader.Loaded || liveLoader.Busy)
             {
                 return;
@@ -69,13 +66,29 @@ namespace WinterOlympics2014WP.Pages
                 {
                     //TO-DO : check where to do this update
                     PopulateLineItems(data);
-
+                    PopulateRankList(data);
                     snow1.IsBusy = false;
                 });
         }
 
+        private void PopulateRankList(LiveData data)
+        {
+            if (data.RankList!=null && data.RankList.Length>0)
+            {
+                rankListBox.ItemsSource = data.RankList;
+            }
+        }
+
         private void PopulateLineItems(LiveData data)
         {
+            if (data==null)
+            {
+                return;
+            }
+            if (data.LineItems==null)
+            {
+                return;
+            }
             FrameworkElement control = null;
             lineItemsStackPanel.Children.Clear();
 
@@ -83,17 +96,17 @@ namespace WinterOlympics2014WP.Pages
             {
                 switch (item.Type)
                 {
-                    case 0:
-                        control = new LivePageItemVideo();
+                    case 0://video
+                        control = new LivePageItemVideo() { HostingPage = this };
                         break;
-                    case 1:
-                        control = new LivePageItemLiveText();//TO-DO : check design
+                    case 1://image text news
+                        control = new LivePageItemLiveText(){ HostingPage = this };
                         break;
-                    case 2:
+                    case 2://album
                         control = new LivePageItemAlbum() { HostingPage = this };
                         break;
-                    case 12:
-                        control = new LivePageItemLiveText();
+                    case 12://live text
+                        control = new LivePageItemLiveText() { HostingPage = this };
                         break;
                     default:
                         control = null;

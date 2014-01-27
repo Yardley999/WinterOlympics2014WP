@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="clr-namespace:WinterOlympics2014WP.Controls"
     mc:Ignorable="d"
-    Height="100" d:DesignWidth="480" Margin="12,0,12,12" Tap="UserControl_Tap">
+    Height="100" d:DesignWidth="480" Margin="12,0,12,12" >
 
     <Grid x:Name="LayoutRoot" Background="#ffffffff">
         <ItemsControl ItemsSource="{Binding Album}">

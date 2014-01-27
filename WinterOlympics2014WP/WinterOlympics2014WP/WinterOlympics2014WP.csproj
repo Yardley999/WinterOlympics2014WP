@@ -168,7 +168,12 @@
     <Compile Include="Models\Splash.cs" />
     <Compile Include="Models\MedalScore.cs" />
     <Compile Include="Models\GameSchedule.cs" />
+    <Compile Include="Pages\VideoPage.xaml.cs">
+      <DependentUpon>VideoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utility\BitmapImageExtension.cs" />
+    <Compile Include="Utility\Cryptography\CryptographyHelper.cs" />
+    <Compile Include="Utility\Cryptography\MD5.cs" />
     <Compile Include="Utility\DataContextGetter.cs" />
     <Compile Include="Utility\DataLoader.cs">
       <SubType>Code</SubType>
@@ -295,6 +300,10 @@
     <Page Include="Pages\CategoryListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\VideoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\MySubscriptionPage.xaml">
       <SubType>Designer</SubType>
