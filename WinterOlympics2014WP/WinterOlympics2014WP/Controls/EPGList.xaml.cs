@@ -93,7 +93,7 @@ namespace WinterOlympics2014WP.Controls
                 return;
             }
 
-            string param = "&date=" + date + "&token=&sign=&t=";
+            string param = "&date=" + date;
 
             snow1.IsBusy = true;
 

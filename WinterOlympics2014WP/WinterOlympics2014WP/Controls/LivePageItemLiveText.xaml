@@ -12,7 +12,11 @@
             <ColumnDefinition Width="90"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="{Binding Time, Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='hh:mm:ss'}" Style="{StaticResource LivePage_ItemTime_Style}"/>
+        <Image Source="/Assets/Images/ContentTypeIconLiveText.png" Stretch="None" VerticalAlignment="Top"/>
+        <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Background="#ffe0e0e0" Margin="0,0,0,4">
+            <TextBlock Text="{Binding Time, Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='hh:mm:ss'}" Style="{StaticResource LivePage_ItemTime_Style}"/>
+        </Grid>
+        
         <Grid Grid.Column="1" Background="#ffffffff">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>

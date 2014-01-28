@@ -230,14 +230,14 @@
     <!--banner-->
     <Style x:Key="Banner_Title_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
         <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Foreground" Value="#ff000000"/>
+        <Setter Property="Foreground" Value="#ffffffff"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
     <Style x:Key="Banner_Description_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyleBase}">
         <Setter Property="FontSize" Value="18"/>
-        <Setter Property="Foreground" Value="#ff000000"/>
+        <Setter Property="Foreground" Value="#ffffffff"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 

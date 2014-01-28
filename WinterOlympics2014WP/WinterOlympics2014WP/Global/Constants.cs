@@ -10,8 +10,6 @@ namespace WinterOlympics2014WP
     {
         public const string DOMAIN = "http://115.28.21.97";
 
-        public const string APP_NAME = "索契冬奥会";
-
         //splash
         public const string SPLASH_MODULE = "splash";
         public const string SPLASH_FILE_NAME = "splash.txt";

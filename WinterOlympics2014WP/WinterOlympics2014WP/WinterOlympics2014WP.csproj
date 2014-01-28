@@ -109,6 +109,9 @@
       <DependentUpon>CategoryButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ContentButton.cs" />
+    <Compile Include="Controls\HeaderMoreButton.xaml.cs">
+      <DependentUpon>HeaderMoreButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LivePageItemNews.xaml.cs">
       <DependentUpon>LivePageItemNews.xaml</DependentUpon>
     </Compile>
@@ -246,6 +249,10 @@
     <Page Include="Controls\CategoryButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\HeaderMoreButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\LivePageItemNews.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -406,6 +413,9 @@
     <Content Include="Assets\Images\CCTV1.png" />
     <Content Include="Assets\Images\CCTV5.png" />
     <Content Include="Assets\Images\CCTV5+.png" />
+    <Content Include="Assets\Images\ContentTypeIconAlbum.png" />
+    <Content Include="Assets\Images\ContentTypeIconLiveText.png" />
+    <Content Include="Assets\Images\ContentTypeIconNews.png" />
     <Content Include="Assets\Images\Games.png" />
     <Content Include="Assets\Images\LivePageItemArrow.png" />
     <Content Include="Assets\Images\Medal1.png" />
@@ -431,7 +441,7 @@
     <Content Include="Assets\Images\Trophy.png" />
     <Content Include="Assets\Images\UnSubscribe.png" />
     <Content Include="Assets\Images\TimelineTag.png" />
-    <Content Include="Assets\Images\VideoTypeIcon.png" />
+    <Content Include="Assets\Images\ContentTypeIconVideo.png" />
     <Content Include="Assets\Tiles\icon100x100.png" />
     <Content Include="Assets\Images\QuickSelectorPreview.png" />
     <Content Include="Assets\Tiles\icon159x159.png" />

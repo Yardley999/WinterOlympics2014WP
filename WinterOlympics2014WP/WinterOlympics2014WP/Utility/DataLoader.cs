@@ -69,7 +69,7 @@ namespace WinterOlympics2014WP.Utility
             //download new
             try
             {
-                String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim();
+                String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim() + CryptographyHelper.GetApiPostfix();
                 HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
                 request.Method = "GET";
                 request.BeginGetResponse(GetData_Callback, request);
@@ -181,7 +181,7 @@ namespace WinterOlympics2014WP.Utility
             //download new
             try
             {
-                String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim();
+                String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim() + CryptographyHelper.GetApiPostfix();
                 HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
                 request.Method = "GET";
                 request.BeginGetResponse(GetData_Callback, request);
@@ -305,7 +305,7 @@ namespace WinterOlympics2014WP.Utility
             //download new
             try
             {
-                String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim();
+                String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim() + CryptographyHelper.GetApiPostfix();
                 HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
                 request.Method = "GET";
                 request.BeginGetResponse(GetData_Callback, request);
@@ -418,7 +418,7 @@ namespace WinterOlympics2014WP.Utility
                 //download new
                 try
                 {
-                    String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim();
+                    String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim() + CryptographyHelper.GetApiPostfix();
                     HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
                     request.Method = "GET";
                     request.BeginGetResponse(GetData_Callback2, request);

@@ -46,6 +46,7 @@ namespace WinterOlympics2014WP.Pages
 
             LoadData();
             StartTimer();
+
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)

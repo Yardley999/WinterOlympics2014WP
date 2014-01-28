@@ -14,7 +14,7 @@ namespace WinterOlympics2014WP.Models
         [DataMember(Name = "desc")]
         public string Description { get; set; }
 
-        [DataMember(Name = "img")]
+        [DataMember(Name = "img2")]
         public string Image { get; set; }
 
         [DataMember(Name = "type")]

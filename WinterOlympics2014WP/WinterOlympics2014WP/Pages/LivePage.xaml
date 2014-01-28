@@ -27,7 +27,7 @@
         <Rectangle Grid.Row="1" Width="4" Fill="#ffffffff" HorizontalAlignment="Left" Margin="55,0,0,0"/>
 
         <!--content-->
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer x:Name="scrollViewer" Grid.Row="1">
             <Grid x:Name="ContentPanel">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -98,7 +98,7 @@
 
                 <!--live content panel-->
                 <Grid Grid.Row="3">
-                    <StackPanel x:Name="lineItemsStackPanel" Margin="0,0,0,12" />
+                    <StackPanel x:Name="lineItemsStackPanel" Margin="0,0,0,24" />
                 </Grid>
 
                 <!--shadow-->

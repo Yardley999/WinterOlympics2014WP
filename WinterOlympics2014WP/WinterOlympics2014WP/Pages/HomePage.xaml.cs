@@ -305,6 +305,11 @@ namespace WinterOlympics2014WP.Pages
             }
         }
 
+        private void TodayMoreButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            Navigate("/Pages/CalendarPage.xaml");
+        }
+
         #endregion
 
         #region News
