@@ -15,6 +15,7 @@ namespace WinterOlympics2014WP.Pages
     public partial class StadiumDetailPage : PhoneApplicationPage
     {
         private string stadiumID = string.Empty;
+        private string stadiumName = string.Empty;
 
         public StadiumDetailPage()
         {
@@ -26,6 +27,10 @@ namespace WinterOlympics2014WP.Pages
             base.OnNavigatedTo(e);
 
             stadiumID = NavigationContext.QueryString[NaviParam.STADIUM_ID];
+            stadiumName = NavigationContext.QueryString[NaviParam.STADIUM_NAME];
+
+            this.topBar.SecondaryHeader = stadiumName;
+
             LoadHTML();
         }
 

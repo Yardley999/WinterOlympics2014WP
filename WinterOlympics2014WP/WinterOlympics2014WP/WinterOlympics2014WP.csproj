@@ -131,12 +131,10 @@
       <DependentUpon>GameResultPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ImageToggleButton.cs" />
-    <Compile Include="Controls\ListMoreButton.xaml.cs">
-      <DependentUpon>ListMoreButton.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\LivePageItemLiveText.xaml.cs">
       <DependentUpon>LivePageItemLiveText.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NewsDataTemplateSelector.cs" />
     <Compile Include="Controls\QuickSelector.xaml.cs">
       <DependentUpon>QuickSelector.xaml</DependentUpon>
     </Compile>
@@ -161,6 +159,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CalendarItem.cs" />
     <Compile Include="Models\Banner.cs" />
+    <Compile Include="Models\CategoryPivotHeaderData.cs" />
     <Compile Include="Models\VOD.cs" />
     <Compile Include="Models\HTML.cs" />
     <Compile Include="Models\Stadium.cs" />
@@ -174,6 +173,7 @@
       <DependentUpon>VideoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utility\BitmapImageExtension.cs" />
+    <Compile Include="Utility\DataTemplateSelector.cs" />
     <Compile Include="Utility\Cryptography\CryptographyHelper.cs" />
     <Compile Include="Utility\Cryptography\MD5.cs" />
     <Compile Include="Utility\DataContextGetter.cs" />
@@ -272,10 +272,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\GameResultPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ListMoreButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -435,6 +431,7 @@
     <Content Include="Assets\Images\Trophy.png" />
     <Content Include="Assets\Images\UnSubscribe.png" />
     <Content Include="Assets\Images\TimelineTag.png" />
+    <Content Include="Assets\Images\VideoTypeIcon.png" />
     <Content Include="Assets\Tiles\icon100x100.png" />
     <Content Include="Assets\Images\QuickSelectorPreview.png" />
     <Content Include="Assets\Tiles\icon159x159.png" />

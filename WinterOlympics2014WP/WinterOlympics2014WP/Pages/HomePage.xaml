@@ -76,7 +76,7 @@
                         </Grid.RowDefinitions>
                         <controls:BannerControl x:Name="bannerControl" Visibility="Collapsed"/>
                         <controls:EPGList Grid.Row="1" x:Name="epgList"/>
-                    </Grid>
+                    </Grid> 
                 </phone:PanoramaItem>
 
                 <!--news-->
@@ -86,30 +86,64 @@
                             <ItemsControl x:Name="newsListBox">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <StackPanel Loaded="NewsListItemsPanel_Loaded"/>
+                                        <VirtualizingStackPanel />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid Margin="0,0,0,10">
-                                            <!--<Rectangle Height="1" Fill="{StaticResource App_Theme_Color}" VerticalAlignment="Top"/>-->
-                                            <controls:ContentButton Tap="NewsItem_Tap">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <controls:FadingImage Width="120" Height="100" Margin="0,10,0,0" Stretch="UniformToFill"
-                                                       Source="{Binding Image}"/>
-                                                    <Border Width="120" Height="100" Margin="0,10,0,0" Style="{StaticResource Image_Border_Style}"/>
-
-                                                    <StackPanel Grid.Column="1" Margin="12,10,12,0">
-                                                        <TextBlock Text="{Binding Title}" Style="{StaticResource NewsList_ItemTitle_Text_Style}"/>
-                                                        <TextBlock Text="{Binding Time, Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='yyyy-MM-dd hh:mm'}" Style="{StaticResource NewsList_ItemTime_Text_Style}"/>
-                                                    </StackPanel>
-                                                </Grid>
-                                            </controls:ContentButton>
-                                        </Grid>
+                                        <controls:NewsDataTemplateSelector Content="{Binding}" HorizontalContentAlignment="Stretch">
+                                            <controls:NewsDataTemplateSelector.NewsTemplate>
+                                                <DataTemplate>
+                                                    <controls:ContentButton Margin="0,0,0,12" Tap="NewsItem_Tap">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Border Width="120" Height="100" Margin="0,0,0,0" Style="{StaticResource Image_Border_Style}">
+                                                                <controls:FadingImage Stretch="UniformToFill" Source="{Binding Image}"/>
+                                                            </Border>
+                                                            <StackPanel Grid.Column="1" Margin="12,0,12,0">
+                                                                <TextBlock Text="{Binding Title}" Style="{StaticResource NewsList_ItemTitle_Text_Style}"/>
+                                                                <TextBlock Text="{Binding Time, Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='yyyy-MM-dd hh:mm'}" Style="{StaticResource NewsList_ItemTime_Text_Style}"/>
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </controls:ContentButton>
+                                                </DataTemplate>
+                                            </controls:NewsDataTemplateSelector.NewsTemplate>
+                                            <controls:NewsDataTemplateSelector.VideoTemplate>
+                                                <DataTemplate>
+                                                    <controls:ContentButton Margin="0,0,0,12" Tap="NewsItem_Tap">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Border Width="120" Height="100" Margin="0,0,0,0" Style="{StaticResource Image_Border_Style}">
+                                                                <Grid>
+                                                                    <controls:FadingImage Stretch="UniformToFill" Source="{Binding Image}"/>
+                                                                    <Image Source="/Assets/Images/PlayButton48.png" Stretch="None"/>
+                                                                </Grid>
+                                                            </Border>
+                                                            <StackPanel Grid.Column="1" Margin="12,0,12,0">
+                                                                <TextBlock Text="{Binding Title}" Style="{StaticResource NewsList_ItemTitle_Text_Style}"/>
+                                                                <TextBlock Text="{Binding Time, Converter={StaticResource DateTimeToStringConverter}, ConverterParameter='yyyy-MM-dd hh:mm'}" Style="{StaticResource NewsList_ItemTime_Text_Style}"/>
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </controls:ContentButton>
+                                                </DataTemplate>
+                                            </controls:NewsDataTemplateSelector.VideoTemplate>
+                                            <controls:NewsDataTemplateSelector.MoreButtonTemplate>
+                                                <DataTemplate>
+                                                    <controls:ContentButton Height="64" Margin="0,0,0,12" Tap="NewsItem_Tap">
+                                                        <Grid>
+                                                            <Border Style="{StaticResource Image_Border_Style}" Background="#fff0f0f0"/>
+                                                            <TextBlock Text="更多" Style="{StaticResource ListMoreButton_Text_Style}"/>
+                                                        </Grid>
+                                                    </controls:ContentButton>
+                                                </DataTemplate>
+                                            </controls:NewsDataTemplateSelector.MoreButtonTemplate>
+                                        </controls:NewsDataTemplateSelector>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>

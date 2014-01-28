@@ -28,6 +28,7 @@ namespace WinterOlympics2014WP.Pages
         {
             base.OnNavigatedTo(e);
             gameDate = NavigationContext.QueryString[NaviParam.CALENDAR_DATE];
+            this.topBar.SecondaryHeader = gameDate;
             LoadEPGList();
         }
 

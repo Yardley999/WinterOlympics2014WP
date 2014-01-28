@@ -294,8 +294,7 @@ namespace WinterOlympics2014WP.Pages
 
         private void LoadEpg(bool reload)
         {
-            //TO-DO : assign today
-            DateTime today = new DateTime(2014, 2, 8);// DateTime.Today.AddDays(-1);
+            DateTime today = DateTime.Today;//new DateTime(2014, 2, 8);// 
             if (reload)
             {
                 epgList.ReloadEpg(today);
@@ -314,6 +313,8 @@ namespace WinterOlympics2014WP.Pages
         ObservableCollection<News> newsList = new ObservableCollection<News>();
         int newsPageIndex = 1;
         int newsPageCount = 1;
+        bool newsReloading = false;
+        News newsMoreButtonItem = new News() { IsMoreButton = true };
 
         private void LoadNews()
         {
@@ -330,9 +331,15 @@ namespace WinterOlympics2014WP.Pages
                 list =>
                 {
                     newsPageCount = list.TotalPageCount;
-                    
+
                     //remove more button
                     TryRemoveMoreButton();
+
+                    if (newsReloading)
+                    {
+                        newsListScrollViewer.ScrollToVerticalOffset(0);
+                        newsList.Clear();
+                    }
 
                     foreach (var item in list.data)
                     {
@@ -356,6 +363,7 @@ namespace WinterOlympics2014WP.Pages
             if (newsPageIndex <= newsPageCount)
             {
                 newsLoader.Loaded = false;
+                newsReloading = false;
                 LoadNews();
             }
         }
@@ -365,10 +373,8 @@ namespace WinterOlympics2014WP.Pages
             //reset values
             newsPageIndex = 1;
             newsPageCount = 1;
-            newsListScrollViewer.ScrollToVerticalOffset(0);
-            newsList.Clear();
-
             newsLoader.Loaded = false;
+            newsReloading = true;
             LoadNews();
         }
 
@@ -380,18 +386,19 @@ namespace WinterOlympics2014WP.Pages
         private void NewsItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             News news = sender.GetDataContext<News>();
-            string naviString = string.Empty;
+            if (news.IsMoreButton)
+            {
+                LoadMoreNews();
+                return;
+            }
+
             switch (news.Type)
             {
                 case "0":
                     VideoPage.PlayVideo(this, news.ID, this.snowNews);
                     break;
                 case "1":
-                    naviString = string.Format("/Pages/NewsDetailPage.xaml?{0}={1}", NaviParam.NEWS_ID, news.ID);
-                    NavigationService.Navigate(new Uri(naviString, UriKind.Relative));
-                    break;
-                case "2":
-                    naviString = string.Format("/Pages/AlbumPage.xaml?{0}={1}", NaviParam.ALBUM_ID, news.ID);
+                    string naviString = string.Format("/Pages/NewsDetailPage.xaml?{0}={1}", NaviParam.NEWS_ID, news.ID);
                     NavigationService.Navigate(new Uri(naviString, UriKind.Relative));
                     break;
                 default:
@@ -399,32 +406,19 @@ namespace WinterOlympics2014WP.Pages
             }
         }
 
-        StackPanel newsListItemsPanel = null;
-        ListMoreButton newsMoreButton = new ListMoreButton() { Margin = new Thickness(0, 10, 0, 10) };
-        private void NewsListItemsPanel_Loaded(object sender, RoutedEventArgs e)
-        {
-            newsListItemsPanel = sender as StackPanel;
-            newsMoreButton.Tap += newsMoreButton_Tap;
-        }
-
-        private void newsMoreButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            LoadMoreNews();
-        }
-
         private void TryRemoveMoreButton()
         {
-            if (newsListItemsPanel != null && newsListItemsPanel.Children.Contains(newsMoreButton))
+            if (newsList.Contains(newsMoreButtonItem))
             {
-                newsListItemsPanel.Children.Remove(newsMoreButton);
+                newsList.Remove(newsMoreButtonItem);
             }
         }
 
         private void EnsureMoreButton()
         {
-            if (newsListItemsPanel != null && !newsListItemsPanel.Children.Contains(newsMoreButton))
+            if (!newsList.Contains(newsMoreButtonItem))
             {
-                newsListItemsPanel.Children.Add(newsMoreButton);
+                newsList.Add(newsMoreButtonItem);
             }
         }
 

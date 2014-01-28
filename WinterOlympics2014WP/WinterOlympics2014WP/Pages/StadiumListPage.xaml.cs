@@ -5,6 +5,11 @@ using System.Collections.ObjectModel;
 using WinterOlympics2014WP.Models;
 using WinterOlympics2014WP.Utility;
 using Microsoft.Phone.Shell;
+using System.Windows.Media.Imaging;
+using System.IO;
+using Microsoft.Xna.Framework.Media;
+using System.Windows.Controls;
+using WinterOlympics2014WP.Controls;
 
 namespace WinterOlympics2014WP.Pages
 {
@@ -71,7 +76,8 @@ namespace WinterOlympics2014WP.Pages
         private void Stadium_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             Stadium stadium = sender.GetDataContext<Stadium>();
-            string strUri = string.Format("/Pages/StadiumDetailPage.xaml?{0}={1}", NaviParam.STADIUM_ID, stadium.ID);
+            string[] paramArray = new string[] { NaviParam.STADIUM_ID, stadium.ID, NaviParam.STADIUM_NAME, stadium.NameCN };
+            string strUri = string.Format("/Pages/StadiumDetailPage.xaml?{0}={1}&{2}={3}", paramArray);
             NavigationService.Navigate(new Uri(strUri, UriKind.Relative));
         }
 

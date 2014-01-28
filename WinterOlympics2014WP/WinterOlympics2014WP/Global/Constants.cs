@@ -76,8 +76,8 @@ namespace WinterOlympics2014WP
 
     public class NaviParam
     {
-        public const string CATEGORY_ID = "category_id";
-        public const string CATEGORY_TITLE = "category_title";
+        //public const string CATEGORY_ID = "category_id";
+        //public const string CATEGORY_TITLE = "category_title";
 
         public const string SCHEDULE_ID = "schedule_id";
         public const string ALBUM_ID = "album_id";
@@ -87,6 +87,7 @@ namespace WinterOlympics2014WP
         public const string CALENDAR_DATE = "calendar_date";
 
         public const string STADIUM_ID = "stadium_id";
+        public const string STADIUM_NAME = "stadium_name";
         public const string NEWS_ID = "news_id";
         //public const string VOD_ID = "vod_id";
 

@@ -17,8 +17,7 @@ namespace WinterOlympics2014WP.Pages
     {
         #region Property
 
-        private string categoryID = string.Empty;
-        private string categoryTitle = string.Empty;
+        public static Category SelectedCategory { get; set; }
 
         #endregion
 
@@ -32,11 +31,13 @@ namespace WinterOlympics2014WP.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            if (SelectedCategory != null)
+            {
+                this.topBar.SecondaryHeader = SelectedCategory.Title;
+                this.pivotItem1.Header = new CategoryPivotHeaderData() { Title = "赛程赛果", Image = SelectedCategory.AdImage };
+                this.pivotItem2.Header = new CategoryPivotHeaderData() { Title = "冬奥ABC", Image = SelectedCategory.AdImage2 };
+            }
 
-            categoryID = NavigationContext.QueryString[NaviParam.CATEGORY_ID];
-            categoryTitle = NavigationContext.QueryString[NaviParam.CATEGORY_TITLE];
-
-            SetTitle();
             LoadSchedules();
             LoadABC();
         }
@@ -49,15 +50,6 @@ namespace WinterOlympics2014WP.Pages
         //        HidePage();
         //    }
         //}
-
-        #endregion
-
-        #region Sub Title
-
-        private void SetTitle()
-        {
-            this.topBar.SecondaryHeader = categoryTitle;
-        }
 
         #endregion
 
@@ -85,7 +77,7 @@ namespace WinterOlympics2014WP.Pages
 
             snow1.IsBusy = true;
 
-            scheduleLoader.Load("getschedule", "&id=" + categoryID,true, Constants.SCHEDULE_MODULE, string.Format(Constants.SCHEDULE_FILE_NAME_FORMAT, categoryID),
+            scheduleLoader.Load("getschedule", "&id=" + SelectedCategory.ID, true, Constants.SCHEDULE_MODULE, string.Format(Constants.SCHEDULE_FILE_NAME_FORMAT, SelectedCategory.ID),
                 list =>
                 {
                     var subscriptionList = GetSubscriptionList();
@@ -127,7 +119,7 @@ namespace WinterOlympics2014WP.Pages
 
             snow1.IsBusy = true;
 
-            resultLoader.Load("getresult", "&id=" + schedule.ID,true, Constants.SCHEDULE_MODULE, string.Format(Constants.RESULT_FILE_NAME_FORMAT, schedule.ID),
+            resultLoader.Load("getresult", "&id=" + schedule.ID, true, Constants.SCHEDULE_MODULE, string.Format(Constants.RESULT_FILE_NAME_FORMAT, schedule.ID),
                 list =>
                 {
                     ShowResultPanel(schedule, list);
@@ -168,7 +160,7 @@ namespace WinterOlympics2014WP.Pages
             int index = scheduleList.IndexOf(schedule);
             scheduleItemsPanel.Children.Insert(index + 1, gameResultPanel);
             bool hasResult = false;
-            if (result!=null && result.RankList != null && result.RankList.Length > 0)
+            if (result != null && result.RankList != null && result.RankList.Length > 0)
             {
                 hasResult = true;
             }
@@ -203,7 +195,7 @@ namespace WinterOlympics2014WP.Pages
                 schedule.StartTime = schedule.StartTime;// DateTime.Now.AddSeconds(30);
                 try
                 {
-                    var successful = ReminderHelper.AddReminder(schedule.ID, schedule.Category, schedule.Match, schedule.StartTime, string.Format("/Pages/LivePage.xaml?{0}={1}", NaviParam.SCHEDULE_ID, schedule.ID));
+                    var successful = ReminderHelper.AddReminder(schedule.ID, schedule.Category, schedule.Match, schedule.StartTime,"/Pages/HomePage.xaml?");
                     if (successful)
                     {
                         SubscriptionDataContext.Current.AddSubscription(schedule);
@@ -233,7 +225,7 @@ namespace WinterOlympics2014WP.Pages
 
             snow2.IsBusy = true;
 
-            htmlLoader.Load("getabcdetail", "&id=" + categoryID, true, Constants.SCHEDULE_MODULE, string.Format(Constants.CATEGORY_ABC_FILE_NAME_FORMAT, categoryID),
+            htmlLoader.Load("getabcdetail", "&id=" + SelectedCategory.ID, true, Constants.SCHEDULE_MODULE, string.Format(Constants.CATEGORY_ABC_FILE_NAME_FORMAT, SelectedCategory.ID),
                 html =>
                 {
                     browser.NavigateToString(html.Content);

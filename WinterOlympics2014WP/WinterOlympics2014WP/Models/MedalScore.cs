@@ -6,7 +6,7 @@ namespace WinterOlympics2014WP.Models
     public class MedalScore
     {
         [DataMember(Name = "img")]
-        public string CountryFlag { get; set; }
+        public string Image { get; set; }
 
         [DataMember(Name = "country")]
         public string Country { get; set; }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WinterOlympics2014WP.Utility;
 using WinterOlympics2014WP.Models;
+using System.Windows;
 
 namespace WinterOlympics2014WP.Controls
 {
@@ -28,6 +29,25 @@ namespace WinterOlympics2014WP.Controls
                 {
                     InitQuickSelector();
                 }
+            }
+        }
+
+        //ItemsPanelMargin
+        public Thickness ItemsPanelMargin
+        {
+            get { return (Thickness)GetValue(ItemsPanelMarginProperty); }
+            set { SetValue(ItemsPanelMarginProperty, value); }
+        }
+        public static readonly DependencyProperty ItemsPanelMarginProperty =
+            DependencyProperty.Register("ItemsPanelMargin", typeof(Thickness), typeof(EPGList), new PropertyMetadata(new Thickness(0), OnItemsPanelMarginPropertyChanged));
+
+        private static void OnItemsPanelMarginPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            EPGList control = d as EPGList;
+            if (control.ItemsPanel!=null)
+            {
+                Thickness newValue = (Thickness)e.NewValue;
+                control.ItemsPanel.Margin = newValue;
             }
         }
 
@@ -73,7 +93,6 @@ namespace WinterOlympics2014WP.Controls
                 return;
             }
 
-            //TO-DO : set token and sign 
             string param = "&date=" + date + "&token=&sign=&t=";
 
             snow1.IsBusy = true;
@@ -88,8 +107,6 @@ namespace WinterOlympics2014WP.Controls
 
                         foreach (var item in list)
                         {
-                            //TO-DO : remove test lin
-                            item.SeePoint = "重点赛事直播";
                             epgList.Add(item);
                             validHours.Add(item.Start);
                         }
@@ -159,6 +176,13 @@ namespace WinterOlympics2014WP.Controls
         }
 
         #endregion
+
+        VirtualizingStackPanel ItemsPanel = null;
+        private void VirtualizingStackPanel_Loaded(object sender, RoutedEventArgs e)
+        {
+            ItemsPanel = sender as VirtualizingStackPanel;
+            ItemsPanel.Margin = ItemsPanelMargin;
+        }
 
     }
 }

@@ -24,6 +24,8 @@
         <!--top bar-->
         <Image Source="/Assets/Images/TopBar.png" Stretch="Uniform"/>
 
+        <Rectangle Grid.Row="1" Width="4" Fill="#ffffffff" HorizontalAlignment="Left" Margin="55,0,0,0"/>
+
         <!--content-->
         <ScrollViewer Grid.Row="1">
             <Grid x:Name="ContentPanel">
@@ -66,7 +68,7 @@
                     </StackPanel>
                 </Grid>
 
-                <!--TO-DO : ranklist panel-->
+                <!-- ranklist panel-->
                 <ItemsControl Grid.Row="2" x:Name="rankListBox">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -109,53 +111,6 @@
                     </Rectangle.Fill>
                 </Rectangle>
 
-                <!--<Grid Grid.Row="3">
-                    <Grid Height="180" Margin="0,0,0,1">
-                        <Grid.Clip>
-                            <RectangleGeometry Rect="0,0,480,180"/>
-                        </Grid.Clip>
-                        <controls:ContentButton Height="180" Tap="Video_Tap">
-                            <Grid>
-                                <Image Source="/Assets/Sample/SportSample.jpg" Stretch="UniformToFill" Margin="-13,-5"/>
-                                <Rectangle Width="240" HorizontalAlignment="Right" IsHitTestVisible="False" Margin="-13,-5">
-                                    <Rectangle.Fill>
-                                        <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5" >
-                                            <GradientStop Color="#BF000000" Offset="0"/>
-                                            <GradientStop Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <Grid VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,24,36">
-                                    <TextBlock Text="视频集锦" Style="{StaticResource LivePage_SectionTitle_Text_Style}"/>
-                                </Grid>
-                            </Grid>
-                        </controls:ContentButton>
-                    </Grid>
-                </Grid>
-
-                <Grid Grid.Row="4">
-                    <Grid Height="180" Margin="0,0,0,1">
-                        <Grid.Clip>
-                            <RectangleGeometry Rect="0,0,480,180"/>
-                        </Grid.Clip>
-                        <controls:ContentButton Height="180" Tap="Albumn_Tap">
-                            <Grid>
-                                <Image Source="/Assets/Sample/SportSample.jpg" Stretch="UniformToFill" Margin="-13,-5"/>
-                                <Rectangle Width="240" HorizontalAlignment="Right" IsHitTestVisible="False" Margin="-13,-5">
-                                    <Rectangle.Fill>
-                                        <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5" >
-                                            <GradientStop Color="#BF000000" Offset="0"/>
-                                            <GradientStop Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <Grid VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,24,36">
-                                    <TextBlock Text="精彩图集" Style="{StaticResource LivePage_SectionTitle_Text_Style}"/>
-                                </Grid>
-                            </Grid>
-                        </controls:ContentButton>
-                    </Grid>
-                </Grid>-->
             </Grid>
         </ScrollViewer>
 

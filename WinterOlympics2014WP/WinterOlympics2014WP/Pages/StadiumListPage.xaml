@@ -42,7 +42,7 @@
                                         <Rectangle Width="240" HorizontalAlignment="Left" IsHitTestVisible="False" Margin="-13,-5">
                                             <Rectangle.Fill>
                                                 <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5" >
-                                                    <GradientStop Color="#BF000000" Offset="0"/>
+                                                    <GradientStop Color="#7F000000" Offset="0"/>
                                                     <GradientStop Offset="1"/>
                                                 </LinearGradientBrush>
                                             </Rectangle.Fill>

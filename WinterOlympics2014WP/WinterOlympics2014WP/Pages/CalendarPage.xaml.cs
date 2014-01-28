@@ -61,8 +61,10 @@ namespace WinterOlympics2014WP.Pages
                     calendarList.Clear();
                     if (list != null)
                     {
+                        var orderedList = list.OrderBy(x => x.Date);
+
                         int gameDate = 1;
-                        foreach (var item in list)
+                        foreach (var item in orderedList)
                         {
                             item.GameDate = "DAY " + gameDate.ToString();
                             //item.DateString = item.Date.ToString("M月d日 dddd");

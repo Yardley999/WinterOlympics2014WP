@@ -23,6 +23,9 @@ namespace WinterOlympics2014WP.Models
 
         [DataMember(Name = "time")]
         public DateTime Time { get; set; }
+
+        [IgnoreDataMember]
+        public bool IsMoreButton { get; set; }
     }
 
     [DataContract]

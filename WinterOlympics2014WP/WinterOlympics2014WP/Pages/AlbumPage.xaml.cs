@@ -25,7 +25,6 @@ namespace WinterOlympics2014WP.Pages
         private string albumID = string.Empty;
 
         private const string FILE_NAME_PREFIX = "SochiWinterOlympics_";
-        BitmapImage centerBitmapImage = null;
 
         #endregion
 
@@ -65,7 +64,7 @@ namespace WinterOlympics2014WP.Pages
 
             snow1.IsBusy = true;
 
-            albumloader.Load("getalbum", "&id=" + id,true, Constants.ALBUM_MODULE, string.Format(Constants.ALBUM_FILE_NAME_FORMAT, id),
+            albumloader.Load("getalbum", "&id=" + id, true, Constants.ALBUM_MODULE, string.Format(Constants.ALBUM_FILE_NAME_FORMAT, id),
                 album =>
                 {
                     albumItems.Clear();
@@ -165,8 +164,7 @@ namespace WinterOlympics2014WP.Pages
             int indexForLeft = currentIndex == 0 ? (imageCount - 1) : (currentIndex - 1);
             int indexForRight = currentIndex == (imageCount - 1) ? 0 : (currentIndex + 1);
 
-            centerBitmapImage = new BitmapImage(new Uri(albumItems[currentIndex].Image, UriKind.RelativeOrAbsolute));
-            imageCenter.Source = centerBitmapImage;
+            imageCenter.Source = new BitmapImage(new Uri(albumItems[currentIndex].Image, UriKind.RelativeOrAbsolute));
             imageLeft.Source = new BitmapImage(new Uri(albumItems[indexForLeft].Image, UriKind.RelativeOrAbsolute));
             imageRight.Source = new BitmapImage(new Uri(albumItems[indexForRight].Image, UriKind.RelativeOrAbsolute));
             //imageCenter.Source = await ImageCacheDataContext.Current.GetImage(albumItems[currentIndex].Image, true);
@@ -239,11 +237,16 @@ namespace WinterOlympics2014WP.Pages
 
         private void SaveImage()
         {
-            Stream stream = centerBitmapImage.ToStream();
-
-            MediaLibrary library = new MediaLibrary();
-            string fileName = FILE_NAME_PREFIX + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".jpg";
-            library.SavePicture(fileName, stream);
+            BitmapImage bi = imageCenter.Source as BitmapImage;
+            if (bi != null)
+            {
+                using (Stream stream = bi.ToStream())
+                {
+                    MediaLibrary library = new MediaLibrary();
+                    string fileName = FILE_NAME_PREFIX + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".jpg";
+                    library.SavePicture(fileName, stream);
+                }
+            }
         }
 
         #endregion

@@ -18,8 +18,5 @@ namespace WinterOlympics2014WP.Models
 
         [IgnoreDataMember]
         public string GameDate { get; set; }
-
-        [IgnoreDataMember]
-        public string DateString { get; set; }
     }
 }

@@ -24,7 +24,11 @@ namespace WinterOlympics2014WP.Controls
         private ImageSource _Source = null;
         public ImageSource Source
         {
-            get { return (ImageSource)GetValue(SourceProperty); }
+            get 
+            {
+                return (ImageSource)GetValue(SourceProperty);
+                //return this.image.Source;
+            }
             set
             {
                 if (_Source != value)

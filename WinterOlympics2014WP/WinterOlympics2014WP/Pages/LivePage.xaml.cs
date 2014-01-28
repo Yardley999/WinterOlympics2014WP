@@ -122,15 +122,15 @@ namespace WinterOlympics2014WP.Pages
 
             foreach (var item in data.LineItems)
             {
-                switch (item.Type)
+                switch (item.Type.ToString())
                 {
-                    case 0://video
+                    case "0"://video
                         control = new LivePageItemVideo() { HostingPage = this };
                         break;
-                    case 1://news
+                    case "1"://news
                         control = new LivePageItemNews() { HostingPage = this };
                         break;
-                    case 2://album
+                    case "2"://album
                         if (item.Album.Length > 3)
                         {
                             List<AlbumItem> newList = new List<AlbumItem>();
@@ -142,7 +142,7 @@ namespace WinterOlympics2014WP.Pages
                         }
                         control = new LivePageItemAlbum() { HostingPage = this };
                         break;
-                    case 12://live text
+                    case "12"://live text
                         control = new LivePageItemLiveText() { HostingPage = this };
                         break;
                     default:
