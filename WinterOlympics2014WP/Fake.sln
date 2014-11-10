@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDoor", "WinterOlympics2014WP\OpenDoor.csproj", "{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Debug|ARM.ActiveCfg = Debug|ARM
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Debug|ARM.Build.0 = Debug|ARM
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Debug|ARM.Deploy.0 = Debug|ARM
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Debug|x86.ActiveCfg = Debug|x86
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Debug|x86.Build.0 = Debug|x86
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Debug|x86.Deploy.0 = Debug|x86
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Release|ARM.ActiveCfg = Release|ARM
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Release|ARM.Build.0 = Release|ARM
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Release|ARM.Deploy.0 = Release|ARM
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Release|x86.ActiveCfg = Release|x86
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Release|x86.Build.0 = Release|x86
+		{110EBD28-CDD9-4DE9-B23A-9907F5F11ACA}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
